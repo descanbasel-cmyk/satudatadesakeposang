@@ -1,0 +1,4927 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Desa Cantik Bangka Selatan</title>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <style>
+      /* --- PALETTE WARNA BIRU --- */
+      :root {
+        --biru-gelap: #1e3799; /* Navy - Navbar */
+        --biru-utama: #0984e3; /* Blue - Active/Link */
+        --biru-muda: #74b9ff; /* Light Blue - Hover */
+        --biru-bg: #f1f2f6; /* Background Halaman */
+        --teks-gelap: #2f3542; /* Warna Tulisan */
+        --putih: #ffffff;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: var(--biru-bg);
+        color: var(--teks-gelap);
+      }
+
+      /* --- NAVIGASI --- */
+      nav {
+        background: var(--biru-gelap);
+        color: white;
+        padding: 12px 20px;
+        display: flex;
+        flex-direction: row; /* Pastikan satu baris */
+        flex-wrap: nowrap;
+        overflow-x: auto; /* Aktifkan scroll horizontal */
+        -webkit-overflow-scrolling: touch; /* Biar scroll di HP mulus */
+        gap: 5px;
+        position: sticky;
+        top: 0;
+        z-index: 2000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+      /* Sembunyikan scrollbar di beberapa browser agar lebih rapi */
+      nav::-webkit-scrollbar {
+        display: none;
+      }
+      nav {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+      nav a {
+        color: var(--biru-muda);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 11px;
+        padding: 8px 15px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        white-space: nowrap; /* WAJIB: Biar teks tidak ganti baris */
+        flex-shrink: 0;
+      }
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--putih);
+      }
+      nav a.active-link {
+        background: var(--biru-utama);
+        color: var(--putih);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      /* --- KONTEN HALAMAN --- */
+      .page {
+        display: none;
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .active-page {
+        display: block;
+        animation: slideUp 0.4s ease-out;
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- KOMPONEN BOX --- */
+      .card {
+        background: var(--putih);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        margin-bottom: 25px;
+        border-left: 6px solid var(--biru-utama); /* Dekorasi garis biru di kiri box */
+      }
+      h1,
+      h2,
+      h3 {
+        color: var(--biru-gelap);
+        margin-top: 0;
+      }
+
+      /* Layout Konten dengan Gambar */
+      .card-content {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        flex-wrap: wrap; /* Agar responsif di HP */
+      }
+
+      .card-image {
+        flex: 1;
+        min-width: 150px;
+        max-width: 200px;
+        text-align: center;
+      }
+
+      .card-image img {
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(
+          0 5px 10px rgba(0, 0, 0, 0.1)
+        ); /* Memberi efek bayangan halus pada logo */
+      }
+
+      .card-text {
+        flex: 3;
+        min-width: 300px;
+      }
+
+      /* Membuat pola Zig-Zag */
+      .reverse {
+        flex-direction: row-reverse;
+      }
+
+      /* Styling List untuk Tujuan */
+      .list-tujuan {
+        list-style: none;
+        padding: 0;
+        counter-reset: nomor-tujuan; /* Menginisialisasi penghitung otomatis */
+        margin-top: 15px;
+      }
+      .list-tujuan li {
+        display: flex;
+        align-items: flex-start; /* Angka tetap di atas jika teks panjang */
+        gap: 20px;
+        margin-bottom: 20px;
+        position: relative;
+      }
+      /* Membuat Bulatan Biru Berisi Angka */
+      .list-tujuan li::before {
+        counter-increment: nomor-tujuan; /* Menambah angka otomatis */
+        content: counter(nomor-tujuan); /* Menampilkan angka */
+        background: var(--biru-utama); /* Menggunakan warna biru palet kita */
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%; /* Membuat lingkaran sempurna */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0; /* Mencegah lingkaran jadi gepeng */
+        font-weight: bold;
+        font-size: 14px;
+        box-shadow: 0 4px 10px rgba(9, 132, 227, 0.3); /* Bayangan biru halus */
+      }
+
+      .teks-tujuan {
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--teks-gelap);
+      }
+
+      /* Perataan khusus untuk HP */
+      @media (max-width: 768px) {
+        .list-tujuan li {
+          text-align: left; /* Tetap rata kiri agar list tidak berantakan */
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* Pastikan halaman tidak terlalu mepet ke pinggir layar HP */
+        .page {
+          padding: 20px 10px;
+        }
+
+        /* Memperbaiki Card agar teks tidak meluap */
+        .card {
+          padding: 20px; /* Jarak teks ke pinggir kotak */
+          margin-bottom: 15px;
+          overflow: hidden; /* Mencegah apapun keluar dari kotak */
+          word-wrap: break-word; /* Memaksa kata panjang untuk patah baris */
+        }
+
+        .card-content {
+          gap: 15px; /* Memperkecil jarak antara gambar dan teks */
+        }
+
+        .card-text {
+          min-width: unset; /* Menghapus batas minimum agar teks bisa mengecil */
+          width: 100%; /* Teks mengambil lebar penuh kartu */
+        }
+
+        .card-text p {
+          font-size: 14px; /* Sedikit mengecilkan teks agar lebih proporsional di HP */
+          line-height: 1.5;
+          margin: 10px 0;
+        }
+      }
+      /* Ukuran default (laptop/PC) untuk lingkaran ikon tujuan */
+      .tujuan-icon-wrap {
+        width: 75px;
+        height: 75px;
+        font-size: 30px;
+        margin: 0 auto 20px auto;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Aturan khusus layar HP (Mobile) agar bunderannya mengecil */
+      @media (max-width: 768px) {
+        .tujuan-icon-wrap {
+          width: 50px !important;
+          height: 50px !important;
+          font-size: 20px !important;
+          margin-bottom: 12px !important;
+        }
+      }
+
+      /* Penyesuaian agar lebih proporsional dan rapat */
+      .deskripsi-hero {
+        font-size: 14px; /* Ukuran lebih kecil */
+        color: #57606f; /* Warna hitam abu-abu (muted) */
+        max-width: 800px; /* Agar teks tidak terlalu lebar ke samping */
+        margin: 10px auto 0 auto; /* Jarak pas ke atas, center secara horizontal */
+        line-height: 1.6; /* Spasi antar baris biar enak dibaca */
+        text-align: center;
+      }
+      #paksian .hero-card {
+        padding: 20px 15px; /* Memperkecil padding atas-bawah */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #paksian .hero-card img {
+        width: 120px; /* Ukuran logo lebih proporsional */
+        height: auto;
+        margin-bottom: 10px; /* Merapatkan jarak logo ke tulisan */
+      }
+
+      #paksian .hero-card h1 {
+        margin: 0; /* Menghapus margin bawaan h1 */
+        font-size: 1.8em;
+        line-height: 1.2;
+      }
+
+      #paksian .hero-card h3 {
+        margin: 5px 0 0 0; /* Jarak sangat tipis ke atas */
+        font-size: 1.1em;
+        color: var(--biru-utama);
+      }
+      /* Styling khusus untuk list latar belakang di PAKSIAN */
+      .list-paksian {
+        list-style: none;
+        padding: 0;
+      }
+      .list-paksian li {
+        background: #f8faff;
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid var(--biru-gelap);
+        font-size: 0.95em;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+      }
+
+      /* --- DESAIN GALERI PUBLIKASI --- */
+      .publikasi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        padding: 20px 0;
+      }
+
+      .publikasi-item {
+        background: var(--putih);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border-bottom: 5px solid var(--biru-utama);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .publikasi-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .cover-wrapper {
+        position: relative;
+        /* Menggunakan aspect-ratio B5 (kira-kira 1:1.41) */
+        aspect-ratio: 1 / 1.1;
+        width: 100%;
+        overflow: hidden;
+        background: #f1f2f6; /* Warna cadangan jika gambar belum muncul */
+      }
+
+      .cover-wrapper img {
+        width: 100%;
+        height: 100%;
+        /* 'contain' memastikan seluruh gambar terlihat tanpa terpotong */
+        /* 'cover' jika kamu ingin gambar memenuhi kotak meskipun sedikit terpotong */
+        object-fit: contain;
+        transition: transform 0.5s ease;
+      }
+      .publikasi-item:hover .cover-wrapper img {
+        transform: scale(1.1); /* Efek zoom saat hover */
+      }
+
+      /* Overlay tombol baca */
+      .overlay-baca {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(30, 55, 153, 0.7); /* Biru gelap transparan */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .publikasi-item:hover .overlay-baca {
+        opacity: 1;
+      }
+
+      .btn-baca {
+        padding: 10px 20px;
+        background: var(--putih);
+        color: var(--biru-gelap);
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 25px;
+        font-size: 14px;
+      }
+
+      .info-publikasi {
+        padding: 15px;
+        text-align: center;
+      }
+
+      .info-publikasi h4 {
+        margin: 0;
+        font-size: 16px;
+        color: var(--teks-gelap);
+      }
+      /* Teks Lihat Selengkapnya */
+      .toggle-deskripsi {
+        display: block;
+        font-size: 13px;
+        color: var(--biru-utama);
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 10px;
+        text-decoration: underline;
+      }
+
+      /* Area Detail (Awalnya Tersembunyi) */
+      .detail-publikasi {
+        display: none; /* Disembunyikan dulu */
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px dashed #dfe6e9;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .deskripsi-teks {
+        font-size: 14px;
+        color: #57606f;
+        margin-bottom: 15px;
+        line-height: 1.5;
+        text-align: left;
+      }
+
+      /* Tombol Unduh */
+      .btn-unduh {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--biru-gelap);
+        color: white;
+        padding: 8px 18px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        transition: background 0.3s;
+      }
+
+      .btn-unduh:hover {
+        background: var(--biru-utama);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Peta */
+      #map {
+        height: 70vh;
+        width: 100%;
+        border-radius: 15px;
+        border: 3px solid var(--putih);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Grid UI */
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      .placeholder-box {
+        background: #dfe6e9;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        border: 2px dashed var(--biru-muda);
+        color: var(--biru-utama);
+        font-weight: bold;
+      }
+      .hero-card {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Ini yang bikin logo & teks presisi di tengah */
+        border-left: none !important; /* Menghapus garis kiri khusus di beranda */
+        border-bottom: 8px solid var(--biru-utama);
+      }
+
+      /* CONTAINER PITA */
+      .scroll-wrapper {
+        display: flex;
+        overflow-x: auto;
+        gap: 0;
+        padding: 50px 30vw; /* Ruang agar kartu tengah bisa pop-up */
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        align-items: center;
+        perspective: 1200px;
+        height: 500px;
+      }
+
+      .scroll-wrapper::-webkit-scrollbar {
+        display: none; /* Sembunyikan scrollbar agar bersih */
+      }
+
+      /* --- VERTICAL INFOGRAFIS SECTION --- */
+      .infografis-section {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        padding: 60px 20px;
+        border-bottom: 1px solid #eee;
+        opacity: 0; /* Untuk efek muncul saat scroll */
+        transform: translateY(30px);
+        transition: all 0.6s ease-out;
+      }
+
+      /* Munculkan section saat discroll */
+      .infografis-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Mengatur posisi selang-seling (Gambar kiri - Gambar kanan) */
+      .infografis-section:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+
+      .info-content {
+        flex: 1;
+      }
+
+      .info-content h2 {
+        color: var(--biru-gelap);
+        margin-bottom: 15px;
+        font-size: 24px;
+      }
+
+      .info-content p {
+        color: #57606f;
+        line-height: 1.6;
+        font-size: 16px;
+      }
+
+      .info-visual {
+        flex: 1;
+        text-align: center;
+      }
+
+      .info-visual img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .info-visual img:hover {
+        transform: scale(1.03);
+      }
+
+      /* Responsif Mobile */
+      @media (max-width: 768px) {
+        .infografis-section,
+        .infografis-section:nth-child(even) {
+          flex-direction: column;
+          padding: 40px 15px;
+          text-align: center;
+        }
+      }
+      /* Gaya Tombol Unduh Infografis */
+      .btn-unduh-info {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #2f3542; /* Warna gelap elegan */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-unduh-info:hover {
+        background-color: var(--biru-utama);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-unduh-info i {
+        font-size: 16px;
+      }
+
+      /* MENU DATA */
+      .data-card {
+        padding: 30px;
+        border-radius: 15px;
+        border: 1px solid #e0e0e0;
+      }
+      .data-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #4a7ab5;
+        margin-bottom: 5px;
+      }
+      .data-header h2 {
+        margin: 0;
+        font-size: 22px;
+      }
+      .source-text {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .selection-box {
+        background: #f1f8ff;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #d1e3f5;
+        margin-bottom: 40px;
+      }
+      .styled-select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .content-title {
+        text-align: center;
+        color: #1a4a7a;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+      .canvas-container {
+        position: relative;
+        height: 300px; /* Tinggi standar untuk desktop */
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      /* Khusus tampilan Mobile */
+      @media (max-width: 600px) {
+        .canvas-container {
+          height: 250px; /* Lebih pendek di HP agar tidak memenuhi layar */
+        }
+        .data-card {
+          padding: 15px; /* Mengurangi padding agar konten lebih luas */
+        }
+      }
+      .footer-source {
+        font-size: 12px;
+        color: #888;
+        margin-top: 5px;
+        white-space: normal;
+        word-wrap: break-word;
+      }
+
+      /* Styling Tabel */
+      .styled-table-container {
+        margin-top: 20px;
+        overflow-x: auto;
+      }
+      .pure-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+      }
+      .pure-table thead th {
+        background: #d9e9f6;
+        color: #333;
+        padding: 12px;
+        border: 1px solid #fff;
+      }
+      .pure-table td {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        color: #444;
+      }
+
+      .table-footer-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 10px;
+      }
+      .btn-download {
+        background: #4a7ab5;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 14px;
+        display: inline-block;
+      }
+      .download-area {
+        text-align: right;
+      }
+      .download-area small {
+        display: block;
+        font-size: 11px;
+        color: #999;
+        margin-bottom: 5px;
+      }
+
+      /* --- LAYOUT 3 KARTU METADATA --- */
+      .metadata-triple-grid {
+        display: grid;
+        grid-template-columns: repeat(
+          3,
+          1fr
+        ); /* Membuat 3 kolom sejajar di desktop */
+        gap: 25px;
+        margin-top: 10px;
+      }
+
+      .metadata-premium-card {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.05),
+          0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .metadata-premium-card:hover {
+        transform: translateY(-6px);
+        box-shadow:
+          0 20px 25px -5px rgba(74, 122, 181, 0.1),
+          0 10px 10px -5px rgba(74, 122, 181, 0.04);
+        border-color: #4a7ab5;
+      }
+
+      /* HEADER KARTU & LINGKARAN IKON */
+      .meta-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .meta-icon-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+      }
+
+      /* Variasi Warna Ikon Kontras */
+      .color-kegiatan {
+        background: #fee2e2;
+        color: #ef4444;
+      }
+      .color-variabel {
+        background: #dcfce7;
+        color: #22c55e;
+      }
+      .color-indikator {
+        background: #fef9c3;
+        color: #eab308;
+      }
+
+      .meta-badge {
+        font-size: 11px;
+        font-weight: 700;
+        padding: 4px 10px;
+        background: #f1f5f9;
+        color: #64748b;
+        border-radius: 20px;
+        letter-spacing: 0.5px;
+      }
+
+      /* BODY KARTU */
+      .meta-card-body {
+        flex-grow: 1;
+        margin-bottom: 25px;
+      }
+
+      .meta-card-body h3 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+        color: #1a4a7a;
+      }
+
+      .meta-card-body p {
+        margin: 0 0 15px 0;
+        font-size: 13.5px;
+        color: #64748b;
+        line-height: 1.5;
+      }
+
+      .meta-file-size {
+        font-size: 12px;
+        color: #94a3b8;
+        font-weight: 500;
+      }
+
+      /* FOOTER & TOMBOL AKSI */
+      .meta-card-footer {
+        display: flex;
+        gap: 12px;
+      }
+
+      .btn-meta-action {
+        flex: 1;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+      }
+
+      .btn-view {
+        background: #f8fafc;
+        color: #4a7ab5;
+        border: 1px solid #e2e8f0;
+      }
+
+      .btn-view:hover {
+        background: #4a7ab5;
+        color: white;
+        border-color: #4a7ab5;
+      }
+
+      .btn-download {
+        background: #4a7ab5;
+        color: white;
+        border: 1px solid #4a7ab5;
+      }
+
+      .btn-download:hover {
+        background: #2f5482;
+        border-color: #2f5482;
+      }
+
+      /* --- RESPONSIVE BREAKPOINTS (MOBILE & TABLET) --- */
+      @media (max-width: 992px) {
+        .metadata-triple-grid {
+          grid-template-columns: repeat(2, 1fr); /* Layar tablet jadi 2 kolom */
+        }
+      }
+
+      @media (max-width: 650px) {
+        .metadata-triple-grid {
+          grid-template-columns: 1fr; /* Layar HP jadi 1 kolom penuh ke bawah */
+          gap: 20px;
+        }
+        .metadata-premium-card {
+          padding: 20px; /* Sedikit memperkecil padding kartu di HP */
+        }
+      }
+      /* --- CONTAINER PREVIEW SLIDE DOWN --- */
+      .preview-panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-top: 0;
+        border-radius: 12px;
+        background: #f8fafc;
+      }
+
+      /* Aktif saat tombol diklik */
+      .preview-panel.open {
+        max-height: 500px; /* Memberikan ruang tinggi yang cukup untuk flipbook */
+        margin-top: 15px;
+        border: 1px solid #cbd5e1;
+        padding: 5px;
+      }
+
+      /* Bingkai Iframe FlipHTML5 */
+      .fliphtml5-frame {
+        width: 100%;
+        height: 490px;
+        border: none;
+        border-radius: 10px;
+      }
+
+      .btn-preview-toggle {
+        background: #f1f5f9;
+        color: #4a7ab5;
+        border: 1px solid #cbd5e1;
+        cursor: pointer;
+      }
+
+      .btn-preview-toggle:hover {
+        background: #4a7ab5;
+        color: white;
+        border-color: #4a7ab5;
+      }
+
+      /* Responsif Layar */
+      @media (max-width: 992px) {
+        .metadata-triple-grid {
+          grid-template-columns: 1fr; /* Kolom jadi penuh ke bawah di HP agar area baca flipbook luas */
+        }
+      }
+      @media (max-width: 600px) {
+        .preview-panel.open {
+          max-height: 380px; /* Sedikit memendek di layar HP kecil agar proporsional */
+        }
+        .fliphtml5-frame {
+          height: 370px;
+        }
+      }
+
+      /* --- STYLE KARTU PERJALANAN DENGAN FOTO --- */
+      .milestone-container {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        max-width: 950px; /* Diperlebar sedikit agar muat teks + foto */
+        margin: 0 auto;
+      }
+
+      .milestone-card {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        display: flex;
+        align-items: stretch; /* Membuat tinggi teks dan foto selalu sama rata */
+        justify-content: space-between;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        transition: all 0.3s ease;
+      }
+
+      /* Mengatur posisi selang-seling (Ganjil: Teks-Foto, Genap: Foto-Teks) */
+      .milestone-card:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+
+      .milestone-card:hover {
+        transform: translateY(-4px);
+        border-color: #4a7ab5;
+        box-shadow: 0 12px 20px rgba(74, 122, 181, 0.12);
+      }
+
+      /* SISI KONTEN TEKS */
+      .milestone-content-wrapper {
+        flex: 1.2; /* Teks mendapat ruang sedikit lebih luas */
+        padding: 30px;
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .milestone-number {
+        font-size: 42px;
+        font-weight: 800;
+        color: #e2e8f0;
+        line-height: 1;
+        font-family: "Arial Black", sans-serif;
+        transition: color 0.3s;
+      }
+
+      .milestone-card:hover .milestone-number {
+        color: #4a7ab5;
+      }
+
+      .milestone-text {
+        flex: 1;
+      }
+
+      .milestone-text h3 {
+        margin: 10px 0 5px 0;
+        font-size: 18px;
+        color: #1a4a7a;
+      }
+
+      .milestone-date {
+        display: inline-block;
+        font-size: 12px;
+        color: #94a3b8;
+        margin-bottom: 12px;
+      }
+
+      .milestone-content p {
+        margin: 0;
+        font-size: 14px;
+        color: #64748b;
+        line-height: 1.6;
+      }
+
+      /* SISI FOTO DOKUMENTASI */
+      .milestone-photo {
+        flex: 0.8; /* Ukuran kotak foto proporsional */
+        min-width: 280px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .milestone-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Foto otomatis memotong rapi tanpa merusak aspek rasio */
+        transition: transform 0.5s ease;
+      }
+
+      .milestone-card:hover .milestone-photo img {
+        transform: scale(
+          1.05
+        ); /* Efek zoom-in halus pada foto saat kartu di-hover */
+      }
+
+      /* BADGE STATUS */
+      .status-badge {
+        font-size: 11px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .status-badge.selesai {
+        background: #dcfce7;
+        color: #15803d;
+      }
+      .status-badge.proses {
+        background: #fef9c3;
+        color: #a16207;
+      }
+
+      /* --- RESPONSIVE MOBILE (LAYAR HP) --- */
+      @media (max-width: 768px) {
+        .milestone-card,
+        .milestone-card:nth-child(even) {
+          flex-direction: column; /* Teks dan foto menumpuk vertikal di HP */
+        }
+
+        .milestone-photo {
+          width: 100%;
+          height: 200px; /* Batas tinggi foto saat di layar HP */
+          min-width: auto;
+        }
+
+        .milestone-content-wrapper {
+          padding: 20px;
+        }
+      }
+      /* --- LAYOUT GRID GALERI FOTO --- */
+      .galeri-grid-container {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(280px, 1fr)
+        ); /* Mengatur kolom otomatis sesuai ukuran layar */
+        gap: 25px;
+        margin-top: 10px;
+      }
+
+      /* KARTU FOTO */
+      .galeri-card {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .galeri-card:hover {
+        transform: translateY(-5px);
+        border-color: #4a7ab5;
+        box-shadow: 0 15px 25px -5px rgba(74, 122, 181, 0.15);
+      }
+
+      /* WADAH FOTO (PENGUNCI UKURAN) */
+      .galeri-photo-wrapper {
+        width: 100%;
+        height: 200px; /* Mengunci tinggi foto agar sejajar sama rata */
+        overflow: hidden;
+        background: #f1f5f9;
+      }
+
+      .galeri-photo-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Rahasia agar foto tidak lonjong/penyet */
+        transition: transform 0.5s ease;
+      }
+
+      .galeri-card:hover .galeri-photo-wrapper img {
+        transform: scale(
+          1.06
+        ); /* Efek zoom-in pelan saat kursor menyentuh kartu */
+      }
+
+      /* KOTAK KETERANGAN DI BAWAH FOTO */
+      .galeri-info {
+        padding: 18px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid #f1f5f9;
+      }
+
+      .galeri-info h3 {
+        margin: 0 0 8px 0;
+        font-size: 16px;
+        color: #1a4a7a; /* Warna biru tua khas dashboard-mu */
+        font-weight: 700;
+      }
+
+      .galeri-info p {
+        margin: 0;
+        font-size: 13px;
+        color: #64748b;
+        line-height: 1.5;
+      }
+
+      /* PENYESUAIAN LAYAR HANDPHONE (MOBILE) */
+      @media (max-width: 550px) {
+        .galeri-grid-container {
+          grid-template-columns: 1fr; /* Menjadi 1 kolom penuh di HP agar foto terlihat puas */
+          gap: 20px;
+        }
+        .galeri-photo-wrapper {
+          height: 180px; /* Sedikit memendekkan tinggi foto di HP agar proporsional */
+        }
+      }
+      /* --- SUB-MENU PAKSIAN (TABS) --- */
+      .paksian-tabs {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 25px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+
+      .paksian-tabs::-webkit-scrollbar {
+        display: none;
+      }
+
+      .btn-tab {
+        padding: 10px 20px;
+        background: #f1f5f9;
+        border: 2px solid #e2e8f0;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        color: #64748b;
+        transition: all 0.3s;
+        white-space: nowrap;
+        font-size: 14px;
+      }
+
+      .btn-tab:hover {
+        background: #e2e8f0;
+      }
+
+      .btn-tab.active-tab {
+        background: var(--biru-utama);
+        color: white;
+        border-color: var(--biru-utama);
+        box-shadow: 0 4px 10px rgba(9, 132, 227, 0.3);
+      }
+      /* --- RESPONSIVE UNTUK BERANDA --- */
+      .motto-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 100%);
+        padding: 16px 40px;
+        border-radius: 50px;
+        border: 1px solid #bae6fd;
+        box-shadow: 0 8px 20px rgba(9, 132, 227, 0.08);
+      }
+      .motto-badge p {
+        margin: 0;
+        font-size: 1.15em;
+        color: var(--biru-gelap);
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+      .pilar-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 900px;
+        margin: 0 auto 35px auto;
+      }
+      .pilar-card {
+        padding: 25px 20px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+        transition: transform 0.3s;
+      }
+      .komitmen-box {
+        background: #f1f5f9;
+        padding: 25px 30px;
+        border-radius: 12px;
+        max-width: 850px;
+        margin: 0 auto;
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        text-align: left;
+        border: 1px solid #e2e8f0;
+      }
+
+      /* Aturan Khusus Layar HP */
+      @media (max-width: 768px) {
+        .motto-badge {
+          padding: 15px 20px;
+          border-radius: 20px; /* Lengkungan dikurangi agar teks lebih muat */
+        }
+        .motto-badge p {
+          font-size: 1em; /* Ukuran huruf sedikit dikecilkan */
+        }
+        .pilar-grid {
+          grid-template-columns: 1fr; /* Memaksa kotak menjadi 1 kolom penuh ke bawah */
+        }
+        .komitmen-box {
+          flex-direction: column; /* Ikon pindah ke atas, teks di bawah */
+          align-items: center;
+          text-align: center;
+          padding: 20px 15px;
+        }
+      }
+      /* Aturan khusus tampilan HP untuk menu PAKSIAN */
+      @media (max-width: 768px) {
+        .paksian-header-flex {
+          flex-direction: column;
+          text-align: center !important;
+          gap: 20px !important;
+        }
+        .paksian-title-area {
+          text-align: center !important;
+        }
+        .paksian-huge-title {
+          font-size: 3em !important; /* Dikecilkan dikit agar pas di layar HP */
+        }
+      }
+
+      @media (max-width: 768px) {
+        .paksian-grid-2x2 {
+          grid-template-columns: 1fr !important;
+        }
+      }
+      @media (max-width: 600px) {
+        .logo-container {
+          gap: 20px !important; /* Jarak antar logo mengecil di HP */
+        }
+        .logo-container img {
+          width: 100px !important; /* Ukuran logo mengecil di HP */
+        }
+      }
+    </style>
+    <!-- Tambahkan CSS Tom Select di sini -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav>
+      <a id="btn-beranda" class="active-link" onclick="bukaHalaman('beranda')"
+        >Beranda</a
+      >
+      <a id="btn-seputar" onclick="bukaHalaman('seputar')">SDDI</a>
+      <a id="btn-paksian" onclick="bukaHalaman('paksian')">PAKSIAN</a>
+      <a id="btn-publikasi" onclick="bukaHalaman('publikasi')">Publikasi</a>
+      <a id="btn-infografis" onclick="bukaHalaman('infografis')">Infografis</a>
+      <a id="btn-data-paksian" onclick="bukaHalaman('data-paksian')"
+        >Data Paksian</a
+      >
+      <a id="btn-data-desa" onclick="bukaHalaman('data-desa')">Data Desa</a>
+      <a id="btn-metadata" onclick="bukaHalaman('metadata')">Metadata</a>
+      <a id="btn-peta" onclick="bukaHalaman('peta')">Peta</a>
+      <a id="btn-perjalanan" onclick="bukaHalaman('perjalanan')">Perjalanan</a>
+      <a id="btn-galeri" onclick="bukaHalaman('galeri')">Galeri</a>
+    </nav>
+
+    <!-- BERANDA -->
+    <div id="beranda" class="page active-page">
+      <!-- BLOK 1: SAMBUTAN & MOTTO -->
+      <div
+        class="card hero-card"
+        style="
+          text-align: center;
+          border-left: none;
+          border-bottom: 6px solid var(--biru-utama);
+          padding: 60px 20px 80px 20px;
+          margin-bottom: 25vh;
+        "
+      >
+        <!-- Logo Desa Cantik -->
+        <div
+          class="logo-container"
+          style="
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 25px;
+            align-items: center;
+          "
+        >
+          <!-- Logo 1 -->
+          <img
+            src="basel.png "
+            alt="Logo Basel"
+            style="width: 80px; height: auto"
+          />
+
+          <!-- Logo 2 -->
+          <img
+            src="logodescan.png"
+            alt="Logo Desa Cantik"
+            style="width: 100px; height: auto"
+          />
+        </div>
+
+        <h1
+          style="font-size: 2.2em; color: var(--biru-gelap); margin-bottom: 5px"
+        >
+          Selamat Datang di Portal Satu Data Desa Keposang
+        </h1>
+        <h3
+          style="
+            color: #64748b;
+            font-weight: 500;
+            margin-bottom: 45px;
+            font-size: 1.1em;
+          "
+        >
+          <i
+            class="fas fa-map-marker-alt"
+            style="color: var(--biru-utama); margin-right: 8px"
+          ></i>
+          Desa Binaan Program Desa Cinta Statistik Kabupaten Bangka Selatan
+        </h3>
+
+        <!-- Kotak Motto / Visi -->
+        <div style="text-align: center; margin: 0 auto">
+          <div class="motto-badge">
+            <p>
+              <span
+                style="
+                  color: var(--biru-utama);
+                  font-size: 1.3em;
+                  margin-right: 5px;
+                "
+                >"</span
+              >Mewujudkan tata kelola data desa yang berkualitas untuk
+              pembangunan yang lebih terukur<span
+                style="
+                  color: var(--biru-utama);
+                  font-size: 1.3em;
+                  margin-left: 5px;
+                "
+                >"</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <!-- Teks Komitmen (Digabung ke dalam Blok 1) -->
+        <p
+          style="
+            font-size: 15.5px;
+            color: #57606f;
+            line-height: 1.8;
+            max-width: 850px;
+            margin: 40px auto 0 auto;
+          "
+        >
+          Pada tahun 2026, <strong>Desa Keposang</strong> terpilih sebagai desa
+          binaan Desa Cantik bersama dengan Desa Bikang dan Desa Kepoh. Melalui
+          rangkaian pembinaan, Desa berkomitmen menjadi desa yang sadar data,
+          menyediakan informasi yang akurat, mutakhir, dan bermanfaat bagi warga
+          serta pemangku kebijakan.
+        </p>
+      </div>
+      <!-- Akhir Blok 1 -->
+    </div>
+    <!-- Akhir Halaman Beranda -->
+
+    <!-- SECTION: SEPUTAR DESA CANTIK -->
+    <div id="seputar" class="page">
+      <!-- 1. APA ITU SDDI (Dengan Ikon Kaca Pembesar Modern) -->
+      <div
+        class="card"
+        style="border-left: 6px solid #0ea5e9; margin-bottom: 30px"
+      >
+        <div
+          class="card-content"
+          style="align-items: center; gap: 40px; padding: 20px"
+        >
+          <!-- Ikon Pencarian Data -->
+          <div
+            class="card-image"
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background: linear-gradient(135deg, #f0f9ff 0%, #bae6fd 100%);
+              width: 180px;
+              height: 180px;
+              border-radius: 50%;
+              box-shadow: 0 10px 25px rgba(2, 132, 199, 0.15);
+              flex-shrink: 0;
+              margin: 0 auto;
+            "
+          >
+            <i
+              class="fas fa-search-location"
+              style="
+                font-size: 75px;
+                color: #0284c7;
+                text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+              "
+            ></i>
+          </div>
+
+          <div class="card-text">
+            <h2
+              style="
+                margin-bottom: 15px;
+                font-size: 1.8em;
+                color: var(--biru-gelap);
+              "
+            >
+              Satu Data Desa Indonesia (SDDI)
+            </h2>
+            <p style="line-height: 1.8; font-size: 15px; color: #475569">
+              Satu Data Desa Indonesia atau <b>SDDI</b> adalah inisiatif untuk
+              menciptakan sistem data yang terintegrasi, akurat, dan terpercaya
+              di tingkat desa. Program ini bertujuan untuk menyelaraskan dan
+              menyatukan berbagai sumber data desa yang sebelumnya tersebar dan
+              tidak terstandarisasi, sehingga mempermudah pengambilan keputusan,
+              perencanaan pembangunan, dan evaluasi program-program pemerintah.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. APA ITU DESA CANTIK (Dengan Badge dan Quote Box) -->
+      <div
+        class="card"
+        style="border-left: 6px solid #10b981; margin-bottom: 30px"
+      >
+        <div
+          class="card-content reverse"
+          style="align-items: center; gap: 40px; padding: 20px"
+        >
+          <!-- Logo Desa Cantik -->
+          <div class="card-image" style="flex-shrink: 0; margin: 0 auto">
+            <img
+              src="logodescan.png"
+              alt="Logo Desa Cantik"
+              style="max-width: 200px"
+            />
+          </div>
+
+          <div class="card-text">
+            <h2
+              style="
+                margin-bottom: 15px;
+                font-size: 1.8em;
+                color: var(--biru-gelap);
+              "
+            >
+              Apa itu Desa Cantik?
+            </h2>
+            <p style="line-height: 1.8; font-size: 15px; color: #475569">
+              <b>Desa Cantik</b> atau <b>Desa Cinta Statistik</b> merupakan
+              program inovatif dari Badan Pusat Statistik (BPS) yang bertujuan
+              untuk mempercepat penguatan statistik sektoral di tingkat desa.
+              Program ini mendorong pemerintah desa agar lebih cakap dalam
+              mengelola dan memanfaatkan data statistik sebagai bagian dari
+              upaya mewujudkan
+              <span
+                style="
+                  background: #eff6ff;
+                  color: #1d4ed8;
+                  padding: 3px 10px;
+                  border-radius: 6px;
+                  font-weight: 600;
+                  border: 1px solid #bfdbfe;
+                "
+                >Satu Data Desa Indonesia</span
+              >, yakni sistem data yang terintegrasi, akurat, dan terpercaya.
+            </p>
+
+            <!-- Kotak Highlight Kutipan -->
+            <div
+              style="
+                background: #f8fafc;
+                border-left: 4px solid #94a3b8;
+                padding: 15px 20px;
+                margin-top: 25px;
+                border-radius: 0 8px 8px 0;
+              "
+            >
+              <p
+                style="
+                  margin: 0;
+                  font-style: italic;
+                  color: #64748b;
+                  font-size: 0.95em;
+                  line-height: 1.6;
+                "
+              >
+                "Program Desa Cantik dilatarbelakangi kondisi dimana saat ini
+                desa/kelurahan tidak lagi dianggap sebagai obyek pembangunan,
+                melainkan ditempatkan sebagai subyek dan ujung tombak
+                pembangunan dalam peningkatan kesejahteraan masyarakat."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. TUJUAN DESA CANTIK (Grid 2x2 dengan Ikon Responsif) -->
+      <div
+        class="card"
+        style="border-left: 6px solid var(--biru-utama); padding: 50px 30px"
+      >
+        <h2
+          style="
+            margin-bottom: 40px;
+            font-size: 2.2em;
+            text-align: center;
+            color: var(--biru-gelap);
+          "
+        >
+          Tujuan Desa Cantik
+        </h2>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 950px;
+            margin: 0 auto;
+          "
+        >
+          <!-- Tujuan 1 -->
+          <div
+            class="pilar-card"
+            style="text-align: center; padding: 35px 25px"
+          >
+            <div
+              class="tujuan-icon-wrap"
+              style="background: #e0f2fe; color: #0284c7"
+            >
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 15px 0;
+                color: var(--biru-gelap);
+                font-size: 20px;
+                font-weight: 700;
+              "
+            >
+              Literasi & Kesadaran
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 15.5px;
+                color: #57606f;
+                line-height: 1.7;
+              "
+            >
+              Meningkatkan literasi, kesadaran, dan peran aktif perangkat
+              desa/kelurahan dan masyarakat dalam penyelenggaraan kegiatan
+              statistik.
+            </p>
+          </div>
+
+          <!-- Tujuan 2 -->
+          <div
+            class="pilar-card"
+            style="text-align: center; padding: 35px 25px"
+          >
+            <div
+              class="tujuan-icon-wrap"
+              style="background: #dcfce7; color: #16a34a"
+            >
+              <i class="fas fa-database"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 15px 0;
+                color: var(--biru-gelap);
+                font-size: 20px;
+                font-weight: 700;
+              "
+            >
+              Standardisasi Data
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 15.5px;
+                color: #57606f;
+                line-height: 1.7;
+              "
+            >
+              Standardisasi pengelolaan data statistik untuk menjaga kualitas
+              dan keterbandingan indikator statistik.
+            </p>
+          </div>
+
+          <!-- Tujuan 3 -->
+          <div
+            class="pilar-card"
+            style="text-align: center; padding: 35px 25px"
+          >
+            <div
+              class="tujuan-icon-wrap"
+              style="background: #fef9c3; color: #ca8a04"
+            >
+              <i class="fas fa-tasks"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 15px 0;
+                color: var(--biru-gelap);
+                font-size: 20px;
+                font-weight: 700;
+              "
+            >
+              Optimalisasi Program
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 15.5px;
+                color: #57606f;
+                line-height: 1.7;
+              "
+            >
+              Optimalisasi penggunaan dan pemanfaatan data statistik sehingga
+              program pembangunan di desa/kelurahan tepat sasaran.
+            </p>
+          </div>
+
+          <!-- Tujuan 4 -->
+          <div
+            class="pilar-card"
+            style="text-align: center; padding: 35px 25px"
+          >
+            <div
+              class="tujuan-icon-wrap"
+              style="background: #f3e8ff; color: #9333ea"
+            >
+              <i class="fas fa-users-cog"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 15px 0;
+                color: var(--biru-gelap);
+                font-size: 20px;
+                font-weight: 700;
+              "
+            >
+              Agen Statistik Desa
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 15.5px;
+                color: #57606f;
+                line-height: 1.7;
+              "
+            >
+              Membentuk agen-agen statistik pada level desa/kelurahan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- HALAMAN PAKSIAN -->
+    <!-- ============================================== -->
+    <div id="paksian" class="page">
+      <!-- KARTU UTAMA: GAYA CLEAN DENGAN LOGO BESAR & FONT PAKSIAN MEGA -->
+      <div
+        class="card"
+        style="border-left: 6px solid var(--biru-utama); margin-bottom: 30px"
+      >
+        <div
+          class="card-content"
+          style="align-items: center; gap: 40px; padding: 35px 25px"
+        >
+          <!-- Logo PAKSIAN Diperbesar Jadi 230px -->
+          <div
+            class="card-image"
+            style="flex-shrink: 0; margin: 0 auto; text-align: center"
+          >
+            <img
+              src="logopaksian.png"
+              alt="Logo PAKSIAN"
+              style="
+                width: 230px;
+                height: auto;
+                filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.06));
+              "
+            />
+          </div>
+
+          <!-- Teks di Kanan (Judul dibuat 3.2em agar super besar) -->
+          <div class="card-text">
+            <h2
+              style="
+                margin-bottom: 5px;
+                font-size: 3.2em;
+                color: var(--biru-gelap);
+                font-weight: 800;
+                line-height: 1.1;
+              "
+            >
+              PAKSIAN
+            </h2>
+            <h4
+              style="
+                color: var(--biru-utama);
+                font-weight: 600;
+                font-size: 1.2em;
+                margin-bottom: 18px;
+              "
+            >
+              Pendataan Lengkap Kependudukan, Sosial, Agraria, dan Hunian
+            </h4>
+            <p
+              style="
+                line-height: 1.8;
+                font-size: 15px;
+                color: #475569;
+                margin-bottom: 15px;
+              "
+            >
+              <strong>PAKSIAN</strong> adalah kegiatan pendataan lengkap yang
+              menggabungkan data penduduk, kondisi sosial, kepemilikan lahan,
+              hingga keadaan rumah dalam satu sistem. Tujuannya supaya
+              pemerintah punya data yang jujur dan detail tentang apa yang
+              sebenarnya dibutuhkan warga di lapangan. Dengan data ini,
+              pemberian bantuan sosial atau perencanaan pembangunan desa jadi
+              lebih tepat sasaran.
+            </p>
+            <p
+              style="
+                line-height: 1.8;
+                font-size: 15px;
+                color: #475569;
+                margin: 0;
+              "
+            >
+              Melalui integrasi data ini, intervensi kebijakan maupun
+              perencanaan pembangunan desa jadi bisa berjalan jauh lebih tepat
+              sasaran.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- ============================================== -->
+      <!-- MENGAPA PAKSIAN HADIR (Grid 2x2 & Hover Jalan) -->
+      <!-- ============================================== -->
+      <div
+        class="card"
+        style="
+          border-left: 6px solid #0ea5e9;
+          padding: 45px 35px;
+          margin-top: 30px;
+        "
+      >
+        <div
+          style="text-align: center; max-width: 800px; margin: 0 auto 40px auto"
+        >
+          <h2
+            style="
+              font-size: 2.2em;
+              color: var(--biru-gelap);
+              margin-bottom: 12px;
+            "
+          >
+            Mengapa PAKSIAN Hadir?
+          </h2>
+          <p
+            style="
+              color: #64748b;
+              font-size: 15.5px;
+              line-height: 1.7;
+              margin: 0;
+            "
+          >
+            Kegiatan ini merupakan bagian integral dari program
+            <strong>Desa Cinta Statistik (Desa Cantik)</strong> BPS Kabupaten
+            Bangka Selatan untuk memotret kondisi riil masyarakat secara
+            mendalam dan terintegrasi.
+          </p>
+        </div>
+
+        <!-- GRID 2x2 DENGAN EFEK HOVER LANGSUNG -->
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+          "
+          class="paksian-grid-2x2"
+        >
+          <!-- Poin 1: Transisi Konvensional -->
+          <div
+            class="interactive-card"
+            onmouseover="
+              this.style.transform = 'translateY(-6px)';
+              this.style.boxShadow = '0 12px 25px rgba(2, 132, 199, 0.12)';
+              this.style.borderColor = '#0284c7';
+            "
+            onmouseout="
+              this.style.transform = 'translateY(0)';
+              this.style.boxShadow = 'none';
+              this.style.borderColor = '#e2e8f0';
+            "
+            style="
+              background: #ffffff;
+              padding: 30px 25px;
+              border-radius: 12px;
+              border: 1px solid #e2e8f0;
+              transition: all 0.3s ease;
+            "
+          >
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: #e0f2fe;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #0284c7;
+                font-size: 20px;
+                margin-bottom: 20px;
+              "
+            >
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 10px 0;
+                color: var(--biru-gelap);
+                font-size: 17px;
+                font-weight: 700;
+              "
+            >
+              Transisi dari Konvensional
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 14px;
+                color: #475569;
+                line-height: 1.6;
+              "
+            >
+              Desa menghadapi tantangan dalam akurasi data kependudukan yang
+              masih bergantung pada metode konvensional, yakni pengumpulan
+              fotokopi Kartu Keluarga melalui tingkat RT.
+            </p>
+          </div>
+
+          <!-- Poin 2: Prinsip Inklusif (Leave No One Behind) -->
+          <div
+            class="interactive-card"
+            onmouseover="
+              this.style.transform = 'translateY(-6px)';
+              this.style.boxShadow = '0 12px 25px rgba(22, 163, 74, 0.12)';
+              this.style.borderColor = '#16a34a';
+            "
+            onmouseout="
+              this.style.transform = 'translateY(0)';
+              this.style.boxShadow = 'none';
+              this.style.borderColor = '#e2e8f0';
+            "
+            style="
+              background: #ffffff;
+              padding: 30px 25px;
+              border-radius: 12px;
+              border: 1px solid #e2e8f0;
+              transition: all 0.3s ease;
+            "
+          >
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: #dcfce7;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #16a34a;
+                font-size: 20px;
+                margin-bottom: 20px;
+              "
+            >
+              <i class="fas fa-hands-helping"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 10px 0;
+                color: var(--biru-gelap);
+                font-size: 17px;
+                font-weight: 700;
+              "
+            >
+              Prinsip Inklusif (Leave No One Behind)
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 14px;
+                color: #475569;
+                line-height: 1.6;
+              "
+            >
+              Memberi perhatian khusus pada kelompok rentan seperti pendataan
+              lansia dan penanganan anak putus sekolah untuk intervensi yang
+              tepat.
+            </p>
+          </div>
+
+          <!-- Poin 3: Standar Hunian Layak -->
+          <div
+            class="interactive-card"
+            onmouseover="
+              this.style.transform = 'translateY(-6px)';
+              this.style.boxShadow = '0 12px 25px rgba(202, 138, 4, 0.12)';
+              this.style.borderColor = '#ca8a04';
+            "
+            onmouseout="
+              this.style.transform = 'translateY(0)';
+              this.style.boxShadow = 'none';
+              this.style.borderColor = '#e2e8f0';
+            "
+            style="
+              background: #ffffff;
+              padding: 30px 25px;
+              border-radius: 12px;
+              border: 1px solid #e2e8f0;
+              transition: all 0.3s ease;
+            "
+          >
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: #fef9c3;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #ca8a04;
+                font-size: 20px;
+                margin-bottom: 20px;
+              "
+            >
+              <i class="fas fa-home"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 10px 0;
+                color: var(--biru-gelap);
+                font-size: 17px;
+                font-weight: 700;
+              "
+            >
+              Standar Hunian Layak
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 14px;
+                color: #475569;
+                line-height: 1.6;
+              "
+            >
+              Mengidentifikasi profil hunian guna memastikan penyaluran bantuan
+              stimulan tepat sasaran.
+            </p>
+          </div>
+
+          <!-- Poin 4: Pemetaan Agraria -->
+          <div
+            class="interactive-card"
+            onmouseover="
+              this.style.transform = 'translateY(-6px)';
+              this.style.boxShadow = '0 12px 25px rgba(147, 51, 234, 0.12)';
+              this.style.borderColor = '#9333ea';
+            "
+            onmouseout="
+              this.style.transform = 'translateY(0)';
+              this.style.boxShadow = 'none';
+              this.style.borderColor = '#e2e8f0';
+            "
+            style="
+              background: #ffffff;
+              padding: 30px 25px;
+              border-radius: 12px;
+              border: 1px solid #e2e8f0;
+              transition: all 0.3s ease;
+            "
+          >
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: #f3e8ff;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #9333ea;
+                font-size: 20px;
+                margin-bottom: 20px;
+              "
+            >
+              <i class="fas fa-seedling"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 10px 0;
+                color: var(--biru-gelap);
+                font-size: 17px;
+                font-weight: 700;
+              "
+            >
+              Agraria
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 14px;
+                color: #475569;
+                line-height: 1.6;
+              "
+            >
+              Mengidentifikasi banyaknya rumah tangga yang memiliki lahan
+              perkebunan.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- KARTU KEDUA: TUJUAN PAKSIAN (Format Grid 2x2, Tanpa Kata Memetakan) -->
+      <div
+        class="card"
+        style="
+          border-left: 6px solid var(--biru-utama);
+          padding: 45px 35px;
+          margin-top: 30px;
+        "
+      >
+        <h2
+          style="
+            margin-bottom: 35px;
+            font-size: 2.2em;
+            text-align: center;
+            color: var(--biru-gelap);
+          "
+        >
+          Tujuan PAKSIAN
+        </h2>
+
+        <!-- GRID 2x2 UNTUK TUJUAN -->
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+          "
+          class="paksian-grid-2x2"
+        >
+          <!-- Tujuan 1 -->
+          <div
+            class="interactive-card"
+            onmouseover="
+              this.style.transform = 'translateY(-6px)';
+              this.style.boxShadow = '0 12px 25px rgba(2, 132, 199, 0.12)';
+              this.style.borderColor = '#0284c7';
+            "
+            onmouseout="
+              this.style.transform = 'translateY(0)';
+              this.style.boxShadow = 'none';
+              this.style.borderColor = '#e2e8f0';
+            "
+            style="
+              background: #ffffff;
+              padding: 30px 25px;
+              border-radius: 12px;
+              border: 1px solid #e2e8f0;
+              transition: all 0.3s ease;
+            "
+          >
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: #e0f2fe;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #0284c7;
+                font-size: 20px;
+                margin-bottom: 20px;
+              "
+            >
+              <i class="fas fa-database"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 10px 0;
+                color: var(--biru-gelap);
+                font-size: 17px;
+                font-weight: 700;
+              "
+            >
+              Basis Data Mikro & Kependudukan
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 14px;
+                color: #475569;
+                line-height: 1.6;
+              "
+            >
+              Mengumpulkan data akurat dan terkini mengenai kondisi kependudukan
+              serta profil sosial secara menyeluruh di tingkat desa.
+            </p>
+          </div>
+
+          <!-- Tujuan 2 -->
+          <div
+            class="interactive-card"
+            onmouseover="
+              this.style.transform = 'translateY(-6px)';
+              this.style.boxShadow = '0 12px 25px rgba(22, 163, 74, 0.12)';
+              this.style.borderColor = '#16a34a';
+            "
+            onmouseout="
+              this.style.transform = 'translateY(0)';
+              this.style.boxShadow = 'none';
+              this.style.borderColor = '#e2e8f0';
+            "
+            style="
+              background: #ffffff;
+              padding: 30px 25px;
+              border-radius: 12px;
+              border: 1px solid #e2e8f0;
+              transition: all 0.3s ease;
+            "
+          >
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: #dcfce7;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #16a34a;
+                font-size: 20px;
+                margin-bottom: 20px;
+              "
+            >
+              <i class="fas fa-seedling"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 10px 0;
+                color: var(--biru-gelap);
+                font-size: 17px;
+                font-weight: 700;
+              "
+            >
+              Produktivitas Pertanian & Hunian
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 14px;
+                color: #475569;
+                line-height: 1.6;
+              "
+            >
+              Menilai produktivitas pertanian serta kualitas hunian masyarakat
+              sebagai parameter utama kesejahteraan warga.
+            </p>
+          </div>
+
+          <!-- Tujuan 3 -->
+          <div
+            class="interactive-card"
+            onmouseover="
+              this.style.transform = 'translateY(-6px)';
+              this.style.boxShadow = '0 12px 25px rgba(202, 138, 4, 0.12)';
+              this.style.borderColor = '#ca8a04';
+            "
+            onmouseout="
+              this.style.transform = 'translateY(0)';
+              this.style.boxShadow = 'none';
+              this.style.borderColor = '#e2e8f0';
+            "
+            style="
+              background: #ffffff;
+              padding: 30px 25px;
+              border-radius: 12px;
+              border: 1px solid #e2e8f0;
+              transition: all 0.3s ease;
+            "
+          >
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: #fef9c3;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #ca8a04;
+                font-size: 20px;
+                margin-bottom: 20px;
+              "
+            >
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 10px 0;
+                color: var(--biru-gelap);
+                font-size: 17px;
+                font-weight: 700;
+              "
+            >
+              Identifikasi Kelompok Rentan
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 14px;
+                color: #475569;
+                line-height: 1.6;
+              "
+            >
+              Menjadi dasar bagi pemerintah desa dalam mengidentifikasi kelompok
+              rentan seperti lansia dan anak putus sekolah secara presisi.
+            </p>
+          </div>
+
+          <!-- Tujuan 4 -->
+          <div
+            class="interactive-card"
+            onmouseover="
+              this.style.transform = 'translateY(-6px)';
+              this.style.boxShadow = '0 12px 25px rgba(147, 51, 234, 0.12)';
+              this.style.borderColor = '#9333ea';
+            "
+            onmouseout="
+              this.style.transform = 'translateY(0)';
+              this.style.boxShadow = 'none';
+              this.style.borderColor = '#e2e8f0';
+            "
+            style="
+              background: #ffffff;
+              padding: 30px 25px;
+              border-radius: 12px;
+              border: 1px solid #e2e8f0;
+              transition: all 0.3s ease;
+            "
+          >
+            <div
+              style="
+                width: 50px;
+                height: 50px;
+                background: #f3e8ff;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #9333ea;
+                font-size: 20px;
+                margin-bottom: 20px;
+              "
+            >
+              <i class="fas fa-network-wired"></i>
+            </div>
+            <h4
+              style="
+                margin: 0 0 10px 0;
+                color: var(--biru-gelap);
+                font-size: 17px;
+                font-weight: 700;
+              "
+            >
+              Kebijakan Pembangunan Berkelanjutan
+            </h4>
+            <p
+              style="
+                margin: 0;
+                font-size: 14px;
+                color: #475569;
+                line-height: 1.6;
+              "
+            >
+              Merancang kebijakan pembangunan yang tepat sasaran dan
+              berkelanjutan untuk meningkatkan kualitas hidup masyarakat secara
+              jangka panjang.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Akhir Halaman PAKSIAN -->
+
+    <!-- SECTION: PUBLIKASI -->
+    <div id="publikasi" class="page">
+      <div
+        class="card hero-card"
+        style="margin-bottom: 30px; text-align: center; padding: 40px 30px"
+      >
+        <h1
+          style="
+            font-size: 2.2em;
+            color: var(--biru-gelap);
+            margin-bottom: 12px;
+            font-weight: 800;
+          "
+        >
+          Publikasi Desa
+        </h1>
+        <p
+          class="deskripsi-hero"
+          style="
+            color: #64748b;
+            font-size: 15.5px;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+          "
+        >
+          Kumpulan publikasi e-book dan laporan resmi hasil pendataan statistik
+          sektoral yang disajikan sebagai acuan data valid bagi pembangunan
+          desa.
+        </p>
+      </div>
+
+      <div class="publikasi-grid">
+        <!-- Item 1: Publikasi A -->
+        <div class="publikasi-item">
+          <div class="cover-wrapper">
+            <img src="CoverPaksianKeposang.png" alt="Cover Publikasi 1" />
+            <div class="overlay-baca">
+              <span style="color: white; font-weight: bold">E-Book</span>
+            </div>
+          </div>
+          <div class="info-publikasi">
+            <h4>Publikasi PAKSIAN Keposang 2026</h4>
+            <p
+              class="deskripsi-teks"
+              style="
+                font-size: 13.5px;
+                color: #57606f;
+                line-height: 1.6;
+                margin-bottom: 15px;
+              "
+            >
+              Publikasi PAKSIAN Keposang 2026 merupakan hasil pendataan lengkap
+              yang mencakup dimensi kependudukan, sosial, agraria, hingga
+              kondisi hunian warga. Data ini hadir sebagai wujud komitmen Desa
+              Keposang dalam mewujudkan tata kelola satu data desa yang akurat
+              dan mutakhir.
+            </p>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                flex-wrap: wrap;
+              "
+            >
+              <button
+                onclick="
+                  toggleFullPreview(
+                    this,
+                    'https://online.fliphtml5.com/1905Descan2026/Publikasi-Pusaka-Desa-Gadung/',
+                  )
+                "
+                class="toggle-deskripsi"
+                style="
+                  background: #e0f2fe;
+                  color: #0284c7;
+                  padding: 8px 14px;
+                  border-radius: 6px;
+                  border: none;
+                  font-weight: 600;
+                  font-size: 13px;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 5px;
+                  cursor: pointer;
+                "
+              >
+                <i class="fas fa-book-open"></i> Lihat Preview
+              </button>
+              <a
+                href="cobapermata.pdf"
+                download
+                class="btn-unduh"
+                style="padding: 8px 14px; font-size: 13px"
+              >
+                📥 Unduh PDF
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2: Publikasi B (Ganti link fliphtml5 & file pdf sesuai kebutuhan) -->
+        <div class="publikasi-item">
+          <div class="cover-wrapper">
+            <img src="CoverBukletKeposang.png" alt="Cover Publikasi 2" />
+            <div class="overlay-baca">
+              <span style="color: white; font-weight: bold">E-Book</span>
+            </div>
+          </div>
+          <div class="info-publikasi">
+            <h4>Buklet PAKSIAN Keposang Tahun 2026</h4>
+            <p
+              class="deskripsi-teks"
+              style="
+                font-size: 13.5px;
+                color: #57606f;
+                line-height: 1.6;
+                margin-bottom: 15px;
+              "
+            >
+              Buklet PAKSIAN Desa Keposang 2026 menyajikan hasil pendataan
+              lengkap kependudukan, sosial, agraria, dan hunian dalam format
+              visual yang informatif. Dengan desain yang intuitif, publikasi ini
+              mengubah data teknis menjadi informasi yang mudah dipahami,
+              memberikan potret desa yang jelas bagi seluruh masyarakat.
+            </p>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                flex-wrap: wrap;
+              "
+            >
+              <button
+                onclick="
+                  toggleFullPreview(
+                    this,
+                    'https://online.fliphtml5.com/link_lain_disini/',
+                  )
+                "
+                class="toggle-deskripsi"
+                style="
+                  background: #e0f2fe;
+                  color: #0284c7;
+                  padding: 8px 14px;
+                  border-radius: 6px;
+                  border: none;
+                  font-weight: 600;
+                  font-size: 13px;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 5px;
+                  cursor: pointer;
+                "
+              >
+                <i class="fas fa-book-open"></i> Lihat Preview
+              </button>
+              <a
+                href="filelain.pdf"
+                download
+                class="btn-unduh"
+                style="padding: 8px 14px; font-size: 13px"
+              >
+                📥 Unduh PDF
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Publikasi C -->
+        <div class="publikasi-item">
+          <div class="cover-wrapper">
+            <img src="CoverProfilDesaKeposang.png" alt="Cover Publikasi 3" />
+            <div class="overlay-baca">
+              <span style="color: white; font-weight: bold">E-Book</span>
+            </div>
+          </div>
+          <div class="info-publikasi">
+            <h4>Publikasi Profil Desa Keposang Tahun 2026</h4>
+            <p
+              class="deskripsi-teks"
+              style="
+                font-size: 13.5px;
+                color: #57606f;
+                line-height: 1.6;
+                margin-bottom: 15px;
+              "
+            >
+              Dokumen ini merupakan rangkuman Profil Desa Keposang 2026 yang
+              bersumber dari data Prodeskel. Berisi informasi mutakhir mengenai
+              kondisi kependudukan, sarana prasarana, serta tata kelola
+              pemerintahan desa yang diperbarui secara berkala sebagai cerminan
+              dinamika pembangunan wilayah.
+            </p>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                flex-wrap: wrap;
+              "
+            >
+              <button
+                onclick="
+                  toggleFullPreview(
+                    this,
+                    'https://online.fliphtml5.com/link_lain_disini_2/',
+                  )
+                "
+                class="toggle-deskripsi"
+                style="
+                  background: #e0f2fe;
+                  color: #0284c7;
+                  padding: 8px 14px;
+                  border-radius: 6px;
+                  border: none;
+                  font-weight: 600;
+                  font-size: 13px;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 5px;
+                  cursor: pointer;
+                "
+              >
+                <i class="fas fa-book-open"></i> Lihat Preview
+              </button>
+              <a
+                href="filelain2.pdf"
+                download
+                class="btn-unduh"
+                style="padding: 8px 14px; font-size: 13px"
+              >
+                📥 Unduh PDF
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4: Publikasi D -->
+        <div class="publikasi-item">
+          <div class="cover-wrapper">
+            <img src="CoverPodesKeposang.jpg" alt="Cover Publikasi 4" />
+            <div class="overlay-baca">
+              <span style="color: white; font-weight: bold">E-Book</span>
+            </div>
+          </div>
+          <div class="info-publikasi">
+            <h4>Publikasi Potensi Desa (PODES) Keposang Tahun 2025</h4>
+            <p
+              class="deskripsi-teks"
+              style="
+                font-size: 13.5px;
+                color: #57606f;
+                line-height: 1.6;
+                margin-bottom: 15px;
+              "
+            >
+              Publikasi Potensi Desa Keposang merupakan publikasi yang berisi
+              data dan indikator strategis mengenai kondisi dan potensi yang ada
+              di Desa Keposang. Data dan indikator terkait kondisi dan potensi
+              desa diperoleh dari hasil kegiatan pendataan Potensi Desa (Podes)
+              2025 yang diselenggarakan oleh Badan Pusat Statistik (BPS).
+            </p>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                flex-wrap: wrap;
+              "
+            >
+              <button
+                onclick="
+                  toggleFullPreview(
+                    this,
+                    'https://online.fliphtml5.com/link_lain_disini_3/',
+                  )
+                "
+                class="toggle-deskripsi"
+                style="
+                  background: #e0f2fe;
+                  color: #0284c7;
+                  padding: 8px 14px;
+                  border-radius: 6px;
+                  border: none;
+                  font-weight: 600;
+                  font-size: 13px;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 5px;
+                  cursor: pointer;
+                "
+              >
+                <i class="fas fa-book-open"></i> Lihat Preview
+              </button>
+              <a
+                href="filelain3.pdf"
+                download
+                class="btn-unduh"
+                style="padding: 8px 14px; font-size: 13px"
+              >
+                📥 Unduh PDF
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AREA PREVIEW FULL 1 HALAMAN DI BAWAH GRID -->
+      <div
+        id="full-preview-box"
+        class="card"
+        style="
+          display: none;
+          border-left: 6px solid var(--biru-utama);
+          padding: 40px 30px;
+          margin-top: 40px;
+        "
+      >
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+          "
+        >
+          <h2 style="margin: 0; font-size: 1.8em; color: var(--biru-gelap)">
+            Preview E-Book Full Halaman
+          </h2>
+          <button
+            onclick="closeFullPreview()"
+            style="
+              background: #fee2e2;
+              color: #dc2626;
+              border: none;
+              padding: 8px 16px;
+              border-radius: 6px;
+              font-weight: 600;
+              cursor: pointer;
+            "
+          >
+            <i class="fas fa-times"></i> Tutup Preview
+          </button>
+        </div>
+        <div
+          style="
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            background: #f8fafc;
+          "
+        >
+          <iframe
+            id="dynamic-iframe-pub"
+            src=""
+            seamless="seamless"
+            scrolling="no"
+            frameborder="0"
+            allowfullscreen="true"
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            "
+          >
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <div id="infografis" class="page">
+      <div class="card hero-card" style="margin-bottom: 0">
+        <h1>Infografis</h1>
+        <p class="deskripsi-hero">
+          Simak penyajian data statistik desa yang dikemas secara visual agar
+          lebih mudah dipahami dan menarik untuk dilihat. Mulai dari infografis
+          kependudukan dan sosial, hunian, hingga agraria!
+        </p>
+      </div>
+
+      <!-- Section 1 -->
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>Infografis 1: Jumlah Keluarga di Desa Keposang Tahun 2026</h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/4.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/4.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>Infografis 2: Jumlah Penduduk di Desa Keposang Tahun 2026</h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/5.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/5.png" alt="Infografis 2" />
+        </div>
+      </div>
+
+      <!-- Section 1 -->
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 3: Jumlah Penduduk Menurut Jenis Kelamin di Desa Keposang
+            Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/6.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/6.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 4: Jumlah Penduduk Menurut Agama di Desa Keposang Tahun
+            2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/7.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/7.png" alt="Infografis 2" />
+        </div>
+      </div>
+
+      <!-- Section 1 -->
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 5: Jumlah Penduduk Menurut Status Perkawinan di Desa
+            Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/8.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/8.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 6: Keterangan Migrasi Seumur Hidup Penduduk di Desa
+            Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/9.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/9.png" alt="Infografis 2" />
+        </div>
+      </div>
+
+      <!-- Section 1 -->
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 7: Keterangan Lansia dan Putus Sekolah di Desa Keposang
+            Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/10.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/10.png" alt="Infografis 1" />
+        </div>
+      </div>
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 8: Jumlah Bumbung Rumah di Desa Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/11.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/11.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 9: Rata-Rata Jumlah Keluarga dan Jumlah Penghuni Rumah di
+            Desa Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/12.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/12.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 10: Keterangan Status Kepemilikan Bangunan Tempat Tinggal
+            di Desa Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/13.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/13.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 11: Keterangan Bukti Penguasaaan Bangunan Tempat Tinggal
+            di Desa Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/14.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/14.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 12: Bangunan Tempat Tinggal Menurut Atap Terluas di Desa
+            Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/15.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/15.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 13: Bangunan Tempat Tinggal Menurut Dinding Terluas di
+            Desa Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/16.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/16.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 14: Bangunan Tempat Tinggal Menurut Lantai Terluas di
+            Desa Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/17.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/17.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 15: Kepemilikan Fasilitas Buang Air Besar di Desa
+            Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/18.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/18.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 16: Sumber Air Utama untuk Minum di Desa Keposang Tahun
+            2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/19.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/19.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 17: Sumber Air Utama untuk Mandi/Cuci/dll di Desa
+            Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/20.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/20.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 18: Keterangan Rumah Layak Huni di Desa Keposang Tahun
+            2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/21.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/21.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 19: Keterangan Ketahanan Bangunan di Desa Keposang Tahun
+            2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/22.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/22.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 20: Keterangan Ruang Hunian Memadai di Desa Keposang
+            Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/23.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/23.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 21: Keterangan Sanitasi Layak di Desa Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/24.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/24.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 22: Keterangan Akses Air Minum Layak di Desa Keposang
+            Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/25.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/25.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 23: Keterangan Akses Air Minum Aman di Desa Keposang
+            Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/26.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/26.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 24: Keterangan Akses Air Minum Bukan Air Permukaan dan
+            Akses Air Minum Layak Dasar di Desa Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/27.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/27.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 25: Sumber Penerangan Bangunan Tempat Tinggal di Desa
+            Keposang Tahun 2026
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/28.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/28.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>Infografis 26: Keterangan Agraria di Desa Keposang Tahun 2026</h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/29.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/29.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <div class="infografis-section">
+        <div class="info-content">
+          <h2>
+            Infografis 27: Keterangan Agraria di Desa Keposang Tahun 2026
+            (Lanjutan)
+          </h2>
+          <!-- Tombol Unduh -->
+          <a
+            href="PAKSIANKEPOSANG/30.png"
+            download="Infografis_Utama_Keposang.png"
+            class="btn-unduh-info"
+          >
+            <span>📥 Unduh Infografis</span>
+          </a>
+        </div>
+        <div class="info-visual">
+          <img src="PAKSIANKEPOSANG/30.png" alt="Infografis 1" />
+        </div>
+      </div>
+
+      <!-- Tambahkan Section 3 sampai 20 di sini -->
+    </div>
+
+    <!-- SECTION: DATA PAKSIAN -->
+    <div id="data-paksian" class="page">
+      <div class="card data-card">
+        <div class="data-header">
+          <h2>Data PAKSIAN Keposang</h2>
+        </div>
+
+        <p
+          class="source-text"
+          id="footerTabelPaksian"
+          style="line-height: 1.6; color: #57606f"
+        >
+          Memuat hasil Pendataan Lengkap Kependudukan, Sosial, Agraria, dan
+          Hunian (PAKSIAN) yang dilaksanakan pada Bulan Mei sampai Juni 2026.
+        </p>
+
+        <!-- TOMBOL SUB-MENU KATEGORI -->
+        <div class="paksian-tabs">
+          <button
+            class="btn-tab active-tab"
+            onclick="gantiKategoriPaksian('kependudukan', this)"
+          >
+            Kependudukan & Sosial
+          </button>
+          <button
+            class="btn-tab"
+            onclick="gantiKategoriPaksian('hunian', this)"
+          >
+            Hunian
+          </button>
+          <button
+            class="btn-tab"
+            onclick="gantiKategoriPaksian('agraria', this)"
+          >
+            Agraria
+          </button>
+        </div>
+
+        <!-- Box Pilih Jenis Data / Sheet -->
+        <div class="selection-box">
+          <label><i class="fas fa-folder-open"></i> Pilih Jenis Data:</label>
+          <select
+            id="pilihSheetPaksian"
+            class="styled-select"
+            autocomplete="off"
+            onchange="updateDashboardPaksian()"
+          >
+            <!-- Biarkan kosong, nanti diisi otomatis oleh JavaScript -->
+            <option value="" selected disabled>Memuat pilihan data...</option>
+          </select>
+        </div>
+
+        <!-- Section Grafik -->
+        <div class="chart-section">
+          <h3 id="judulGrafikPaksian" class="content-title"></h3>
+          <div class="canvas-container">
+            <canvas id="canvasGrafikPaksian"></canvas>
+          </div>
+          <p id="footerGrafikPaksian" class="footer-source"></p>
+        </div>
+
+        <!-- Section Tabel -->
+        <div class="table-section">
+          <h3 id="judulTabelPaksian" class="content-title"></h3>
+          <div class="styled-table-container">
+            <table id="tabelDataPaksian" class="pure-table">
+              <thead>
+                <tr id="tableHeaderPaksian"></tr>
+              </thead>
+              <tbody id="tableBodyPaksian"></tbody>
+            </table>
+          </div>
+          <div class="table-footer-flex">
+            <p id="footerTabelSubPaksian" class="footer-source"></p>
+            <div class="download-area">
+              <small>(klik kanan dan buka di tab baru untuk unduh)</small>
+              <a
+                id="btnUnduhPaksian"
+                href="#"
+                class="btn-download"
+                target="_blank"
+              >
+                <i class="fas fa-download"></i> Unduh Data PAKSIAN
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIBRARY UNTUK FITUR PENCARIAN DROPDOWN (TOM SELECT) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+
+    <!-- SECTION: DATA DESA -->
+    <div id="data-desa" class="page">
+      <div class="card" style="padding: 40px 30px; text-align: left">
+        <!-- Header Kiri Rata -->
+        <h2
+          style="
+            font-size: 26px;
+            color: var(--biru-gelap);
+            margin: 0 0 15px 0;
+            font-weight: 700;
+          "
+        >
+          Data Administrasi Desa
+        </h2>
+        <p
+          style="
+            color: #64748b;
+            font-size: 14.5px;
+            line-height: 1.6;
+            margin: 0 0 30px 0;
+          "
+        >
+          Data kependudukan dan profil desa di bawah ini bersumber langsung dari
+          <strong>Catatan Administrasi Desa</strong>. Data ini dikelola secara
+          rutin oleh perangkat desa melalui mekanisme pencatatan administrasi
+          bulanan.
+        </p>
+
+        <!-- Box Pilih Jenis Data dengan Fitur Pencarian -->
+        <div
+          style="
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+          "
+        >
+          <label
+            style="
+              display: block;
+              font-size: 14px;
+              color: #475569;
+              margin-bottom: 10px;
+              font-weight: 600;
+            "
+          >
+            🔍 Cari & Pilih Jenis Data:
+          </label>
+          <!-- Elemen onchange dihapus dari HTML karena sekarang ditangani langsung oleh Tom Select di Javascript -->
+          <select
+            id="pilihSheetDesa"
+            placeholder="Ketik indikator yang ingin dicari..."
+            autocomplete="off"
+          >
+            <option value="Sheet1" selected>
+              Perkembangan Jumlah Keluarga di Desa Keposang Tahun 2026
+              (Maret-Juni)
+            </option>
+            <option value="Sheet2">
+              Perkembangan Jumlah Penduduk di Desa Keposang Tahun 2026
+              (Maret-Juni)
+            </option>
+            <option value="Sheet3">
+              Perkembangan Jumlah Penduduk Laki-Laki di Desa Keposang Tahun 2026
+              (Maret-Juni)
+            </option>
+            <option value="Sheet4">
+              Perkembangan Jumlah Penduduk Perempuan di Desa Keposang Tahun 2026
+              (Maret-Juni)
+            </option>
+            <!-- Nanti kalau ada Sheet5, Sheet6 dst, tinggal tambah di sini -->
+          </select>
+        </div>
+
+        <!-- BUNGKUSAN GRAFIK & TABEL -->
+        <div id="grafik-wrapper">
+          <!-- Judul Grafik -->
+          <h3
+            id="chart-title"
+            style="
+              text-align: center;
+              color: var(--biru-gelap);
+              margin-bottom: 25px;
+              font-size: 18px;
+              font-weight: 700;
+            "
+          >
+            Memuat Data...
+          </h3>
+
+          <!-- Kotak Grafik -->
+          <div
+            style="
+              position: relative;
+              width: 100%;
+              height: 400px;
+              margin: 0 auto;
+              background: #ffffff;
+              padding: 20px;
+              border-radius: 8px;
+              border: 1px solid #e2e8f0;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            "
+          >
+            <canvas id="trendChart"></canvas>
+          </div>
+
+          <!-- Sumber & Catatan (Versi Atas / Bawah Grafik) -->
+          <div
+            style="
+              margin: 15px 0 40px 0;
+              font-size: 12.5px;
+              color: #64748b;
+              text-align: left;
+              line-height: 1.5;
+            "
+          >
+            <p style="margin: 0">
+              <strong style="color: #475569">Sumber:</strong>
+              <span id="chart-source">-</span>
+            </p>
+            <p style="margin: 4px 0 0 0; font-style: italic">
+              *Catatan: <span id="chart-note">-</span>
+            </p>
+          </div>
+
+          <!-- TABEL DATA DINAMIS -->
+          <div style="width: 100%; margin: 0 auto">
+            <h3
+              id="table-title"
+              style="
+                text-align: center;
+                color: var(--biru-gelap);
+                margin-bottom: 20px;
+                font-size: 18px;
+                font-weight: 700;
+              "
+            ></h3>
+
+            <div
+              style="
+                overflow-x: auto;
+                border: 1px solid #e2e8f0;
+                border-radius: 6px;
+                margin-bottom: 15px;
+              "
+            >
+              <table
+                style="
+                  width: 100%;
+                  border-collapse: collapse;
+                  text-align: center;
+                  font-size: 14px;
+                "
+              >
+                <thead>
+                  <tr
+                    style="
+                      background-color: #e0f2fe;
+                      color: var(--biru-gelap);
+                      font-weight: 600;
+                    "
+                  >
+                    <th
+                      id="th-label"
+                      style="
+                        padding: 12px;
+                        border-right: 1px solid #e2e8f0;
+                        border-bottom: 1px solid #e2e8f0;
+                        width: 40%;
+                      "
+                    >
+                      Bulan
+                    </th>
+                    <th
+                      id="th-value"
+                      style="
+                        padding: 12px;
+                        border-bottom: 1px solid #e2e8f0;
+                        width: 60%;
+                      "
+                    >
+                      Jumlah
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="table-body">
+                  <!-- Baris data di-generate via JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Sumber, Catatan & Tombol Unduh (Bagian Bawah Tabel) -->
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                font-size: 12.5px;
+                color: #64748b;
+                flex-wrap: wrap;
+                gap: 15px;
+              "
+            >
+              <div style="text-align: left; line-height: 1.5">
+                <p style="margin: 0">
+                  <strong style="color: #475569">Sumber:</strong>
+                  <span id="table-source">-</span>
+                </p>
+                <p style="margin: 4px 0 0 0; font-style: italic">
+                  *Catatan: <span id="table-note">-</span>
+                </p>
+              </div>
+              <div style="text-align: right">
+                <p style="margin: 0 0 5px 0; font-size: 11px; color: #94a3b8">
+                  (klik kanan dan buka di tab baru untuk unduh)
+                </p>
+                <a
+                  id="btn-download"
+                  href="#"
+                  target="_blank"
+                  style="
+                    background: #3b82f6;
+                    color: white;
+                    padding: 8px 16px;
+                    border-radius: 6px;
+                    text-decoration: none;
+                    font-weight: 600;
+                    font-size: 13px;
+                    display: inline-block;
+                    transition: 0.2s;
+                  "
+                >
+                  Unduh Data Administrasi
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: METADATA -->
+    <div id="metadata" class="page">
+      <div class="card hero-card" style="margin-bottom: 30px">
+        <h1>Metadata</h1>
+        <p class="deskripsi-hero">
+          Dokumentasi resmi mengenai definisi, konsep, metodologi, dan indikator
+          statistik sektoral yang digunakan sebagai standar pengelolaan data di
+          Desa Keposang.
+        </p>
+      </div>
+
+      <div class="metadata-triple-grid">
+        <!-- 1. Metadata Kegiatan -->
+        <div class="metadata-premium-card">
+          <div class="meta-card-header">
+            <div class="meta-icon-circle color-kegiatan">
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+            <span class="meta-badge">KEGIATAN</span>
+          </div>
+          <div class="meta-card-body">
+            <h3>Metadata Kegiatan</h3>
+            <p>
+              Memuat informasi dasar mengenai penyelenggaraan pengumpulan data,
+              latar belakang, tujuan, serta metodologi yang digunakan di
+              lapangan.
+            </p>
+            <span class="meta-file-size"
+              ><i class="far fa-file-pdf"></i> PDF (Metadata_Kegiatan.pdf)</span
+            >
+          </div>
+          <div class="meta-card-footer">
+            <button
+              class="btn-meta-action btn-preview-toggle"
+              onclick="
+                toggleMetaPreview(
+                  this,
+                  'https://online.fliphtml5.com/1905Descan2026/Publikasi-Pusaka-Desa-Gadung/',
+                )
+              "
+            >
+              <i class="fas fa-book-open"></i> Lihat Preview
+            </button>
+            <a
+              href="MS-Kegiatan Paksian.pdf"
+              download="MS-Kegiatan Paksian.pdf"
+              class="btn-meta-action btn-download"
+            >
+              <i class="fas fa-download"></i> Unduh File
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. Metadata Variabel -->
+        <div class="metadata-premium-card">
+          <div class="meta-card-header">
+            <div class="meta-icon-circle color-variabel">
+              <i class="fas fa-code-branch"></i>
+            </div>
+            <span class="meta-badge">VARIABEL</span>
+          </div>
+          <div class="meta-card-body">
+            <h3>Metadata Variabel</h3>
+            <p>
+              Memuat kamus data, definisi operasional, konsep, serta klasifikasi
+              dari setiap variabel atau elemen data yang dikumpulkan.
+            </p>
+            <span class="meta-file-size"
+              ><i class="far fa-file-pdf"></i> PDF (Metadata_Variabel.pdf)</span
+            >
+          </div>
+          <div class="meta-card-footer">
+            <button
+              class="btn-meta-action btn-preview-toggle"
+              onclick="
+                toggleMetaPreview(
+                  this,
+                  'https://online.fliphtml5.com/1905Descan2026/Publikasi-Pusaka-Desa-Gadung/',
+                )
+              "
+            >
+              <i class="fas fa-book-open"></i> Lihat Preview
+            </button>
+            <a
+              href="MS-Variabel Paksian.pdf"
+              download="MS-Variabel Paksian.pdf"
+              class="btn-meta-action btn-download"
+            >
+              <i class="fas fa-download"></i> Unduh File
+            </a>
+          </div>
+        </div>
+
+        <!-- 3. Metadata Indikator -->
+        <div class="metadata-premium-card">
+          <div class="meta-card-header">
+            <div class="meta-icon-circle color-indikator">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <span class="meta-badge">INDIKATOR</span>
+          </div>
+          <div class="meta-card-body">
+            <h3>Metadata Indikator</h3>
+            <p>
+              Memuat rumus/formulasi penghitungan, interpretasi, serta kegunaan
+              dari indikator-indikator hasil pengolahan data statistik desa.
+            </p>
+            <span class="meta-file-size"
+              ><i class="far fa-file-pdf"></i> PDF
+              (Metadata_Indikator.pdf)</span
+            >
+          </div>
+          <div class="meta-card-footer">
+            <button
+              class="btn-meta-action btn-preview-toggle"
+              onclick="
+                toggleMetaPreview(
+                  this,
+                  'https://online.fliphtml5.com/1905Descan2026/Publikasi-Pusaka-Desa-Gadung/',
+                )
+              "
+            >
+              <i class="fas fa-book-open"></i> Lihat Preview
+            </button>
+            <a
+              href="MS_Indikator_Paksian.pdf"
+              download="MS_Indikator_Paksian.pdf"
+              class="btn-meta-action btn-download"
+            >
+              <i class="fas fa-download"></i> Unduh File
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AREA PREVIEW FULL 1 HALAMAN DI BAWAH GRID METADATA -->
+      <div
+        id="meta-preview-box"
+        class="card"
+        style="
+          display: none;
+          border-left: 6px solid var(--biru-utama);
+          padding: 40px 30px;
+          margin-top: 40px;
+        "
+      >
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+          "
+        >
+          <h2 style="margin: 0; font-size: 1.8em; color: var(--biru-gelap)">
+            Preview Metadata Full Halaman
+          </h2>
+          <button
+            onclick="closeMetaPreview()"
+            style="
+              background: #fee2e2;
+              color: #dc2626;
+              border: none;
+              padding: 8px 16px;
+              border-radius: 6px;
+              font-weight: 600;
+              cursor: pointer;
+            "
+          >
+            <i class="fas fa-times"></i> Tutup Preview
+          </button>
+        </div>
+        <div
+          style="
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            background: #f8fafc;
+          "
+        >
+          <iframe
+            id="dynamic-iframe-meta"
+            src=""
+            seamless="seamless"
+            scrolling="no"
+            frameborder="0"
+            allowfullscreen="true"
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            "
+          >
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: PETA TEMATIK -->
+    <div id="peta" class="page">
+      <div class="card" style="padding: 40px 30px; text-align: left">
+        <!-- Header Halaman -->
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+          "
+        >
+          <h2
+            style="
+              margin: 0;
+              font-size: 26px;
+              color: var(--biru-gelap);
+              font-weight: 700;
+            "
+          >
+            Peta Tematik Spasial Desa
+          </h2>
+          <span
+            style="
+              background: #10b981;
+              color: white;
+              padding: 6px 16px;
+              border-radius: 20px;
+              font-size: 13px;
+              font-weight: 600;
+              box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+            "
+          >
+            <i class="fas fa-map-marked-alt"></i> Pemetaan Berbasis SLS
+          </span>
+        </div>
+
+        <p
+          style="
+            color: #64748b;
+            font-size: 14.5px;
+            line-height: 1.6;
+            margin: 0 0 30px 0;
+          "
+        >
+          Kumpulan peta tematik interaktif yang menyajikan sebaran indikator
+          kependudukan, sosial, dan infrastruktur di Desa Keposang Tahun 2026
+          yang dipecah menjadi 3 kategori: Rendah, Sedang, dan Tinggi. Data
+          disajikan hingga tingkatan Dusun.
+        </p>
+
+        <!-- Box Pilih Peta (Searchable Dropdown) -->
+        <div
+          style="
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+          "
+        >
+          <label
+            style="
+              display: block;
+              font-size: 14px;
+              color: #475569;
+              margin-bottom: 10px;
+              font-weight: 600;
+            "
+          >
+            🔍 Cari & Pilih Peta Tematik:
+          </label>
+          <select
+            id="pilihJenisPeta"
+            placeholder="Ketik indikator peta yang ingin dicari..."
+            autocomplete="off"
+          >
+            <option value="peta1" selected>
+              Peta Persentase Akses Air Minum Layak Tingkat Dusun
+            </option>
+            <option value="peta2">
+              Peta Rumah Tangga dengan Akses Sanitasi Layak
+            </option>
+          </select>
+        </div>
+
+        <!-- BUNGKUSAN KONTEN PETA (Berubah Dinamis) -->
+        <div
+          id="peta-wrapper"
+          style="
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            display: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+          "
+        >
+          <!-- Bagian Penjelasan / Metadata Peta (Hanya Judul & Deskripsi) -->
+          <div
+            style="
+              background: #e0f2fe;
+              padding: 25px 30px;
+              border-bottom: 1px solid #bae6fd;
+            "
+          >
+            <h3
+              id="judul-peta"
+              style="
+                margin: 0 0 10px 0;
+                color: var(--biru-gelap);
+                font-size: 20px;
+                font-weight: 700;
+              "
+            >
+              Memuat Peta...
+            </h3>
+            <p
+              id="deskripsi-peta"
+              style="
+                margin: 0 0 10px 0;
+                color: #334155;
+                font-size: 14.5px;
+                line-height: 1.6;
+              "
+            >
+              <!-- Deskripsi akan disuntikkan otomatis oleh JavaScript -->
+            </p>
+
+            <!-- Kalimat Petunjuk Interaktif -->
+            <span
+              style="
+                display: inline-block;
+                background: rgba(255, 255, 255, 0.7);
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 12.5px;
+                color: #0284c7;
+                font-weight: 600;
+              "
+            >
+              💡 Tips: Arahkan kursor atau sentuh wilayah dusun pada peta untuk
+              melihat detail data.
+            </span>
+          </div>
+
+          <!-- Bagian Iframe Peta Interaktif (QGIS2WEB) -->
+          <div
+            style="
+              position: relative;
+              width: 100%;
+              height: 550px;
+              background: #f1f5f9;
+            "
+          >
+            <iframe
+              id="frame-peta"
+              src=""
+              width="100%"
+              height="100%"
+              frameborder="0"
+              style="border: 0; position: absolute; top: 0; left: 0"
+              allowfullscreen=""
+              aria-hidden="false"
+              tabindex="0"
+            >
+            </iframe>
+          </div>
+
+          <!-- Keterangan Sumber & Catatan Khusus (DI BAWAH PETA) -->
+          <div
+            style="
+              background: #f8fafc;
+              padding: 20px 30px;
+              border-top: 1px solid #e2e8f0;
+              font-size: 13px;
+              color: #475569;
+              line-height: 1.6;
+            "
+          >
+            <p style="margin: 0 0 6px 0">
+              <strong style="color: var(--biru-gelap)">Sumber:</strong> Paksian
+              Keposang Tahun 2026
+            </p>
+            <p style="margin: 0; font-style: italic">
+              <strong>Catatan:</strong> Tabulasi data Keposang tidak
+              mengikutsertakan data RT 07 Dusun Harapan Mulia.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: PERJALANAN DESA CANTIK -->
+    <div id="perjalanan" class="page">
+      <div
+        class="card hero-card"
+        style="margin-bottom: 30px; text-align: center; padding: 40px 30px"
+      >
+        <h1
+          style="
+            font-size: 2.2em;
+            color: var(--biru-gelap);
+            margin-bottom: 12px;
+            font-weight: 700;
+            font-stretch: normal;
+            transform: none;
+          "
+        >
+          Perjalanan Desa Cantik ⏳
+        </h1>
+        <p
+          class="deskripsi-hero"
+          style="
+            color: #64748b;
+            font-size: 15.5px;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+          "
+        >
+          Jejak langkah Desa Keposang dalam mewujudkan pembangunan berbasis
+          data, lewat berbagai kegiatan inspiratif! 🚀
+        </p>
+        <p
+          style="
+            color: var(--biru-gelap);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+          "
+        >
+          Yuk, saksikan video singkat yang merekam jejak perjalanan Desa
+          Keposang sebagai Desa Binaan Desa Cantik!
+        </p>
+      </div>
+
+      <!-- VIDEO UTAMA PERJALANAN VIA YOUTUBE -->
+      <div
+        class="card"
+        style="
+          border-left: 6px solid var(--biru-utama);
+          padding: 30px 20px;
+          margin-bottom: 40px;
+          max-width: 900px;
+          margin-left: auto;
+          margin-right: auto;
+        "
+      >
+        <div
+          style="
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            background: #000;
+          "
+        >
+          <iframe
+            src="https://www.youtube.com/embed/MASUKKAN_ID_YOUTUBE_DISINI"
+            title="Perjalanan Desa Keposang Cinta Statistik"
+            frameborder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+              web-share;
+            "
+            allowfullscreen
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            "
+          >
+          </iframe>
+        </div>
+      </div>
+
+      <!-- KARTU MILESTONE / FOTO PERJALANAN -->
+      <div class="milestone-container">
+        <div class="milestone-card">
+          <div class="milestone-content-wrapper">
+            <div class="milestone-number">01</div>
+            <div class="milestone-text">
+              <span class="status-badge selesai">Selesai</span>
+              <h3>Koordinasi dengan Pemerintah Daerah/OPD</h3>
+              <span class="milestone-date"
+                ><i class="far fa-calendar-alt"> 12 Februari 2026</i>
+              </span>
+              <p></p>
+            </div>
+          </div>
+          <div class="milestone-photo">
+            <img src="P1_Keposang.jpg" alt="Foto Sosialisasi Desa Cantik" />
+          </div>
+        </div>
+
+        <div class="milestone-card">
+          <div class="milestone-content-wrapper">
+            <div class="milestone-number">02</div>
+            <div class="milestone-text">
+              <span class="status-badge selesai">Selesai</span>
+              <h3>
+                Koordinasi Awal Pelaksanaan Pembinaan Desa Cantik dan
+                Pembentukan Komunitas Agen Statistik
+              </h3>
+              <span class="milestone-date"
+                ><i class="far fa-calendar-alt"> 2 April 2026</i>
+              </span>
+              <p></p>
+            </div>
+          </div>
+          <div class="milestone-photo">
+            <img src="P2_Keposang.jpg" alt="Foto Sosialisasi Desa Cantik" />
+          </div>
+        </div>
+
+        <div class="milestone-card">
+          <div class="milestone-content-wrapper">
+            <div class="milestone-number">03</div>
+            <div class="milestone-text">
+              <span class="status-badge selesai">Selesai</span>
+              <h3>
+                Sosialisasi Desa Cantik, Pembinaan Literasi Statistik, dan
+                Identifikasi Kebutuhan Data Desa Keposang Tahun 2026
+              </h3>
+              <span class="milestone-date"
+                ><i class="far fa-calendar-alt"> 9 April 2026</i>
+              </span>
+              <p></p>
+            </div>
+          </div>
+          <div class="milestone-photo">
+            <img src="P3_Keposang.jpg" alt="Foto Sosialisasi Desa Cantik" />
+          </div>
+        </div>
+
+        <div class="milestone-card">
+          <div class="milestone-content-wrapper">
+            <div class="milestone-number">04</div>
+            <div class="milestone-text">
+              <span class="status-badge selesai">Selesai</span>
+              <h3>
+                Sosialisasi DTSEN dan Sensus Ekonomi serta Identifikasi
+                Kebutuhan Final Tahun 2026
+              </h3>
+              <span class="milestone-date"
+                ><i class="far fa-calendar-alt"></i> 20 April 2026</span
+              >
+              <p></p>
+            </div>
+          </div>
+          <div class="milestone-photo">
+            <img src="P4_Keposang.jpg" alt="Foto Bimtek Agen Statistik" />
+          </div>
+        </div>
+
+        <div class="milestone-card">
+          <div class="milestone-content-wrapper">
+            <div class="milestone-number">05</div>
+            <div class="milestone-text">
+              <span class="status-badge selesai">Selesai</span>
+              <h3>
+                Pembinaan Pelatihan Petugas Pengumpulan Data Desa Cantik Desa
+                Keposang 2026
+              </h3>
+              <span class="milestone-date"
+                ><i class="far fa-calendar-alt"></i> 22 Mei 2026</span
+              >
+              <p></p>
+            </div>
+          </div>
+          <div class="milestone-photo">
+            <img src="P5_Keposang.jpg" alt="Foto Pendataan Lapangan" />
+          </div>
+        </div>
+
+        <div class="milestone-card">
+          <div class="milestone-content-wrapper">
+            <div class="milestone-number">06</div>
+            <div class="milestone-text">
+              <span class="status-badge selesai">Selesai</span>
+              <h3>
+                Pembinaan Pengolahan dan Penyajian Data Desa Cantik Desa
+                Keposang 2026
+              </h3>
+              <span class="milestone-date"
+                ><i class="far fa-calendar-alt"></i> 17 Juli 2026</span
+              >
+              <p></p>
+            </div>
+          </div>
+          <div class="milestone-photo">
+            <img src="P6_Keposang.jpeg" alt="Foto Bimtek Agen Statistik" />
+          </div>
+        </div>
+
+        <div class="milestone-card">
+          <div class="milestone-content-wrapper">
+            <div class="milestone-number">07</div>
+            <div class="milestone-text">
+              <span class="status-badge selesai">Selesai</span>
+              <h3>Pencanangan Desa Cantik Tahun 2026</h3>
+              <span class="milestone-date"
+                ><i class="far fa-calendar-alt"></i> 29 Juli 2026</span
+              >
+              <p></p>
+            </div>
+          </div>
+          <div class="milestone-photo">
+            <img src="P6_Keposang.jpeg" alt="Foto Bimtek Agen Statistik" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="galeri" class="page">
+      <div class="card hero-card" style="margin-bottom: 30px">
+        <h1>Galeri Foto Kegiatan</h1>
+        <p class="deskripsi-hero">
+          Dokumentasi lensa kegiatan pelaksanaan program Desa Cinta Statistik
+          (Desa Cantik) di Desa Keposang Tahun 2026
+        </p>
+      </div>
+
+<div class="galeri-grid-container">
+  
+  <!-- Bagian 1: File .jpg (1 sampai 15) -->
+  <script>
+    const container = document.querySelector('.galeri-grid-container');
+    
+    // Loop untuk file 1.jpg sampai 15.jpg
+    for (let i = 1; i <= 15; i++) {
+      const card = document.createElement('div');
+      card.className = 'galeri-card';
+      card.innerHTML = `
+        <div class="galeri-photo-wrapper">
+          <img src="GALERIKEPOSANG/${i}.jpg" alt="Galeri ${i}" />
+        </div>
+      `;
+      container.appendChild(card);
+    }
+
+    // Bagian 2: File .jpeg (16 sampai 20)
+    for (let i = 16; i <= 20; i++) {
+      const card = document.createElement('div');
+      card.className = 'galeri-card';
+      card.innerHTML = `
+        <div class="galeri-photo-wrapper">
+          <img src="GALERIKEPOSANG/${i}.jpeg" alt="Galeri ${i}" />
+        </div>
+      `;
+      container.appendChild(card);
+    }
+  </script>
+
+</div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+    <script>
+      function toggleDetail(element) {
+        // Mencari elemen detail yang berada tepat setelah tombol yang diklik
+        const detail = element.nextElementSibling;
+
+        // Cek status display, jika block maka sembunyikan, jika tidak maka tampilkan
+        if (detail.style.display === "block") {
+          detail.style.display = "none";
+          element.innerText = "Lihat Selengkapnya";
+        } else {
+          detail.style.display = "block";
+          element.innerText = "Tutup Deskripsi";
+        }
+      }
+      // --- 1. LOGIKA NAVIGASI ---
+      function bukaHalaman(idHalaman) {
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active-page"));
+        document
+          .querySelectorAll("nav a")
+          .forEach((a) => a.classList.remove("active-link"));
+
+        document.getElementById(idHalaman).classList.add("active-page");
+        document
+          .getElementById("btn-" + idHalaman)
+          .classList.add("active-link");
+
+        if (idHalaman === "peta") {
+          setTimeout(() => {
+            map.invalidateSize();
+          }, 300);
+        }
+      }
+
+      // --- LOGIKA INFOGRAFIS ---
+      const sections = document.querySelectorAll(".infografis-section");
+
+      const observerOptions = {
+        threshold: 0.2,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+
+      // --- 2. LOGIKA PETA ---
+      var map = L.map("map").setView([-2.9, 106.4], 11);
+      L.tileLayer("http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
+        maxZoom: 20,
+        subdomains: ["mt0", "mt1", "mt2", "mt3"],
+        attribution: "© Google Maps",
+      }).addTo(map);
+
+      var groupBasel = L.layerGroup();
+      var groupKeposang = L.layerGroup();
+      var groupBikang = L.layerGroup();
+
+      function loadData(file, wadah, warna) {
+        fetch(encodeURI(file))
+          .then((res) => res.json())
+          .then((data) => {
+            L.geoJSON(data, {
+              style: {
+                color: "white",
+                weight: 1.5,
+                fillColor: warna,
+                fillOpacity: 0.6,
+              },
+              onEachFeature: (f, l) =>
+                l.bindPopup(
+                  "<b>SLS:</b> " + (f.properties.nm_sls || "Wilayah"),
+                ),
+            }).addTo(wadah);
+          });
+      }
+
+      // Warna wilayah disesuaikan dengan Palette Biru
+      loadData("COBA BASEL.geojson", groupBasel, "#00d2d3"); // Cyan
+      loadData("KEPOSANG.geojson", groupKeposang, "#54a0ff"); // Blue
+      loadData("BIKANG.geojson", groupBikang, "#ff9f43"); // Kontras: Orange agar terlihat di atas biru
+
+      var overlays = {
+        "Wilayah Basel": groupBasel,
+        Keposang: groupKeposang,
+        Bikang: groupBikang,
+      };
+      L.control.layers(null, overlays, { collapsed: false }).addTo(map);
+
+      groupBasel.addTo(map);
+      groupKeposang.addTo(map);
+      groupBikang.addTo(map);
+    </script>
+
+    <!-- Script JavaScript untuk menghidupkan fungsi toggle preview metadata -->
+    <script>
+      function toggleFlipHTML5(panelId, url, btn) {
+        const panel = document.getElementById(panelId);
+
+        if (panel.style.display === "none" || panel.style.display === "") {
+          // Masukkan elemen iframe jika belum ada isinya
+          if (!panel.innerHTML.trim()) {
+            panel.innerHTML = `<iframe src="${url}" seamless="seamless" scrolling="no" frameborder="0" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>`;
+          }
+          panel.style.display = "block";
+          btn.innerHTML = '<i class="fas fa-times"></i> Tutup Preview';
+          btn.style.background = "#fee2e2";
+          btn.style.color = "#dc2626";
+        } else {
+          panel.style.display = "none";
+          btn.innerHTML = '<i class="fas fa-book-open"></i> Lihat Preview';
+          btn.style.background = "";
+          btn.style.color = "";
+        }
+      }
+    </script>
+
+    <!-- Script JavaScript untuk mengubah source iframe sesuai link yang diklik -->
+    <script>
+      function toggleFullPreview(btn, targetUrl) {
+        const box = document.getElementById("full-preview-box");
+        const iframe = document.getElementById("dynamic-iframe-pub");
+
+        // Set source iframe sesuai target link tiap kartu
+        iframe.src = targetUrl;
+        box.style.display = "block";
+        box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      function closeFullPreview() {
+        const box = document.getElementById("full-preview-box");
+        const iframe = document.getElementById("dynamic-iframe-pub");
+        box.style.display = "none";
+        iframe.src = ""; // Kosongkan kembali
+      }
+    </script>
+
+    <!-- Script JavaScript untuk mengatur preview metadata -->
+    <script>
+      function toggleMetaPreview(btn, targetUrl) {
+        const box = document.getElementById("meta-preview-box");
+        const iframe = document.getElementById("dynamic-iframe-meta");
+
+        iframe.src = targetUrl;
+        box.style.display = "block";
+        box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      function closeMetaPreview() {
+        const box = document.getElementById("meta-preview-box");
+        const iframe = document.getElementById("dynamic-iframe-meta");
+        box.style.display = "none";
+        iframe.src = "";
+      }
+    </script>
+
+    <!-- Script JavaScript Terintegrasi -->
+    <script>
+      let myTrendChart = null;
+
+      // 1. Inisialisasi Fitur Pencarian Dropdown (Tom Select)
+      new TomSelect("#pilihSheetDesa", {
+        create: false,
+        sortField: {
+          field: "text",
+          direction: "asc",
+        },
+        onChange: function (value) {
+          updateDashboardDesa(); // Otomatis perbarui data saat dropdown dipilih/dicari
+        },
+      });
+
+      // 2. Fungsi Utama Menarik Data Google Sheets
+      function updateDashboardDesa() {
+        const selectObj = document.getElementById("pilihSheetDesa");
+        const selectedValue = selectObj.value;
+
+        if (!selectedValue) return;
+
+        const sheetId = "1Zq6DJ05Jk5CCsWRIsb8RSxXUbEFYBpFnKbSolCy4WeA";
+        const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${selectedValue}`;
+
+        fetch(csvUrl)
+          .then((response) => response.text())
+          .then((csvText) => {
+            const {
+              title,
+              source,
+              note,
+              headerLabel,
+              headerValue,
+              labels,
+              data,
+            } = parseCSV(csvText);
+
+            // Suntik teks ke Grafik
+            document.getElementById("chart-title").innerText = title;
+            document.getElementById("chart-source").innerText = source;
+            document.getElementById("chart-note").innerText = note;
+
+            // Suntik teks ke Tabel
+            document.getElementById("table-title").innerText = "Tabel " + title;
+            document.getElementById("th-label").innerText = headerLabel;
+            document.getElementById("th-value").innerText = headerValue;
+            document.getElementById("table-source").innerText = source;
+            document.getElementById("table-note").innerText = note;
+
+            // Set link tombol unduh
+            document.getElementById("btn-download").href =
+              `https://docs.google.com/spreadsheets/d/${sheetId}/edit#gid=0`;
+
+            // Render Grafik & Tabel
+            renderChart(labels, data, title, "#0ea5e9");
+            renderTable(labels, data);
+          })
+          .catch((error) => {
+            console.error("Gagal menarik data:", error);
+            document.getElementById("chart-title").innerText =
+              "Gagal memuat data. Periksa koneksi atau ID Sheet.";
+          });
+      }
+
+      // 3. Fungsi Parsing CSV
+      function parseCSV(csvText) {
+        const rows = csvText.trim().split("\n");
+        const labels = [];
+        const data = [];
+        let title = "",
+          source = "",
+          note = "";
+        let headerLabel = "Bulan",
+          headerValue = "Jumlah";
+
+        if (rows.length > 3) {
+          title = rows[0].split(",")[1]
+            ? rows[0].split(",")[1].replace(/"/g, "")
+            : "";
+          source = rows[1].split(",")[1]
+            ? rows[1].split(",")[1].replace(/"/g, "")
+            : "";
+          note = rows[2].split(",")[1]
+            ? rows[2].split(",")[1].replace(/"/g, "")
+            : "";
+
+          headerLabel = rows[3].split(",")[0]
+            ? rows[3].split(",")[0].replace(/"/g, "")
+            : "Bulan";
+          headerValue = rows[3].split(",")[1]
+            ? rows[3].split(",")[1].replace(/"/g, "")
+            : "Jumlah";
+        }
+
+        for (let i = 4; i < rows.length; i++) {
+          const row = rows[i].replace(/"/g, "");
+          const cols = row.split(",");
+
+          if (cols.length >= 2 && cols[0].trim() !== "") {
+            labels.push(cols[0]);
+            data.push(Number(cols[1]));
+          }
+        }
+        return { title, source, note, headerLabel, headerValue, labels, data };
+      }
+
+      // 4. Fungsi Render Grafik Chart.js
+      function renderChart(chartLabels, chartData, chartLabelText, chartColor) {
+        const ctx = document.getElementById("trendChart").getContext("2d");
+
+        if (myTrendChart != null) {
+          myTrendChart.destroy();
+        }
+
+        myTrendChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: chartLabels,
+            datasets: [
+              {
+                label: chartLabelText,
+                data: chartData,
+                borderColor: chartColor,
+                backgroundColor: chartColor + "33",
+                borderWidth: 3,
+                pointBackgroundColor: "#ffffff",
+                pointBorderColor: chartColor,
+                pointBorderWidth: 2,
+                pointRadius: 5,
+                fill: true,
+                tension: 0.4,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+            },
+            scales: {
+              y: { beginAtZero: false },
+            },
+          },
+        });
+      }
+
+      // 5. Fungsi Render Tabel
+      function renderTable(labels, data) {
+        const tbody = document.getElementById("table-body");
+        tbody.innerHTML = "";
+
+        for (let i = 0; i < labels.length; i++) {
+          const tr = document.createElement("tr");
+          tr.style.borderBottom = "1px solid #f1f5f9";
+
+          const td1 = document.createElement("td");
+          td1.style.padding = "10px 12px";
+          td1.innerText = labels[i];
+
+          const td2 = document.createElement("td");
+          td2.style.padding = "10px 12px";
+          td2.innerText = data[i];
+
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tbody.appendChild(tr);
+        }
+      }
+
+      // 6. Trigger Muat Data Pertama Kali
+      setTimeout(() => {
+        updateDashboardDesa();
+      }, 100);
+    </script>
+
+    <!-- Script JavaScript untuk Peta Dinamis -->
+    <script>
+      // DATABASE PETA
+      const databasePeta = {
+        peta1: {
+          judul:
+            "Peta Persentase Akses Air Minum Layak Tingkat Dusun di Desa Keposang Tahun 2026",
+          deskripsi:
+            "Peta choropleth ini menampilkan persentase rumah tangga yang memiliki akses terhadap sumber air minum layak di tiap dusun untuk Desa Keposang pada tahun 2026. Area berwarna hijau menandakan capaian yang sudah tinggi, sedangkan merah membutuhkan prioritas peningkatan akses minum layak.",
+          linkPeta: "./peta-air-minum-layak/index.html#14/-3.0079/106.5436",
+        },
+        peta2: {
+          judul: "Peta Rumah Tangga dengan Akses Sanitasi Layak",
+          deskripsi:
+            "Visualisasi spasial yang memetakan persentase rumah tangga yang telah memiliki dan menggunakan fasilitas sanitasi (jamban) yang memenuhi standar kesehatan.",
+          linkPeta: "./peta-sanitasi/index.html",
+        },
+      };
+
+      // Inisialisasi Tom Select (Dropdown Pencarian)
+      new TomSelect("#pilihJenisPeta", {
+        create: false,
+        sortField: { field: "text", direction: "asc" },
+        onChange: function (value) {
+          tampilkanPeta(value);
+        },
+      });
+
+      // Fungsi untuk mengubah isi kotak peta dan penjelasan
+      function tampilkanPeta(idPeta) {
+        const data = databasePeta[idPeta];
+        if (!data) return;
+
+        // Tampilkan kotak pembungkus peta
+        document.getElementById("peta-wrapper").style.display = "block";
+
+        // Ganti Teks Judul dan Deskripsi
+        document.getElementById("judul-peta").innerText = data.judul;
+        document.getElementById("deskripsi-peta").innerText = data.deskripsi;
+
+        // Ganti Link Iframe Peta ke folder qgis2web yang sesuai
+        document.getElementById("frame-peta").src = data.linkPeta;
+      }
+
+      // Trigger load peta1 (Air Minum) pertama kali saat halaman dibuka
+      setTimeout(() => {
+        tampilkanPeta("peta1");
+      }, 100);
+    </script>
+    <!-- LIBRARY UNTUK FITUR PENCARIAN DROPDOWN (TOM SELECT) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+    <!-- SCRIPT UTAMA DASHBOARD & KATEGORI PAKSIAN -->
+    <script>
+      let selectPaksianInstan = null;
+      let chartPaksianInstan = null;
+
+      // Fungsi Mengganti Kategori Tab (Kependudukan, Hunian, Agraria)
+      function gantiKategoriPaksian(kategori, btnElement) {
+        // 1. Ubah warna tombol tab aktif
+        if (btnElement) {
+          document
+            .querySelectorAll(".btn-tab")
+            .forEach((btn) => btn.classList.remove("active-tab"));
+          btnElement.classList.add("active-tab");
+        }
+
+        // 2. Hancurkan instance Tom Select lama biar bersih dari cache
+        if (selectPaksianInstan !== null) {
+          selectPaksianInstan.destroy();
+          selectPaksianInstan = null;
+        }
+
+        const selectBox = document.getElementById("pilihSheetPaksian");
+        if (!selectBox) return;
+        selectBox.innerHTML = ""; // Kosongkan total elemen select
+
+        // 3. Masukkan pilihan sheet murni ke HTML sesuai kategori tab-nya
+        if (kategori === "kependudukan") {
+          selectBox.innerHTML = `
+            <option value="Sheet2">Jumlah Keluarga di Desa Keposang Menurut Dusun Tahun 2026</option>
+            <option value="Sheet4">Jumlah Penduduk di Desa Keposang Menurut Dusun Tahun 2026</option>
+            <option value="Sheet5">Jumlah Penduduk di Desa Keposang Menurut Jenis Kelamin Tahun 2026</option>
+            <option value="Sheet6">Jumlah Penduduk di Desa Keposang Menurut Jenis Kelamin dan Dusun Tahun 2026</option>
+            <option value="Sheet7">Jumlah Penduduk di Desa Keposang Menurut Agama Tahun 2026</option>
+            <option value="Sheet8">Jumlah Penduduk di Desa Keposang Menurut Agama dan Dusun Tahun 2026</option>
+            <option value="Sheet9">Jumlah Penduduk di Desa Keposang Berdasarkan Tempat Kelahiran Tahun 2026</option>
+            <option value="Sheet10">Jumlah Penduduk di Desa Keposang Berdasarkan Tempat Kelahiran dan Dusun Tahun 2026</option>
+            <option value="Sheet11">Jumlah Penduduk di Desa Keposang Berdasarkan Status Perkawinan Tahun 2026</option>
+            <option value="Sheet12">Jumlah Penduduk di Desa Keposang Berdasarkan Status Perkawinan dan Dusun Tahun 2026</option>
+            <option value="Sheet59">Jumlah Rumah Tangga dengan Keberadaan Anak Putus Sekolah di Desa Keposang Tahun 2026</option>
+            <option value="Sheet60">Jumlah Rumah Tangga dengan Keberadaan Anak Putus Sekolah Menurut Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet61">Jumlah Rumah Tangga dengan Keberadaan Lansia Menurut Dusun di Desa Keposang Tahun 2026</option>
+          `;
+        } else if (kategori === "hunian") {
+          selectBox.innerHTML = `
+            <option value="Sheet14">Jumlah Bumbung Rumah Tempat Tinggal di Desa Keposang Menurut Dusun Tahun 2026</option>
+            <option value="Sheet15">Jumlah Bumbung Rumah Tempat Tinggal di Desa Keposang Berdasarkan Status Kepemilikan Bangunan Tahun 2026</option>
+            <option value="Sheet16">Jumlah Bumbung Rumah Tempat Tinggal di Desa Keposang Berdasarkan Dusun dan Status Kepemilikan Bangunan Tahun 2026</option>
+            <option value="Sheet17">Jumlah Rumah Tangga Berdasarkan Bukti Kepemilikan Bangunan di Desa Keposang Berdasarkan Status Kepemilikan Bangunan Tahun 2026</option>
+            <option value="Sheet18">Jumlah Rumah Tangga Berdasarkan Bukti Kepemilikan Bangunan di Desa Keposang Dusun dan Berdasarkan Status Kepemilikan Bangunan Tahun 2026</option>
+            <option value="Sheet19">Rata-Rata Luas Lantai di Desa Keposang Tahun 2026</option>
+            <option value="Sheet20">Rata-Rata Luas Lantai Menurut Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet21">Jumlah Bumbung Rumah Tempat Tinggal di Desa Keposang Berdasarkan Jenis Atap Terluas Tahun 2026</option>
+            <option value="Sheet22">Jumlah Bumbung Rumah Tempat Tinggal di Desa Keposang Berdasarkan Dusun dan Jenis Atap Terluas Tahun 2026</option>
+            <option value="Sheet23">Jumlah Bumbung Rumah Tempat Tinggal di Desa Keposang Berdasarkan Jenis Dinding Terluas Tahun 2026</option>
+            <option value="Sheet24">Jumlah Bumbung Rumah Tempat Tinggal di Desa Keposang Berdasarkan Dusun dan Jenis Dinding Terluas Tahun 2026</option>
+            <option value="Sheet25">Jumlah Bumbung Rumah Tempat Tinggal di Desa Keposang Berdasarkan Jenis Lantai Terluas Tahun 2026</option>
+            <option value="Sheet26">Jumlah Bumbung Rumah Tempat Tinggal di Desa Keposang Berdasarkan Dusun dan Jenis Lantai Terluas Tahun 2026</option>
+            <option value="Sheet27">Jumlah Fasilitas BAB Berdasarkan Kepemilikan di Desa Keposang Tahun 2026</option>
+            <option value="Sheet28">Jumlah Fasilitas BAB Berdasarkan Dusun dan Kepemilikan di Desa Keposang Tahun 2026</option>
+            <option value="Sheet29">Jumlah Fasilitas BAB Berdasarkan Jenis Kloset yang Digunakan di Desa Keposang Tahun 2026</option>
+            <option value="Sheet30">Jumlah Fasilitas BAB Berdasarkan Jenis Tempat Pembuangan Akhir di Desa Keposang Tahun 2026</option>
+            <option value="Sheet31">Jumlah Rumah Tangga Berdasarkan Sumber Air Utama untuk Minum Utama di Desa Keposang Tahun 2026</option>
+            <option value="Sheet32">Jumlah Rumah Tangga Berdasarkan Sumber Air Utama untuk Mandi/Cuci/dll Utama di Desa Keposang Tahun 2026</option>
+            <option value="Sheet33">Jumlah Rumah Tangga Berdasarkan Sumber Penerangan Utama di Desa Keposang Tahun 2026</option>
+            <option value="Sheet34">Jumlah Rumah Tangga Berdasarkan Sumber Penerangan Utama dan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet35">Jumlah Rumah Tangga Berdasarkan Sumber Air Utama untuk Mandi/Cuci/dll dan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet36">Jumlah Rumah Tangga Berdasarkan Dusun dan Sumber Air Utama untuk Minum di Desa Keposang Tahun 2026</option>
+            <option value="Sheet37">Jumlah Fasilitas BAB Berdasarkan Jenis Kloset yang Digunakan dan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet38">Jumlah Fasilitas BAB Berdasarkan Jenis Tempat Pembuangan Akhir dan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet39">Jumlah Rumah Tangga Berdasarkan Akses Air Minum Layak di Desa Keposang Tahun 2026</option>
+            <option value="Sheet40">Jumlah Rumah Tangga Berdasarkan Akses Air Minum Layak dan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet41">Jumlah Rumah Tangga Berdasarkan Akses Sanitasi Layak di Desa Keposang Tahun 2026</option>
+            <option value="Sheet42">Jumlah Rumah Tangga Berdasarkan Akses Sanitasi Layak dan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet43">Jumlah Rumah Tangga Berdasarkan Akses Ketahanan Bangunan di Desa Keposang Tahun 2026</option>
+            <option value="Sheet44">Jumlah Rumah Tangga Berdasarkan Akses Ketahanan Bangunan Layak dan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet45">Jumlah Rumah Tangga Berdasarkan Akses Kecukupan Luas Lantai di Desa Keposang Tahun 2026</option>
+            <option value="Sheet46">Jumlah Rumah Tangga Berdasarkan Kecukupan Luas Lantai dan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet47">Jumlah Rumah Tangga Berdasarkan Akses Hunian Layak di Desa Keposang Tahun 2026</option>
+            <option value="Sheet48">Jumlah Rumah Tangga Berdasarkan Akses Hunian Layak dan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet49">Jumlah Rumah Tangga Berdasarkan Akses Air Minum Layak Dasar di Desa Keposang Tahun 2026</option>
+            <option value="Sheet50">Jumlah Rumah Tangga Berdasarkan Akses Air Minum Layak Dasar dan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet51">Jumlah Rumah Tangga Berdasarkan Akses Air Minum Bukan Air Permukaan di Desa Keposang Tahun 2026</option>
+            <option value="Sheet52">Jumlah Rumah Tangga Berdasarkan Akses Air Minum Bukan Air Permukaan dan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet53">Jumlah Rumah Tangga Berdasarkan Akses Air Minum Aman di Desa Keposang Tahun 2026</option>
+            <option value="Sheet54">Jumlah Rumah Tangga Berdasarkan Akses Air Minum Aman dan Dusun di Desa Keposang Tahun 2026</option>
+          `;
+        } else if (kategori === "agraria") {
+          selectBox.innerHTML = `
+            <option value="Sheet55">Keberadaan Rumah Tangga yang Mengusahakan Pertanian/Perkebunan di Desa Keposang Tahun 2026</option>
+            <option value="Sheet56">Keberadaan Rumah Tangga yang Mengusahakan Pertanian/Perkebunan Berdasarkan Dusun di Desa Keposang Tahun 2026</option>
+            <option value="Sheet57">Keberadaan Rumah Tangga yang Mengusahakan Pertanian dengan Lahan Pertaniannya Berada di Dalam Desa Keposang Tahun 2026</option>
+            <option value="Sheet58">Keberadaan Rumah Tangga yang Mengusahakan Pertanian/Perkebunan dengan Lahan Pertaniannya Berdasarkan Dusun di Desa Keposang Tahun 2026</option>
+          `;
+        }
+
+        // 4. Beri jeda tipis agar opsi selesai dirender, baru aktifkan Tom Select
+        setTimeout(() => {
+          selectPaksianInstan = new TomSelect("#pilihSheetPaksian", {
+            create: false,
+            sortField: { field: "text", direction: "asc" },
+            placeholder: "Ketik untuk mencari judul data...",
+          });
+
+          // 5. Muat data grafik & tabel
+          updateDashboardPaksian();
+        }, 50);
+      }
+
+      // Fungsi Mengambil Data & Render Grafik/Tabel Paksian
+      async function updateDashboardPaksian() {
+        const selectObj = document.getElementById("pilihSheetPaksian");
+        if (!selectObj) return;
+        const sheetName = selectObj.value;
+        if (!sheetName) return;
+
+        const spreadsheetId = "18uwK91BufNIv0QRBGsK-BnnziBbkGfn2JjS4RAbUUBM";
+        const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&headers=0&sheet=${sheetName}`;
+
+        try {
+          const res = await fetch(url);
+          const csv = await res.text();
+
+          const rows = csv
+            .split("\n")
+            .map((r) => r.split(",").map((c) => c.replace(/"/g, "")));
+
+          const titleText = rows[0][1] || "Data Paksian";
+          const footerNote = rows[1][1] || "BPS Kabupaten Bangka Selatan";
+          const catatan = rows[2][1] || "-";
+
+          document.getElementById("judulGrafikPaksian").innerText = titleText;
+          document.getElementById("judulTabelPaksian").innerText =
+            "Tabel " + titleText;
+
+          const teksFooter = `<strong>Sumber:</strong> ${footerNote} <br><span style="font-size: 0.9em; color: #57606f; font-style: italic;">*Catatan: ${catatan}</span>`;
+          document.getElementById("footerGrafikPaksian").innerHTML = teksFooter;
+          document.getElementById("footerTabelSubPaksian").innerHTML =
+            teksFooter;
+          document.getElementById("btnUnduhPaksian").href = url;
+
+          const headers = rows[3].filter(
+            (h) => h !== undefined && h.trim() !== "",
+          );
+          const numCols = headers.length;
+
+          let headerHtml = "";
+          for (let c = 0; c < numCols; c++) {
+            headerHtml += `<th>${headers[c]}</th>`;
+          }
+          document.getElementById("tableHeaderPaksian").innerHTML = headerHtml;
+
+          const labels = [];
+          const datasetsConfig = [];
+          let totals = new Array(numCols).fill(0);
+
+          const warnaGrafik = [
+            "#0984e3",
+            "#ff7675",
+            "#00b894",
+            "#fdcb6e",
+            "#6c5ce7",
+            "#e17055",
+            "#00cec9",
+            "#fd79a8",
+          ];
+
+          let tipeGrafik = titleText.toLowerCase().includes("dusun")
+            ? "bar"
+            : "pie";
+
+          for (let c = 1; c < numCols; c++) {
+            datasetsConfig.push({
+              label: headers[c],
+              data: [],
+              backgroundColor:
+                tipeGrafik === "pie"
+                  ? warnaGrafik
+                  : warnaGrafik[(c - 1) % warnaGrafik.length],
+              categoryPercentage: 0.8,
+              barPercentage: 0.9,
+            });
+          }
+
+          // --- BAGIAN HITUNG TOTAL TERLEBIH DAHULU ---
+let totalKeseluruhan = 0;
+for (let i = 4; i < rows.length; i++) {
+  if (rows[i][1]) totalKeseluruhan += parseFloat(rows[i][1]) || 0;
+}
+
+// --- BAGIAN MEMBUAT BODY HTML ---
+let bodyHtml = "";
+for (let i = 4; i < rows.length; i++) {
+  if (!rows[i][0]) continue;
+
+  bodyHtml += "<tr>";
+  bodyHtml += `<td>${rows[i][0]}</td>`;
+  labels.push(rows[i][0]);
+
+  for (let c = 1; c < numCols; c++) {
+    let nilaiAngka = parseFloat(rows[i][c]) || 0;
+    
+    // Hitung persentase (2 angka di belakang koma)
+    let persentase = totalKeseluruhan > 0 
+      ? ((nilaiAngka / totalKeseluruhan) * 100).toFixed(2) + "%" 
+      : "0%";
+
+    // Tambahkan kolom angka dan kolom persentase
+    bodyHtml += `<td>${nilaiAngka.toLocaleString()}</td>`; // toLocaleString biar ada pemisah ribuan
+    bodyHtml += `<td>${persentase}</td>`;
+    
+    datasetsConfig[c - 1].data.push(nilaiAngka);
+    totals[c] += nilaiAngka;
+  }
+  bodyHtml += "</tr>";
+}
+
+          
+          bodyHtml += `<tr style="font-weight: bold; background-color: #d9e9f6; color: #1a4a7a;">`;
+          bodyHtml += `<td>TOTAL</td>`;
+          for (let c = 1; c < numCols; c++) {
+            bodyHtml += `<td>${totals[c]}</td>`;
+          }
+          bodyHtml += `</tr>`;
+
+          document.getElementById("tableBodyPaksian").innerHTML = bodyHtml;
+
+          const ctx = document
+            .getElementById("canvasGrafikPaksian")
+            .getContext("2d");
+          if (window.chartPaksianInstan instanceof Chart) {
+            window.chartPaksianInstan.destroy();
+          }
+
+          let opsiGrafik = { responsive: true, maintainAspectRatio: false };
+          if (tipeGrafik === "bar") {
+            opsiGrafik.scales = {
+              y: { beginAtZero: true, grid: { drawBorder: false } },
+            };
+          }
+
+          window.chartPaksianInstan = new Chart(ctx, {
+            type: tipeGrafik,
+            data: { labels: labels, datasets: datasetsConfig },
+            options: opsiGrafik,
+          });
+        } catch (e) {
+          console.error("Error muat data Paksian:", e);
+          document.getElementById("judulGrafikPaksian").innerText =
+            "Gagal memuat data dari Spreadsheet Paksian.";
+        }
+      }
+
+      // Trigger default saat halaman dimuat pertama kali
+      window.addEventListener("load", () => {
+        gantiKategoriPaksian(
+          "kependudukan",
+          document.querySelector(".btn-tab"),
+        );
+      });
+    </script>
+  </body>
+</html>

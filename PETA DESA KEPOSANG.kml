@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="fixed_geometries_copy" id="fixed_geometries_copy">
+	<SimpleField name="fid" type="float"></SimpleField>
+	<SimpleField name="kk" type="float"></SimpleField>
+	<SimpleField name="gid" type="float"></SimpleField>
+	<SimpleField name="bstt" type="float"></SimpleField>
+	<SimpleField name="luas" type="float"></SimpleField>
+	<SimpleField name="bsbtt" type="float"></SimpleField>
+	<SimpleField name="idsls" type="string"></SimpleField>
+	<SimpleField name="kdkab" type="string"></SimpleField>
+	<SimpleField name="kdkec" type="string"></SimpleField>
+	<SimpleField name="kdsls" type="string"></SimpleField>
+	<SimpleField name="nmkab" type="string"></SimpleField>
+	<SimpleField name="nmkec" type="string"></SimpleField>
+	<SimpleField name="nmsls" type="string"></SimpleField>
+	<SimpleField name="bstt_k" type="float"></SimpleField>
+	<SimpleField name="kddesa" type="string"></SimpleField>
+	<SimpleField name="kdprov" type="string"></SimpleField>
+	<SimpleField name="khusus" type="float"></SimpleField>
+	<SimpleField name="muatan" type="float"></SimpleField>
+	<SimpleField name="nmdesa" type="string"></SimpleField>
+	<SimpleField name="nmprov" type="string"></SimpleField>
+	<SimpleField name="posisi" type="string"></SimpleField>
+	<SimpleField name="rw_dki" type="string"></SimpleField>
+	<SimpleField name="segmen" type="string"></SimpleField>
+	<SimpleField name="sumber" type="string"></SimpleField>
+	<SimpleField name="dom_sls" type="string"></SimpleField>
+	<SimpleField name="periode" type="string"></SimpleField>
+	<SimpleField name="tingkat" type="float"></SimpleField>
+	<SimpleField name="nm_gedung" type="string"></SimpleField>
+	<SimpleField name="wil_campur" type="float"></SimpleField>
+	<SimpleField name="is_konsent" type="float"></SimpleField>
+	<SimpleField name="idsubsls" type="string"></SimpleField>
+	<SimpleField name="kdsubsls" type="string"></SimpleField>
+	<SimpleField name="DATA 3 DESA EXCEL — slssubsls1905_dusun" type="string"></SimpleField>
+</Schema>
+<Folder><name>fixed_geometries_copy</name>
+  <Placemark id="fixed_geometries_copy.1">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">18</SimpleData>
+		<SimpleData name="kk">69</SimpleData>
+		<SimpleData name="gid">5850</SimpleData>
+		<SimpleData name="bstt">67</SimpleData>
+		<SimpleData name="luas">221877.175010483915685</SimpleData>
+		<SimpleData name="bsbtt">4</SimpleData>
+		<SimpleData name="idsls">19050300080005</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0005</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 001 DUSUN HARAPAN MULIA</SimpleData>
+		<SimpleData name="bstt_k">3</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">76</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">11, 11, 11</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008000500</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MULIA</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.537326525,-3.02681948199995 106.538069599,-3.02682569999996 106.538550758,-3.02856397199997 106.53909291,-3.03534085999996 106.537588441,-3.03563904399994 106.53593488,-3.03152547299993 106.53717825,-3.02688267499997 106.537292799,-3.02684857299994 106.537326525,-3.02681948199995</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.2">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">41</SimpleData>
+		<SimpleData name="kk">34</SimpleData>
+		<SimpleData name="gid">5529</SimpleData>
+		<SimpleData name="bstt">28</SimpleData>
+		<SimpleData name="luas">54126.386756183463149</SimpleData>
+		<SimpleData name="bsbtt">5</SimpleData>
+		<SimpleData name="idsls">19050300080022</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0022</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 004 DUSUN HARAPAN MAKMUR</SimpleData>
+		<SimpleData name="bstt_k">3</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">42</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008002200</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MAKMUR</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.547998866,-3.00232089099995 106.547121828,-3.00169276399993 106.548761834,-2.99917176199995 106.551025583,-2.99887688199993 106.551122068,-2.99886431399994 106.549728005,-3.00015548199997 106.549707211,-3.00017474199996 106.548500925,-3.00122515899994 106.54827051,-3.00152503599997 106.548212907,-3.00188082299996 106.548141749,-3.00205871699995 106.548018005,-3.00231115499997 106.547998866,-3.00232089099995</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.3">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">145</SimpleData>
+		<SimpleData name="kk">46</SimpleData>
+		<SimpleData name="gid">5543</SimpleData>
+		<SimpleData name="bstt">44</SimpleData>
+		<SimpleData name="luas">93320.768235772848129</SimpleData>
+		<SimpleData name="bsbtt">2</SimpleData>
+		<SimpleData name="idsls">19050300080016</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0016</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 003 DUSUN AIR BULANG</SimpleData>
+		<SimpleData name="bstt_k">2</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">50</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008001600</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN AIR BULANG</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.549662748,-3.02846549399993 106.547855584,-3.02890557099994 106.547669062,-3.02898752799996 106.547269449,-3.02899233099993 106.544243345,-3.02586677099993 106.544731281,-3.02546015799993 106.549392543,-3.02779411899996 106.549556425,-3.02818107799993 106.549662748,-3.02846549399993</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.4">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">168</SimpleData>
+		<SimpleData name="kk">53</SimpleData>
+		<SimpleData name="gid">5563</SimpleData>
+		<SimpleData name="bstt">50</SimpleData>
+		<SimpleData name="luas">78078.386741684225854</SimpleData>
+		<SimpleData name="bsbtt">8</SimpleData>
+		<SimpleData name="idsls">19050300080008</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0008</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 004 DUSUN HARAPAN MULIA</SimpleData>
+		<SimpleData name="bstt_k">1</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">62</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008000800</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MULIA</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.533877328,-3.01228349999997 106.536874749,-3.00963442999995 106.537091817,-3.00993001099994 106.537511777,-3.01050187199996 106.537899472,-3.01104786499997 106.534306737,-3.01362126599997 106.534306309,-3.01361585199993 106.534214821,-3.01270097199995 106.534001349,-3.01273824499998 106.533877328,-3.01228349999997</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.5">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">177</SimpleData>
+		<SimpleData name="kk">47</SimpleData>
+		<SimpleData name="gid">5576</SimpleData>
+		<SimpleData name="bstt">45</SimpleData>
+		<SimpleData name="luas">338410.200973208993673</SimpleData>
+		<SimpleData name="bsbtt">7</SimpleData>
+		<SimpleData name="idsls">19050300080015</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0015</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 002 DUSUN AIR BULANG</SimpleData>
+		<SimpleData name="bstt_k">7</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">61</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008001500</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN AIR BULANG</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.548107917,-3.02068402799995 106.551287919,-3.02363039799997 106.553539223,-3.02852044599996 106.552365781,-3.02931362599998 106.5498275,-3.02890620499994 106.549662748,-3.02846549399993 106.549556425,-3.02818107799993 106.549392543,-3.02779411899996 106.546738559,-3.02152747299994 106.548107917,-3.02068402799995</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.6">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">234</SimpleData>
+		<SimpleData name="kk">33</SimpleData>
+		<SimpleData name="gid">5630</SimpleData>
+		<SimpleData name="bstt">32</SimpleData>
+		<SimpleData name="luas">331294.229488075943664</SimpleData>
+		<SimpleData name="bsbtt">3</SimpleData>
+		<SimpleData name="idsls">19050300080011</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0011</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 007 DUSUN HARAPAN MULIA</SimpleData>
+		<SimpleData name="bstt_k">7</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">43</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008001100</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MULIA</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.523561219,-3.00812550699993 106.524740309,-3.00348863999994 106.526922466,-3.00417988299995 106.529621872,-3.01191471899995 106.529228726,-3.01176745599997 106.529047444,-3.01166410799993 106.528857691,-3.01191315899996 106.528400252,-3.01237226199993 106.528400252,-3.01235026799998 106.528417194,-3.01227233399993 106.523561219,-3.00812550699993</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.7">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">235</SimpleData>
+		<SimpleData name="kk">56</SimpleData>
+		<SimpleData name="gid">5631</SimpleData>
+		<SimpleData name="bstt">54</SimpleData>
+		<SimpleData name="luas">435432.664566298946738</SimpleData>
+		<SimpleData name="bsbtt">3</SimpleData>
+		<SimpleData name="idsls">19050300080014</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0014</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 001 DUSUN AIR BULANG</SimpleData>
+		<SimpleData name="bstt_k">3</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">62</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008001400</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN AIR BULANG</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.543727409,-3.01223950899993 106.544988802,-3.01135067699994 106.547360713,-3.01341085099995 106.548187493,-3.02063501399994 106.548107917,-3.02068402799995 106.546738559,-3.02152747299994 106.546317072,-3.02178708499997 106.541952757,-3.01345151299995 106.543344848,-3.01253713599993 106.543727409,-3.01223950899993</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.8">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">236</SimpleData>
+		<SimpleData name="kk">61</SimpleData>
+		<SimpleData name="gid">5632</SimpleData>
+		<SimpleData name="bstt">60</SimpleData>
+		<SimpleData name="luas">233660.514940557884984</SimpleData>
+		<SimpleData name="bsbtt">2</SimpleData>
+		<SimpleData name="idsls">19050300080021</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0021</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 003 DUSUN HARAPAN MAKMUR</SimpleData>
+		<SimpleData name="bstt_k">14</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">77</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008002100</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MAKMUR</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.547402129,-3.00269497599993 106.547706334,-3.00255004099995 106.547998866,-3.00232089099995 106.548018005,-3.00231115499997 106.548260345,-3.00231115499997 106.548900761,-3.00221627999997 106.54890368,-3.00222357699994 106.548948199,-3.00233487499997 106.549171836,-3.00243991699995 106.54929382,-3.00258223199995 106.549314151,-3.00286008399996 106.549344647,-3.00315487899997 106.549547953,-3.00359537599996 106.549558119,-3.00365298 106.550262915,-3.00370719499995 106.55138449,-3.00340901199996 106.552888959,-3.00345983799997 106.553024024,-3.00342449399994 106.553251523,-3.00336496199998 106.554061361,-3.00304305999992 106.557266829,-3.00601811299993 106.55724411,-3.00624368899997 106.557095123,-3.00772290099997 106.557077076,-3.00790208899997 106.548262554,-3.00351821599997 106.547778338,-3.00332599399996 106.547473378,-3.00310235699993 106.547402129,-3.00269497599993</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.9">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">257</SimpleData>
+		<SimpleData name="kk">61</SimpleData>
+		<SimpleData name="gid">5652</SimpleData>
+		<SimpleData name="bstt">48</SimpleData>
+		<SimpleData name="luas">181279.745859736343846</SimpleData>
+		<SimpleData name="bsbtt">12</SimpleData>
+		<SimpleData name="idsls">19050300080026</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0026</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 008 DUSUN HARAPAN MAKMUR</SimpleData>
+		<SimpleData name="bstt_k">0</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">73</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008002600</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MAKMUR</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.541812774,-3.00491448299994 106.544861735,-3.00281264499995 106.545539424,-3.00150470599994 106.546203559,-3.00136916899993 106.546898191,-3.00230776799998 106.547401374,-3.00269066099997 106.547402129,-3.00269497599993 106.547473378,-3.00310235699993 106.547778338,-3.00332599399996 106.548262554,-3.00351821599997 106.545216675,-3.00562335899997 106.542671544,-3.00663079699996 106.542652046,-3.00652722699994 106.542441963,-3.00575127399998 106.542137003,-3.00545647799993 106.541812774,-3.00491448299994</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.10">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">290</SimpleData>
+		<SimpleData name="kk">62</SimpleData>
+		<SimpleData name="gid">5684</SimpleData>
+		<SimpleData name="bstt">54</SimpleData>
+		<SimpleData name="luas">86966.050659868866205</SimpleData>
+		<SimpleData name="bsbtt">3</SimpleData>
+		<SimpleData name="idsls">19050300080019</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0019</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 001 DUSUN HARAPAN MAKMUR</SimpleData>
+		<SimpleData name="bstt_k">0</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">65</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008001900</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MAKMUR</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.565094149,-3.01442899499995 106.565298492,-3.01361800799998 106.566268148,-3.01380655099996 106.567042526,-3.01301197299995 106.567769768,-3.01235880099995 106.569486867,-3.01410283499996 106.568712489,-3.01494455099993 106.565852213,-3.01516018099994 106.565231154,-3.01468866899995 106.565094149,-3.01442899499995</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.11">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">315</SimpleData>
+		<SimpleData name="kk">59</SimpleData>
+		<SimpleData name="gid">5717</SimpleData>
+		<SimpleData name="bstt">57</SimpleData>
+		<SimpleData name="luas">349707.361995074315928</SimpleData>
+		<SimpleData name="bsbtt">4</SimpleData>
+		<SimpleData name="idsls">19050300080009</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0009</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 005 DUSUN HARAPAN MULIA</SimpleData>
+		<SimpleData name="bstt_k">10</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">73</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008000900</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MULIA</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.537091817,-3.00993001099994 106.541682951,-3.00469746799996 106.541812774,-3.00491448299994 106.542137003,-3.00545647799993 106.542441963,-3.00575127399998 106.542652046,-3.00652722699994 106.542671544,-3.00663079699996 106.543727409,-3.01223950899993 106.543344848,-3.01253713599993 106.537899472,-3.01104786499997 106.537511777,-3.01050187199996 106.537091817,-3.00993001099994</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.12">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">352</SimpleData>
+		<SimpleData name="kk">0</SimpleData>
+		<SimpleData name="gid">5753</SimpleData>
+		<SimpleData name="bstt">0</SimpleData>
+		<SimpleData name="luas">17174153.130344472825527</SimpleData>
+		<SimpleData name="bsbtt">0</SimpleData>
+		<SimpleData name="idsls">19050300081002</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">1002</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">PERKEBUNAN KARET</SimpleData>
+		<SimpleData name="bstt_k">0</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">0</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">11</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008100200</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">PERKEBUNAN KARET</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.56070624,-2.97956273899996 106.560949968,-2.98180862099997 106.560116892,-2.98117156299997 106.550410062,-2.98801008599997 106.550460733,-2.99583761099996 106.551167774,-2.99852436699996 106.551025583,-2.99887688199993 106.548761834,-2.99917176199995 106.547121828,-3.00169276399993 106.547998866,-3.00232089099995 106.547706334,-3.00255004099995 106.547402129,-3.00269497599993 106.547401374,-3.00269066099997 106.546898191,-3.00230776799998 106.546203559,-3.00136916899993 106.545539424,-3.00150470599994 106.544861735,-3.00281264499995 106.541812774,-3.00491448299994 106.541682951,-3.00469746799996 106.537091817,-3.00993001099994 106.536874749,-3.00963442999995 106.533877328,-3.01228349999997 106.533859035,-3.01221642399997 106.53288994,-3.01178270399993 106.531356018,-3.01274140399994 106.531343115,-3.01272638599994 106.531227908,-3.01251630199994 106.529621872,-3.01191471899995 106.526922466,-3.00417988299995 106.524740309,-3.00348863999994 106.523561219,-3.00812550699993 106.523544611,-3.00811132499996 106.520806749,-3.00843661499994 106.520440796,-3.01099827899998 106.520972622,-3.01140117699993 106.520960923,-3.01142691699994 106.520913485,-3.01204022499996 106.520974477,-3.01253154999995 106.521023608,-3.01277721199995 106.521063923,-3.01289896099996 106.518856699,-3.01098896099995 106.517189584,-3.01030449499996 106.515366602,-3.01101606799995 106.512642491,-3.01365620499996 106.512639313,-3.01364463799996 106.512604835,-3.01352783999994 106.51152927,-3.0098842699999 106.51143418,-3.00379365999993 106.51159944,-2.99936555999994 106.51183744,-2.99298877999996 106.51185341,-2.99256063999997 106.51188015,-2.99184429999997 106.51134614,-2.98930541999994 106.5112733,-2.98895909999993 106.51114195,-2.98833460999992 106.51014096,-2.98670247999996 106.50749845,-2.98239385999995 106.50796665,-2.97751739999995 106.5097641,-2.97482120999996 106.51282437,-2.97357797999996 106.51695393,-2.97190033999993 106.51749066,-2.97191964999996 106.52406281,-2.97216046999995 106.52736703,-2.97228153999993 106.52847273,-2.9723214699999 106.53144515,-2.97303485999993 106.53334749,-2.97339154999997 106.53524984,-2.97362933999994 106.53667661,-2.97398602999993 106.53678776,-2.97404185999994 106.53976792,-2.97553168999997 106.54096823,-2.97609137999996 106.555426795,-2.98044753799996 106.56070624,-2.97956273899996</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.13">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">381</SimpleData>
+		<SimpleData name="kk">81</SimpleData>
+		<SimpleData name="gid">5823</SimpleData>
+		<SimpleData name="bstt">81</SimpleData>
+		<SimpleData name="luas">236602.321988183306530</SimpleData>
+		<SimpleData name="bsbtt">15</SimpleData>
+		<SimpleData name="idsls">19050300080003</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0003</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 003 DUSUN KEPOSANG</SimpleData>
+		<SimpleData name="bstt_k">13</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">109</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1, 1, 1, 1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008000300</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN KEPOSANG</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.526973137,-3.01580199299997 106.522675475,-3.02206324199995 106.522590764,-3.02201580399998 106.521055799,-3.02044695499995 106.521025303,-3.01753628199998 106.522271406,-3.01641478899995 106.522689029,-3.01627916899997 106.522841509,-3.01644520299993 106.523088865,-3.01651974799995 106.523454818,-3.01652313699998 106.524234159,-3.01634354999993 106.525948712,-3.01589627499993 106.526863658,-3.01556569199994 106.526973137,-3.01580199299997</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.14">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">404</SimpleData>
+		<SimpleData name="kk">51</SimpleData>
+		<SimpleData name="gid">5808</SimpleData>
+		<SimpleData name="bstt">51</SimpleData>
+		<SimpleData name="luas">209519.867909414460883</SimpleData>
+		<SimpleData name="bsbtt">3</SimpleData>
+		<SimpleData name="idsls">19050300080010</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0010</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 006 DUSUN HARAPAN MULIA</SimpleData>
+		<SimpleData name="bstt_k">0</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">54</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008001000</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MULIA</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.534345015,-3.01410536199995 106.53695226,-3.01371326899994 106.536979368,-3.01460104199992 106.537792595,-3.01849097599995 106.538077224,-3.02037495099995 106.538010793,-3.02036721399997 106.536389778,-3.02017842099997 106.535725643,-3.02005643699994 106.534051752,-3.01575311299996 106.53481754,-3.01573955899994 106.534729441,-3.01554980599997 106.534519357,-3.01527873099997 106.5344482,-3.01493141499998 106.534370139,-3.01434356599998 106.534345015,-3.01410536199995</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.15">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">419</SimpleData>
+		<SimpleData name="kk">54</SimpleData>
+		<SimpleData name="gid">5826</SimpleData>
+		<SimpleData name="bstt">47</SimpleData>
+		<SimpleData name="luas">1047662.644745628116652</SimpleData>
+		<SimpleData name="bsbtt">6</SimpleData>
+		<SimpleData name="idsls">19050300080024</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0024</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 006 DUSUN HARAPAN MAKMUR</SimpleData>
+		<SimpleData name="bstt_k">15</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">75</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008002400</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MAKMUR</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.560949968,-2.98180862099997 106.561240456,-2.98448539199995 106.561251255,-2.98458489499995 106.561269515,-2.98475316199995 106.555529973,-2.99090127699998 106.555793951,-2.99325254699994 106.552531353,-2.99858160399998 106.551588632,-2.99887115399997 106.551329602,-2.99903967899996 106.551122068,-2.99886431399994 106.551025583,-2.99887688199993 106.551167774,-2.99852436699996 106.550460733,-2.99583761099996 106.550410062,-2.98801008599997 106.560116892,-2.98117156299997 106.560949968,-2.98180862099997</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.16">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">536</SimpleData>
+		<SimpleData name="kk">56</SimpleData>
+		<SimpleData name="gid">5948</SimpleData>
+		<SimpleData name="bstt">50</SimpleData>
+		<SimpleData name="luas">218305.579562678060029</SimpleData>
+		<SimpleData name="bsbtt">11</SimpleData>
+		<SimpleData name="idsls">19050300080002</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0002</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 002 DUSUN KEPOSANG</SimpleData>
+		<SimpleData name="bstt_k">9</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">76</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008000200</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN KEPOSANG</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.521063923,-3.01289896099996 106.521023608,-3.01277721199995 106.520974477,-3.01253154999995 106.520913485,-3.01204022499996 106.520960923,-3.01142691699994 106.520972622,-3.01140117699993 106.52188258,-3.01206394499997 106.523708951,-3.01233501999997 106.526589128,-3.01495767599994 106.526877145,-3.01556081799993 106.526863658,-3.01556569199994 106.525948712,-3.01589627499993 106.524234159,-3.01634354999993 106.523454818,-3.01652313699998 106.523088865,-3.01651974799995 106.522841509,-3.01644520299993 106.522689029,-3.01627916899997 106.522271406,-3.01641478899995 106.521374312,-3.01670611299994 106.520960632,-3.01405855099995 106.521697909,-3.01405041999993 106.521921546,-3.01404703099996 106.521972373,-3.01329818499994 106.521972373,-3.01285768799994 106.521071047,-3.01290512599996 106.521063923,-3.01289896099996</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.17">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">560</SimpleData>
+		<SimpleData name="kk">47</SimpleData>
+		<SimpleData name="gid">5969</SimpleData>
+		<SimpleData name="bstt">46</SimpleData>
+		<SimpleData name="luas">123098.707847143479739</SimpleData>
+		<SimpleData name="bsbtt">2</SimpleData>
+		<SimpleData name="idsls">19050300080025</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0025</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 007 DUSUN HARAPAN MAKMUR</SimpleData>
+		<SimpleData name="bstt_k">6</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">55</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008002500</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MAKMUR</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.551122068,-2.99886431399994 106.551329602,-2.99903967899996 106.551372631,-2.99907603899993 106.5513523,-3.00028232499994 106.552328172,-3.00113621299994 106.553024024,-3.00342449399994 106.552888959,-3.00345983799997 106.55138449,-3.00340901199996 106.550262915,-3.00370719499995 106.549558119,-3.00365298 106.549547953,-3.00359537599996 106.549344647,-3.00315487899997 106.549314151,-3.00286008399996 106.54929382,-3.00258223199995 106.549171836,-3.00243991699995 106.548948199,-3.00233487499997 106.54890368,-3.00222357699994 106.549713987,-3.00199348899997 106.550259527,-3.00187828199995 106.550400147,-3.00181728999996 106.550456056,-3.00166480999997 106.550472999,-3.00123278399997 106.550428949,-3.00105658399997 106.550083328,-3.00061608699997 106.549728005,-3.00015548199997 106.551122068,-2.99886431399994</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.18">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">564</SimpleData>
+		<SimpleData name="kk">63</SimpleData>
+		<SimpleData name="gid">5978</SimpleData>
+		<SimpleData name="bstt">61</SimpleData>
+		<SimpleData name="luas">66014.031962385459337</SimpleData>
+		<SimpleData name="bsbtt">7</SimpleData>
+		<SimpleData name="idsls">19050300080007</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0007</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 003 DUSUN HARAPAN MULIA</SimpleData>
+		<SimpleData name="bstt_k">4</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">74</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008000700</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MULIA</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.531356018,-3.01274140399994 106.53288994,-3.01178270399993 106.533859035,-3.01221642399997 106.533877328,-3.01228349999997 106.534001349,-3.01273824499998 106.534214821,-3.01270097199995 106.534306309,-3.01361585199993 106.534306737,-3.01362126599997 106.534345015,-3.01410536199995 106.534370139,-3.01434356599998 106.533997961,-3.01437486399993 106.531670008,-3.01393939599996 106.531651464,-3.01363109999994 106.531604025,-3.01325837099995 106.53154981,-3.01296696499998 106.531356018,-3.01274140399994</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.19">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">570</SimpleData>
+		<SimpleData name="kk">0</SimpleData>
+		<SimpleData name="gid">5984</SimpleData>
+		<SimpleData name="bstt">0</SimpleData>
+		<SimpleData name="luas">21851859.880891747772694</SimpleData>
+		<SimpleData name="bsbtt">0</SimpleData>
+		<SimpleData name="idsls">19050300081001</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">1001</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">PERKEBUNAN KARET</SimpleData>
+		<SimpleData name="bstt_k">0</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">0</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">11</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008100100</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">PERKEBUNAN KARET</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.579868629,-3.02106414499997 106.57941557,-3.0222291499999 106.57627002,-3.02941897999995 106.57514661,-3.03997903999994 106.575208382,-3.04319109899996 106.566965112,-3.04392383399994 106.56159756,-3.04375021999994 106.56121632,-3.04379863999998 106.5519375,-3.04497561999995 106.54164795,-3.04287960999994 106.53920246,-3.04224552999995 106.53659166,-3.04156856999992 106.52844537,-3.03912045999994 106.52835689,-3.03909386999993 106.52248928,-3.03769818999996 106.5165119,-3.02543269999995 106.51421349,-3.01901021999993 106.51339173,-3.01671395999995 106.512907913,-3.01453786799993 106.520657657,-3.01550067399995 106.520776253,-3.01406058599997 106.520960632,-3.01405855099995 106.521374312,-3.01670611299994 106.522271406,-3.01641478899995 106.521025303,-3.01753628199998 106.521055799,-3.02044695499995 106.522590764,-3.02201580399998 106.522675475,-3.02206324199995 106.526973137,-3.01580199299997 106.527026238,-3.01591660599996 106.527363387,-3.01660615399993 106.529327481,-3.01478020699994 106.529562488,-3.01588102699998 106.530104639,-3.01633507799994 106.530707782,-3.01690433599993 106.531304148,-3.01763624099993 106.531981118,-3.01786204999996 106.533064021,-3.01955155799993 106.535686299,-3.02176270699994 106.535598577,-3.02179640299994 106.536848913,-3.02698072199996 106.53717825,-3.02688267499997 106.53593488,-3.03152547299993 106.537588441,-3.03563904399994 106.53909291,-3.03534085999996 106.538550758,-3.02856397199997 106.538069599,-3.02682569999996 106.537326525,-3.02681948199995 106.53970876,-3.02476467999998 106.537875611,-3.02193194099993 106.537697893,-3.02186146599996 106.538010793,-3.02036721399997 106.538077224,-3.02037495099995 106.537792595,-3.01849097599995 106.536979368,-3.01460104199992 106.53695226,-3.01371326899994 106.534345015,-3.01410536199995 106.534306737,-3.01362126599997 106.537899472,-3.01104786499997 106.543344848,-3.01253713599993 106.541952757,-3.01345151299995 106.546317072,-3.02178708499997 106.546738559,-3.02152747299994 106.549392543,-3.02779411899996 106.544731281,-3.02546015799993 106.544243345,-3.02586677099993 106.547269449,-3.02899233099993 106.547967245,-3.03288762699998 106.550193453,-3.03236241799993 106.547855584,-3.02890557099994 106.549662748,-3.02846549399993 106.5498275,-3.02890620499994 106.552365781,-3.02931362599998 106.554503553,-3.03163729099992 106.556844968,-3.03208795399996 106.556502735,-3.02945174499996 106.553539223,-3.02852044599996 106.551287919,-3.02363039799997 106.548107917,-3.02068402799995 106.548187493,-3.02063501399994 106.547360713,-3.01341085099995 106.544988802,-3.01135067699994 106.543727409,-3.01223950899993 106.542671544,-3.00663079699996 106.545216675,-3.00562335899997 106.548262554,-3.00351821599997 106.557077076,-3.00790208899997 106.557095123,-3.00772290099997 106.562685807,-3.01587380399997 106.568773093,-3.02085675999996 106.569985163,-3.01829794499997 106.565852213,-3.01516018099994 106.568712489,-3.01494455099993 106.569486867,-3.01410283499996 106.567769768,-3.01235880099995 106.567042526,-3.01301197299995 106.566268148,-3.01380655099996 106.565298492,-3.01361800799998 106.565094149,-3.01442899499995 106.561756553,-3.00810308799993 106.55724411,-3.00624368899997 106.557266829,-3.00601811299993 106.554061361,-3.00304305999992 106.553251523,-3.00336496199998 106.553024024,-3.00342449399994 106.552328172,-3.00113621299994 106.5513523,-3.00028232499994 106.551372631,-2.99907603899993 106.551329602,-2.99903967899996 106.551588632,-2.99887115399997 106.552531353,-2.99858160399998 106.555793951,-2.99325254699994 106.555529973,-2.99090127699998 106.561269515,-2.98475316199995 106.561298319,-2.98501858399993 106.561411013,-2.98605702299994 106.557690161,-2.99061546399997 106.557198095,-2.99328834999994 106.558312079,-2.99843010599994 106.558991175,-3.00009650699997 106.566744108,-3.00469558099996 106.57414775,-3.01176771699994 106.579868629,-3.02106414499997</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.20">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">634</SimpleData>
+		<SimpleData name="kk">65</SimpleData>
+		<SimpleData name="gid">6047</SimpleData>
+		<SimpleData name="bstt">65</SimpleData>
+		<SimpleData name="luas">410392.307545109011699</SimpleData>
+		<SimpleData name="bsbtt">9</SimpleData>
+		<SimpleData name="idsls">19050300080004</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0004</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 004 DUSUN KEPOSANG</SimpleData>
+		<SimpleData name="bstt_k">7</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">81</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1, 1, 1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008000400</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN KEPOSANG</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.520972622,-3.01140117699993 106.520440796,-3.01099827899998 106.520806749,-3.00843661499994 106.523544611,-3.00811132499996 106.523561219,-3.00812550699993 106.528417194,-3.01227233399993 106.528400252,-3.01235026799998 106.528400252,-3.01237226199993 106.528400252,-3.01267555899995 106.528732319,-3.01305506399996 106.529159263,-3.01346845499995 106.529220254,-3.01390895299994 106.529159263,-3.01399705199998 106.52957943,-3.01454597899993 106.529327481,-3.01478020699994 106.527363387,-3.01660615399993 106.527026238,-3.01591660599996 106.526973137,-3.01580199299997 106.526863658,-3.01556569199994 106.526877145,-3.01556081799993 106.526589128,-3.01495767599994 106.523708951,-3.01233501999997 106.52188258,-3.01206394499997 106.520972622,-3.01140117699993</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.21">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">667</SimpleData>
+		<SimpleData name="kk">65</SimpleData>
+		<SimpleData name="gid">6085</SimpleData>
+		<SimpleData name="bstt">60</SimpleData>
+		<SimpleData name="luas">226637.263504345319234</SimpleData>
+		<SimpleData name="bsbtt">2</SimpleData>
+		<SimpleData name="idsls">19050300080013</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0013</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 009 DUSUN HARAPAN MULIA</SimpleData>
+		<SimpleData name="bstt_k">5</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">72</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008001300</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MULIA</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.538010793,-3.02036721399997 106.537697893,-3.02186146599996 106.537690941,-3.02189466699997 106.537162344,-3.02168458399996 106.536552424,-3.02131863299996 106.536186472,-3.02113565599996 106.536352506,-3.02165239299995 106.536069571,-3.02173371599997 106.535686299,-3.02176270699994 106.533064021,-3.01955155799993 106.531981118,-3.01786204999996 106.532027581,-3.01782429999997 106.531961506,-3.01699243699994 106.532635807,-3.01731433799995 106.533008535,-3.01726181799995 106.532952626,-3.01661631899998 106.532806922,-3.01645706199997 106.532688327,-3.01620631799994 106.532512128,-3.01603689499996 106.532512128,-3.01582342299997 106.532390144,-3.01574548899993 106.532352871,-3.01553201699994 106.532264772,-3.01551846299998 106.532186837,-3.01535242899996 106.532183449,-3.01514234599995 106.531908985,-3.01495259299997 106.531756505,-3.01464424499994 106.531678571,-3.01408176299998 106.531670008,-3.01393939599996 106.533997961,-3.01437486399993 106.534370139,-3.01434356599998 106.5344482,-3.01493141499998 106.534519357,-3.01527873099997 106.534729441,-3.01554980599997 106.53481754,-3.01573955899994 106.534051752,-3.01575311299996 106.535725643,-3.02005643699994 106.536389778,-3.02017842099997 106.538010793,-3.02036721399997</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.22">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">680</SimpleData>
+		<SimpleData name="kk">45</SimpleData>
+		<SimpleData name="gid">6098</SimpleData>
+		<SimpleData name="bstt">42</SimpleData>
+		<SimpleData name="luas">115420.475042557343841</SimpleData>
+		<SimpleData name="bsbtt">5</SimpleData>
+		<SimpleData name="idsls">19050300080017</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0017</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 004 DUSUN AIR BULANG</SimpleData>
+		<SimpleData name="bstt_k">4</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">54</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008001700</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN AIR BULANG</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.553539223,-3.02852044599996 106.556502735,-3.02945174499996 106.556844968,-3.03208795399996 106.554503553,-3.03163729099992 106.552365781,-3.02931362599998 106.553539223,-3.02852044599996</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.23">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">681</SimpleData>
+		<SimpleData name="kk">85</SimpleData>
+		<SimpleData name="gid">6099</SimpleData>
+		<SimpleData name="bstt">83</SimpleData>
+		<SimpleData name="luas">169522.132318318908801</SimpleData>
+		<SimpleData name="bsbtt">24</SimpleData>
+		<SimpleData name="idsls">19050300080006</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0006</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 002 DUSUN HARAPAN MULIA</SimpleData>
+		<SimpleData name="bstt_k">4</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">113</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1, 1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008000600</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MULIA</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.528400252,-3.01237226199993 106.528857691,-3.01191315899996 106.529047444,-3.01166410799993 106.529228726,-3.01176745599997 106.529621872,-3.01191471899995 106.531227908,-3.01251630199994 106.531343115,-3.01272638599994 106.531356018,-3.01274140399994 106.53154981,-3.01296696499998 106.531604025,-3.01325837099995 106.531651464,-3.01363109999994 106.531670008,-3.01393939599996 106.531678571,-3.01408176299998 106.531756505,-3.01464424499994 106.531908985,-3.01495259299997 106.532183449,-3.01514234599995 106.532186837,-3.01535242899996 106.532264772,-3.01551846299998 106.532352871,-3.01553201699994 106.532390144,-3.01574548899993 106.532512128,-3.01582342299997 106.532512128,-3.01603689499996 106.532688327,-3.01620631799994 106.532806922,-3.01645706199997 106.532952626,-3.01661631899998 106.533008535,-3.01726181799995 106.532635807,-3.01731433799995 106.531961506,-3.01699243699994 106.532027581,-3.01782429999997 106.531981118,-3.01786204999996 106.531304148,-3.01763624099993 106.530707782,-3.01690433599993 106.530104639,-3.01633507799994 106.529562488,-3.01588102699998 106.529327481,-3.01478020699994 106.52957943,-3.01454597899993 106.529159263,-3.01399705199998 106.529220254,-3.01390895299994 106.529159263,-3.01346845499995 106.528732319,-3.01305506399996 106.528400252,-3.01267555899995 106.528400252,-3.01237226199993</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.24">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">788</SimpleData>
+		<SimpleData name="kk">45</SimpleData>
+		<SimpleData name="gid">6212</SimpleData>
+		<SimpleData name="bstt">42</SimpleData>
+		<SimpleData name="luas">366712.309162004210521</SimpleData>
+		<SimpleData name="bsbtt">12</SimpleData>
+		<SimpleData name="idsls">19050300080001</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0001</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 001 DUSUN KEPOSANG</SimpleData>
+		<SimpleData name="bstt_k">12</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">69</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008000100</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN KEPOSANG</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.512642491,-3.01365620499996 106.515366602,-3.01101606799995 106.517189584,-3.01030449499996 106.518856699,-3.01098896099995 106.521063923,-3.01289896099996 106.521071047,-3.01290512599996 106.521972373,-3.01285768799994 106.521972373,-3.01329818499994 106.521921546,-3.01404703099996 106.521697909,-3.01405041999993 106.520960632,-3.01405855099995 106.520776253,-3.01406058599997 106.520657657,-3.01550067399995 106.512907913,-3.01453786799993 106.512873511,-3.0143831399999 106.512807771,-3.01425780899996 106.512642491,-3.01365620499996</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.25">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">889</SimpleData>
+		<SimpleData name="kk">51</SimpleData>
+		<SimpleData name="gid">6318</SimpleData>
+		<SimpleData name="bstt">51</SimpleData>
+		<SimpleData name="luas">156265.166210486524506</SimpleData>
+		<SimpleData name="bsbtt">6</SimpleData>
+		<SimpleData name="idsls">19050300080012</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0012</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 008 DUSUN HARAPAN MULIA</SimpleData>
+		<SimpleData name="bstt_k">8</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">65</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008001200</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MULIA</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.537697893,-3.02186146599996 106.537875611,-3.02193194099993 106.53970876,-3.02476467999998 106.537326525,-3.02681948199995 106.537292799,-3.02684857299994 106.53717825,-3.02688267499997 106.536848913,-3.02698072199996 106.535598577,-3.02179640299994 106.535686299,-3.02176270699994 106.536069571,-3.02173371599997 106.536352506,-3.02165239299995 106.536186472,-3.02113565599996 106.536552424,-3.02131863299996 106.537162344,-3.02168458399996 106.537690941,-3.02189466699997 106.537697893,-3.02186146599996</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.26">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">890</SimpleData>
+		<SimpleData name="kk">42</SimpleData>
+		<SimpleData name="gid">6319</SimpleData>
+		<SimpleData name="bstt">40</SimpleData>
+		<SimpleData name="luas">69054.391003195196390</SimpleData>
+		<SimpleData name="bsbtt">0</SimpleData>
+		<SimpleData name="idsls">19050300080018</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0018</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 005 DUSUN AIR BULANG</SimpleData>
+		<SimpleData name="bstt_k">3</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">45</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008001800</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN AIR BULANG</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.547855584,-3.02890557099994 106.550193453,-3.03236241799993 106.547967245,-3.03288762699998 106.547269449,-3.02899233099993 106.547669062,-3.02898752799996 106.547855584,-3.02890557099994</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.27">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">952</SimpleData>
+		<SimpleData name="kk">49</SimpleData>
+		<SimpleData name="gid">6385</SimpleData>
+		<SimpleData name="bstt">42</SimpleData>
+		<SimpleData name="luas">37036.072367593224044</SimpleData>
+		<SimpleData name="bsbtt">4</SimpleData>
+		<SimpleData name="idsls">19050300080023</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0023</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 005 DUSUN HARAPAN MAKMUR</SimpleData>
+		<SimpleData name="bstt_k">0</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">53</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008002300</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MAKMUR</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.549728005,-3.00015548199997 106.550083328,-3.00061608699997 106.550428949,-3.00105658399997 106.550472999,-3.00123278399997 106.550456056,-3.00166480999997 106.550400147,-3.00181728999996 106.550259527,-3.00187828199995 106.549713987,-3.00199348899997 106.54890368,-3.00222357699994 106.548900761,-3.00221627999997 106.548260345,-3.00231115499997 106.548018005,-3.00231115499997 106.548141749,-3.00205871699995 106.548212907,-3.00188082299996 106.54827051,-3.00152503599997 106.548500925,-3.00122515899994 106.549707211,-3.00017474199996 106.549728005,-3.00015548199997</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="fixed_geometries_copy.28">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#fixed_geometries_copy">
+		<SimpleData name="fid">1013</SimpleData>
+		<SimpleData name="kk">45</SimpleData>
+		<SimpleData name="gid">6451</SimpleData>
+		<SimpleData name="bstt">42</SimpleData>
+		<SimpleData name="luas">615478.338419609703124</SimpleData>
+		<SimpleData name="bsbtt">6</SimpleData>
+		<SimpleData name="idsls">19050300080020</SimpleData>
+		<SimpleData name="kdkab">05</SimpleData>
+		<SimpleData name="kdkec">030</SimpleData>
+		<SimpleData name="kdsls">0020</SimpleData>
+		<SimpleData name="nmkab">BANGKA SELATAN</SimpleData>
+		<SimpleData name="nmkec">TOBOALI</SimpleData>
+		<SimpleData name="nmsls">RT 002 DUSUN HARAPAN MAKMUR</SimpleData>
+		<SimpleData name="bstt_k">2</SimpleData>
+		<SimpleData name="kddesa">008</SimpleData>
+		<SimpleData name="kdprov">19</SimpleData>
+		<SimpleData name="khusus">0</SimpleData>
+		<SimpleData name="muatan">53</SimpleData>
+		<SimpleData name="nmdesa">KAPOSANG</SimpleData>
+		<SimpleData name="nmprov">KEPULAUAN BANGKA BELITUNG</SimpleData>
+		<SimpleData name="sumber">BPS</SimpleData>
+		<SimpleData name="dom_sls">1, 1, 1</SimpleData>
+		<SimpleData name="periode">2025_1</SimpleData>
+		<SimpleData name="tingkat">0</SimpleData>
+		<SimpleData name="wil_campur">0</SimpleData>
+		<SimpleData name="idsubsls">1905030008002000</SimpleData>
+		<SimpleData name="kdsubsls">00</SimpleData>
+		<SimpleData name="DATA 3 DESA EXCEL — slssubsls1905_dusun">DUSUN HARAPAN MAKMUR</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>106.55724411,-3.00624368899997 106.561756553,-3.00810308799993 106.565094149,-3.01442899499995 106.565231154,-3.01468866899995 106.565852213,-3.01516018099994 106.569985163,-3.01829794499997 106.568773093,-3.02085675999996 106.562685807,-3.01587380399997 106.557095123,-3.00772290099997 106.55724411,-3.00624368899997</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+</Folder>
+</Document></kml>
