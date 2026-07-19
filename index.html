@@ -4845,13 +4845,7 @@
             });
           }
 
-          // --- BAGIAN HITUNG TOTAL TERLEBIH DAHULU ---
-let totalKeseluruhan = 0;
-for (let i = 4; i < rows.length; i++) {
-  if (rows[i][1]) totalKeseluruhan += parseFloat(rows[i][1]) || 0;
-}
-
-// --- BAGIAN MEMBUAT BODY HTML ---
+         // --- BAGIAN MEMBUAT BODY HTML (TANPA PERSENTASE) ---
 let bodyHtml = "";
 for (let i = 4; i < rows.length; i++) {
   if (!rows[i][0]) continue;
@@ -4863,14 +4857,8 @@ for (let i = 4; i < rows.length; i++) {
   for (let c = 1; c < numCols; c++) {
     let nilaiAngka = parseFloat(rows[i][c]) || 0;
     
-    // Hitung persentase (2 angka di belakang koma)
-    let persentase = totalKeseluruhan > 0 
-      ? ((nilaiAngka / totalKeseluruhan) * 100).toFixed(2) + "%" 
-      : "0%";
-
-    // Tambahkan kolom angka dan kolom persentase
-    bodyHtml += `<td>${nilaiAngka.toLocaleString()}</td>`; // toLocaleString biar ada pemisah ribuan
-    bodyHtml += `<td>${persentase}</td>`;
+    // Hanya tampilkan kolom angka saja
+    bodyHtml += `<td>${nilaiAngka.toLocaleString()}</td>`;
     
     datasetsConfig[c - 1].data.push(nilaiAngka);
     totals[c] += nilaiAngka;
@@ -4878,15 +4866,16 @@ for (let i = 4; i < rows.length; i++) {
   bodyHtml += "</tr>";
 }
 
-          
-          bodyHtml += `<tr style="font-weight: bold; background-color: #d9e9f6; color: #1a4a7a;">`;
-          bodyHtml += `<td>TOTAL</td>`;
-          for (let c = 1; c < numCols; c++) {
-            bodyHtml += `<td>${totals[c]}</td>`;
-          }
-          bodyHtml += `</tr>`;
+// --- BARIS TOTAL ---
+bodyHtml += `<tr style="font-weight: bold; background-color: #d9e9f6; color: #1a4a7a;">`;
+bodyHtml += `<td>TOTAL</td>`;
+for (let c = 1; c < numCols; c++) {
+  // Menampilkan total angka
+  bodyHtml += `<td>${totals[c].toLocaleString()}</td>`;
+}
+bodyHtml += `</tr>`;
 
-          document.getElementById("tableBodyPaksian").innerHTML = bodyHtml;
+document.getElementById("tableBodyPaksian").innerHTML = bodyHtml;
 
           const ctx = document
             .getElementById("canvasGrafikPaksian")
