@@ -5103,8 +5103,12 @@
             document.getElementById("table-note").innerText = note;
 
             // Set link tombol unduh
+            // Mengatur link tombol agar mengunduh sheet/tab yang sedang aktif sebagai file CSV
             document.getElementById("btn-download").href =
-              `https://docs.google.com/spreadsheets/d/${sheetId}/edit#gid=0`;
+                `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${selectedValue}`;
+
+            // Tambahkan atribut download ke tombol HTML secara dinamis
+              document.getElementById("btn-download").setAttribute("download", `${selectedValue}.csv`);
 
             // Render Grafik & Tabel
             renderChart(labels, data, title, "#0ea5e9");
