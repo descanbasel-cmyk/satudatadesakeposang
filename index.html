@@ -5395,19 +5395,40 @@
 
         // Tampilkan kotak pembungkus peta
         document.getElementById("peta-wrapper").style.display = "block";
+        document.getElementById("judul-peta").innerText = data.judul;
 
         // Ganti Teks Judul dan Deskripsi
-        document.getElementById("judul-peta").innerText = data.judul;
-        document.getElementById("deskripsi-peta").innerText = data.deskripsi;
-
-        // Ganti Link Iframe Peta ke folder qgis2web yang sesuai
+        document.getElementById("deskripsi-peta").innerHTML = data.analisis;
         document.getElementById("frame-peta").src = data.linkPeta;
+        // Render Kartu Sorotan Dusun di Bawah Teks
+  const statsContainer = document.getElementById("stats-peta-wrapper");
+  if (statsContainer && data.stats) {
+    statsContainer.innerHTML = data.stats.map(item => {
+      let borderColor = "#10b981"; // hijau
+      let bgColor = "#ffffff";
+      let textColor = "#047857";
+
+      if (item.status === "sedang") {
+        borderColor = "#f59e0b"; // kuning
+        textColor = "#b45309";
+      } else if (item.status === "perhatian") {
+        borderColor = "#ef4444"; // merah
+        textColor = "#b91c1c";
       }
 
-      // Trigger load peta1 (Air Minum) pertama kali saat halaman dibuka
-      setTimeout(() => {
-        tampilkanPeta("peta1");
-      }, 100);
+      return `
+        <div style="background: ${bgColor}; border: 1px solid #cbd5e1; border-top: 3.5px solid ${borderColor}; padding: 10px 14px; border-radius: 8px;">
+          <div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">${item.dusun}</div>
+          <div style="font-size: 18px; font-weight: 800; color: ${textColor}; margin: 2px 0;">${item.persen}</div>
+          <div style="font-size: 11px; font-weight: 600; color: #475569;">${item.tag}</div>
+        </div>
+      `;
+    }).join('');
+  }
+}
+        
+
+        
     </script>
     <!-- LIBRARY UNTUK FITUR PENCARIAN DROPDOWN (TOM SELECT) -->
     <link
