@@ -4267,63 +4267,29 @@
         </div>
 
         <!-- BUNGKUSAN KONTEN PETA (Berubah Dinamis) -->
-        <div
-          id="peta-wrapper"
-          style="
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            overflow: hidden;
-            display: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-          "
-        >
-          <!-- Bagian Penjelasan / Metadata Peta (Hanya Judul & Deskripsi) -->
-          <div
-            style="
-              background: #e0f2fe;
-              padding: 25px 30px;
-              border-bottom: 1px solid #bae6fd;
-            "
-          >
-            <h3
-              id="judul-peta"
-              style="
-                margin: 0 0 10px 0;
-                color: var(--biru-gelap);
-                font-size: 20px;
-                font-weight: 700;
-              "
-            >
-              Memuat Peta...
-            </h3>
-            <p
-              id="deskripsi-peta"
-              style="
-                margin: 0 0 10px 0;
-                color: #334155;
-                font-size: 14.5px;
-                line-height: 1.6;
-              "
-            >
-              <!-- Deskripsi akan disuntikkan otomatis oleh JavaScript -->
-            </p>
+        <div style="background: #e0f2fe; padding: 25px 30px; border-bottom: 1px solid #bae6fd;">
+  
+  <!-- Judul Peta -->
+  <h3 id="judul-peta" style="margin: 0 0 12px 0; color: var(--biru-gelap); font-size: 20px; font-weight: 700;">
+    Memuat Peta...
+  </h3>
 
-            <!-- Kalimat Petunjuk Interaktif -->
-            <span
-              style="
-                display: inline-block;
-                background: rgba(255, 255, 255, 0.7);
-                padding: 4px 12px;
-                border-radius: 20px;
-                font-size: 12.5px;
-                color: #0284c7;
-                font-weight: 600;
-              "
-            >
-              💡 Tips: Arahkan kursor atau sentuh wilayah dusun pada peta untuk
-              melihat detail data.
-            </span>
-          </div>
+  <!-- Teks Analisis Peta -->
+  <div id="deskripsi-peta" style="color: #334155; font-size: 14.5px; line-height: 1.8; margin-bottom: 20px;">
+    <!-- Teks analisis disuntikkan lewat JS -->
+  </div>
+
+  <!-- Highlights Dusun (Kartu Ringkas) -->
+  <div id="stats-peta-wrapper" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 15px;">
+    <!-- Kartu ringkas disuntikkan lewat JS -->
+  </div>
+
+  <!-- Tips Interaktif -->
+  <span style="display: inline-block; background: rgba(255, 255, 255, 0.85); padding: 5px 14px; border-radius: 20px; font-size: 12.5px; color: #0284c7; font-weight: 600;">
+    💡 Tips: Arahkan kursor atau sentuh wilayah dusun pada peta untuk melihat detail data spasial.
+  </span>
+
+</div>
 
           <!-- Bagian Iframe Peta Interaktif (QGIS2WEB) -->
           <div
@@ -5338,9 +5304,26 @@
         peta1: {
     judul:
       "Peta Persentase Akses Air Minum Layak Tingkat Dusun di Desa Keposang Tahun 2026",
-     deskripsi:
-      "Peta choropleth ini menampilkan persentase rumah tangga yang memiliki akses terhadap sumber air minum layak di tiap dusun untuk Desa Keposang pada tahun 2026. Area berwarna hijau menandakan capaian yang sudah tinggi, sedangkan merah membutuhkan prioritas peningkatan akses minum layak. Secara keseluruhan, mayoritas rumah tangga telah memiliki akses layak, di mana Dusun Keposang mencatatkan capaian tertinggi sebesar 95,69% (222 rumah tangga layak, 10 tidak layak), disusul Dusun Harapan Makmur sebesar 93,84% (381 layak, 25 tidak layak) dan Dusun Harapan Mulia sebesar 88,64% (390 layak, 50 tidak layak). Sementara itu, Dusun Air Bulang menjadi wilayah yang perlu mendapat perhatian utama dengan capaian terendah yaitu 80,65% (175 layak, 42 tidak layak).",
-    linkPeta: "./peta-air-minum-layak/index.html#14/-3.0079/106.5436",
+     // Teks Analisis Rapi & Mengalir
+    analisis: `
+      <p style="margin: 0 0 10px 0;">
+        Secara umum, masyarakat Desa Keposang telah menikmati pemenuhan kebutuhan dasar air minum yang sangat baik. Sebagian besar wilayah desa telah terjangkau oleh sumber air minum yang layak dan aman untuk konsumsi harian keluarga.
+      </p>
+      <p style="margin: 0 0 10px 0;">
+        Capaian tertinggi diraih oleh <strong>Dusun Keposang</strong> dengan tingkat akses mencapai <strong>95,69%</strong> (222 dari 232 rumah tangga), disusul erat oleh <strong>Dusun Harapan Makmur</strong> sebesar <strong>93,84%</strong> (381 dari 406 rumah tangga) dan <strong>Dusun Harapan Mulia</strong> sebesar <strong>88,64%</strong> (390 dari 440 rumah tangga). Kebiasaan warga di ketiga wilayah ini dalam memanfaatkan instalasi air teruji menjadi fondasi utamanya.
+      </p>
+      <p style="margin: 0;">
+        Meskipun demikian, pemenuhan air bersih ini masih memiliki tantangan di <strong>Dusun Air Bulang</strong>. Dengan capaian <strong>80,65%</strong> (175 layak dari 217 rumah tangga), wilayah ini masih memiliki 42 keluarga yang belum menjangkau akses air minum layak. Hal ini menjadikan Dusun Air Bulang sebagai prioritas utama bagi pemerintah desa dalam penganggaran sarana air bersih mendatang.
+      </p>
+    `,
+          linkPeta: "./peta-air-minum-layak/index.html#14/-3.0079/106.5436",
+          // Data Ringkas Tambahan di Bawah Teks
+    stats: [
+      { dusun: "Dusun Keposang", persen: "95,69%", tag: "Capaian Tertinggi", status: "tinggi" },
+      { dusun: "Dusun Harapan Makmur", persen: "93,84%", tag: "Kategori Sangat Baik", status: "tinggi" },
+      { dusun: "Dusun Harapan Mulia", persen: "88,64%", tag: "Kategori Baik", status: "sedang" },
+      { dusun: "Dusun Air Bulang", persen: "80,65%", tag: "Prioritas Intervensi", status: "perhatian" }
+    ]
   },
   peta2: {
     judul: "Peta Migrasi Seumur Hidup Tingkat Dusun di Desa Keposang",
