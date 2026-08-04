@@ -4597,7 +4597,7 @@
             </div>
           </div>
           <div class="milestone-photo">
-            <img src="P6_Keposang.jpeg" alt="Foto Bimtek Agen Statistik" />
+            <img src="B3.JPG" alt="Foto Bimtek Agen Statistik" />
           </div>
         </div>
       </div>
@@ -4966,6 +4966,18 @@
       card.innerHTML = `
         <div class="galeri-photo-wrapper">
           <img src="GALERIKEPOSANG/${i}.jpeg" alt="Galeri ${i}" />
+        </div>
+      `;
+      container.appendChild(card);
+    }
+
+    // Bagian 2: File .jpeg (16 sampai 20)
+    for (let i = 1; i <= 1; i++) {
+      const card = document.createElement('div');
+      card.className = 'galeri-card';
+      card.innerHTML = `
+        <div class="galeri-photo-wrapper">
+          <img src="GALERIKEPOSANG/B${i}.JPG" alt="Galeri B${i}" />
         </div>
       `;
       container.appendChild(card);
