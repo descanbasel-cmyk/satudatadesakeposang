@@ -4161,22 +4161,24 @@
     </div>
 
 
-    <!-- SECTION: PETA TEMATIK -->
+    <!-- ========================================================= -->
+<!-- SECTION: PETA TEMATIK SPASIAL DESA KEPOSANG TAHUN 2026     -->
+<!-- ========================================================= -->
 <div id="peta" class="page">
   <div class="card" style="padding: 40px 30px; text-align: left">
     
     <!-- Header Halaman -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
-      <h2 style="margin: 0; font-size: 26px; color: var(--biru-gelap); font-weight: 700;">
+      <h2 style="margin: 0; font-size: 26px; color: var(--biru-gelap, #1e293b); font-weight: 700;">
         Peta Tematik Spasial Desa
       </h2>
       <span style="background: #10b981; color: white; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);">
-        <i class="fas fa-map-marked-alt"></i> Pemetaan Berbasis Dusun/SLS
+        <i class="fas fa-map-marked-alt"></i> Pemetaan Berbasis SLS/RT
       </span>
     </div>
 
     <p style="color: #64748b; font-size: 14.5px; line-height: 1.6; margin: 0 0 30px 0;">
-      Kumpulan peta tematik interaktif yang menyajikan sebaran indikator kependudukan, sosial, dan infrastruktur di Desa Keposang Tahun 2026. Data disajikan hingga tingkat Dusun dan dikategorikan secara dinamis sesuai karakteristik setiap variabel.
+      Kumpulan peta tematik interaktif yang menyajikan sebaran indikator kependudukan, sosial, perumahan, air minum, dan infrastruktur di Desa Keposang Tahun 2026. Data disajikan hingga tingkat Satuan Lingkungan Setempat (SLS/RT) dan dikategorikan secara dinamis sesuai karakteristik setiap variabel.
     </p>
 
     <!-- Box Pilih Peta (Searchable Dropdown) -->
@@ -4185,41 +4187,42 @@
         🔍 Cari & Pilih Peta Tematik:
       </label>
       <select id="pilihJenisPeta" placeholder="Ketik indikator peta yang ingin dicari..." autocomplete="off">
-        <option value="peta1" selected>Peta Persentase Akses Air Minum Layak Tingkat Dusun di Desa Keposang Tahun 2026</option>
-        <option value="peta2">Peta Migrasi Seumur Hidup Tingkat Dusun di Desa Keposang Tahun 2026</option>
-        <option value="peta3">Peta Rasio Jenis Kelamin Tingkat Dusun di Desa Keposang Tahun 2026</option>
-        <option value="peta4">Peta Persentase Akses Sanitasi Layak Tingkat Dusun di Desa Keposang Tahun 2026</option>
-        <option value="peta5">Peta Persentase Rumah Memenuhi Sufficient Living Space Tingkat Dusun di Desa Keposang Tahun 2026</option>
-        <option value="peta6">Peta Persentase Akses Air Minum Aman Tingkat Dusun di Desa Keposang Tahun 2026</option>
-        <option value="peta7">Peta Persentase Rumah Tangga Terkoneksi Elektrifikasi Tingkat Dusun di Desa Keposang Tahun 2026</option>
-        <option value="peta8">Peta Akses Fasilitas Buang Air Besar (FASBAB) Tingkat Dusun di Desa Keposang Tahun 2026</option>
-        <option value="peta9">Peta Penggunaan Listrik PLN Meteran Tingkat Dusun di Desa Keposang Tahun 2026</option>
+        <option value="peta1" selected>Peta Sebaran Persentase Rumah Tangga yang Dialiri Listrik Menurut SLS di Desa Keposang Tahun 2026</option>
+        <option value="peta2">Peta Sebaran Persentase Listrik PLN Meteran Menurut SLS di Desa Keposang Tahun 2026</option>
+        <option value="peta3">Peta Sebaran Persentase Akses Air Minum Aman Menurut SLS di Desa Keposang Tahun 2026</option>
+        <option value="peta4">Peta Sebaran Persentase Air Minum Bukan Air Permukaan Menurut SLS di Desa Keposang Tahun 2026</option>
+        <option value="peta5">Peta Sebaran Persentase Hunian Tidak Layak Menurut SLS di Desa Keposang Tahun 2026</option>
+        <option value="peta6">Peta Sebaran Persentase Ketahanan Bangunan Tidak Layak Menurut SLS di Desa Keposang Tahun 2026</option>
+        <option value="peta7">Peta Sebaran Persentase Akses Sanitasi Layak Menurut SLS di Desa Keposang Tahun 2026</option>
+        <option value="peta8">Peta Sebaran Persentase Akses Air Minum Layak Menurut SLS di Desa Keposang Tahun 2026</option>
+        <option value="peta9">Peta Sebaran Persentase Migrasi Seumur Hidup Menurut SLS di Desa Keposang Tahun 2026</option>
+        <option value="peta10">Peta Sebaran Rasio Jenis Kelamin Menurut SLS di Desa Keposang Tahun 2026</option>
       </select>
     </div>
 
-    <!-- BUNGKUSAN KONTEN PETA (ID peta-wrapper DITAMBAHKAN KEMBALI DI SINI) -->
+    <!-- BUNGKUSAN KONTEN PETA INTERAKTIF -->
     <div id="peta-wrapper" style="border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);">
       
       <!-- Deskripsi & Analisis Peta -->
       <div style="background: #e0f2fe; padding: 25px 30px; border-bottom: 1px solid #bae6fd;">
-        <h3 id="judul-peta" style="margin: 0 0 12px 0; color: var(--biru-gelap); font-size: 20px; font-weight: 700;">
+        <h3 id="judul-peta" style="margin: 0 0 12px 0; color: var(--biru-gelap, #1e293b); font-size: 20px; font-weight: 700;">
           Memuat Peta...
         </h3>
 
         <div id="deskripsi-peta" style="color: #334155; font-size: 14.5px; line-height: 1.8; margin-bottom: 20px;">
-          <!-- Teks disuntikkan oleh JS -->
+          <!-- Teks Analisis Disuntikkan oleh JS -->
         </div>
 
         <div id="stats-peta-wrapper" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 15px;">
-          <!-- Kartu ringkas disuntikkan oleh JS -->
+          <!-- Kartu Ringkasan Statistik Disuntikkan oleh JS -->
         </div>
 
         <span style="display: inline-block; background: rgba(255, 255, 255, 0.85); padding: 5px 14px; border-radius: 20px; font-size: 12.5px; color: #0284c7; font-weight: 600;">
-          💡 Tips: Arahkan kursor atau sentuh wilayah dusun pada peta untuk melihat detail data spasial.
+          💡 Tips: Arahkan kursor atau sentuh wilayah SLS/RT pada peta untuk melihat detail data spasial.
         </span>
       </div>
 
-      <!-- Frame Tempat Peta Muncul -->
+      <!-- Frame Tempat Peta Leaflet/qgis2web Muncul -->
       <div style="position: relative; width: 100%; height: 550px; background: #f1f5f9;">
         <iframe
           id="frame-peta"
@@ -4232,13 +4235,13 @@
         ></iframe>
       </div>
 
-      <!-- Keterangan Sumber -->
+      <!-- Keterangan Sumber & Catatan -->
       <div style="background: #f8fafc; padding: 20px 30px; border-top: 1px solid #e2e8f0; font-size: 13px; color: #475569; line-height: 1.6;">
         <p style="margin: 0 0 6px 0;">
-          <strong style="color: var(--biru-gelap)">Sumber:</strong> Paksian Keposang Tahun 2026
+          <strong style="color: var(--biru-gelap, #1e293b)">Sumber:</strong> Paksian Keposang Tahun 2026
         </p>
         <p style="margin: 0; font-style: italic;">
-          <strong>Catatan:</strong> Tabulasi data ini mencakup seluruh wilayah administratif di Desa Keposang, yang meliputi 26 RT.
+          <strong>Catatan:</strong> Tabulasi data ini mencakup seluruh wilayah administratif di Desa Keposang, yang meliputi 26 RT dari 4 Dusun.
         </p>
       </div>
 
@@ -5209,118 +5212,205 @@
     </script>
 
 
-     <!-- SCRIPT JAVASCRIPT DENGAN PEMANGGILAN OTOMATIS -->
+    <!-- ========================================================= -->
+<!-- SCRIPT JAVASCRIPT & DATABASE 10 PETA TEMATIK               -->
+<!-- ========================================================= -->
 <script>
   const databasePeta = {
+    // ---------------------------------------------------------
+    // PETA 1: RUMAH TANGGA DIALIRI LISTRIK (100% vs BELUM 100%)
+    // ---------------------------------------------------------
     peta1: {
-      judul: "Peta Persentase Akses Air Minum Layak Tingkat Dusun di Desa Keposang Tahun 2026",
+      judul: "Peta Sebaran Persentase Rumah Tangga yang Dialiri Listrik Menurut SLS di Desa Keposang Tahun 2026",
       analisis: `
-        <p style="margin: 0 0 10px 0;">Secara umum, masyarakat Desa Keposang telah menikmati pemenuhan kebutuhan dasar air minum yang sangat baik. Sebagian besar wilayah desa telah terjangkau oleh sumber air minum yang layak dan aman untuk konsumsi harian keluarga.</p>
-        <p style="margin: 0 0 10px 0;">Capaian tertinggi diraih oleh <strong>Dusun Keposang</strong> dengan tingkat akses mencapai <strong>95,69%</strong> (222 dari 232 rumah tangga), disusul erat oleh <strong>Dusun Harapan Makmur</strong> sebesar <strong>93,84%</strong> (381 dari 406 rumah tangga) dan <strong>Dusun Harapan Mulia</strong> sebesar <strong>88,64%</strong> (390 dari 440 rumah tangga).</p>
-        <p style="margin: 0;">Meskipun demikian, pemenuhan air bersih ini masih memiliki tantangan di <strong>Dusun Air Bulang</strong> dengan capaian <strong>80,65%</strong> (175 layak dari 217 rumah tangga).</p>
+        <p style="margin: 0 0 10px 0;">Peta koroplet ini menggambarkan sebaran tingkat elektrifikasi (akses aliran listrik PLN baik dengan meteran maupun tanpa meteran) pada tingkat Satuan Lingkungan Setempat (SLS/RT) di Desa Keposang Tahun 2026.</p>
+        <p style="margin: 0 0 10px 0;">Secara keseluruhan desa, tingkat elektrifikasi Desa Keposang telah mencapai taraf yang sangat tinggi yaitu <strong>99,85%</strong> (1.376 dari 1.378 rumah tangga). Dari total 26 RT yang ada, sebanyak <strong>24 RT telah mencapai tingkat elektrifikasi sempurna (100%)</strong> yang ditandai dengan warna biru pada peta.</p>
+        <p style="margin: 0;">Hanya terdapat <strong>2 RT yang masuk kategori Belum 100%</strong> (ditandai dengan warna merah/cokelat), yaitu <strong>RT 001 Dusun Air Bulang</strong> (98,53% atau 1 rumah tangga belum berlistrik) dan <strong>RT 006 Dusun Harapan Makmur</strong> (97,96% atau 1 rumah tangga belum berlistrik). Sementara itu, seluruh RT di Dusun Harapan Mulia dan Dusun Keposang telah teraliri listrik 100%.</p>
       `,
-      linkPeta: "./peta-air-minum-layak/index.html#14/-3.0079/106.5436",
+      linkPeta: "./peta-keposang-listrik-dialiri/index.html#14/-3.0079/106.5436",
       stats: [
-        { dusun: "Dusun Keposang", persen: "95,69%", tag: "Capaian Tertinggi", status: "tinggi" },
-        { dusun: "Dusun Harapan Makmur", persen: "93,84%", tag: "Kategori Sangat Baik", status: "tinggi" },
-        { dusun: "Dusun Harapan Mulia", persen: "88,64%", tag: "Kategori Baik", status: "sedang" },
-        { dusun: "Dusun Air Bulang", persen: "80,65%", tag: "Prioritas Intervensi", status: "perhatian" }
+        { dusun: "Dusun Harapan Mulia", persen: "100,00%", tag: "9 RT Teraliri Sempurna", status: "tinggi" },
+        { dusun: "Dusun Keposang", persen: "100,00%", tag: "4 RT Teraliri Sempurna", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "99,75%", tag: "7 dari 8 RT (100%)", status: "tinggi" },
+        { dusun: "Dusun Air Bulang", persen: "99,54%", tag: "4 dari 5 RT (100%)", status: "tinggi" }
       ]
     },
+
+    // ---------------------------------------------------------
+    // PETA 2: LISTRIK PLN METERAN (LEGALITAS METERAN RESMI)
+    // ---------------------------------------------------------
     peta2: {
-      judul: "Peta Migrasi Seumur Hidup Tingkat Dusun di Desa Keposang",
+      judul: "Peta Sebaran Persentase Listrik PLN Meteran Menurut SLS di Desa Keposang Tahun 2026",
       analisis: `
-        <p style="margin: 0 0 10px 0;">Migrasi Seumur Hidup menggambarkan kondisi perpindahan penduduk di mana tempat tinggal saat pendataan berbeda dengan tempat lahirnya. <strong>Dusun Harapan Mulia</strong> menjadi wilayah dengan konsentrasi penduduk migran tertinggi, yaitu <strong>42,29%</strong> (867 dari 2.050 jiwa).</p>
-        <p style="margin: 0;">Sebaliknya, <strong>Dusun Air Bulang</strong> mencatatkan keterikatan penduduk lokal tertinggi dengan <strong>86,17%</strong> (941 jiwa) merupakan penduduk asli bukan migran.</p>
+        <p style="margin: 0 0 10px 0;">Peta koroplet ini memetakan penetrasi penggunaan listrik resmi PLN ber-meteran (prabayar/pascabayar) pada tingkat Satuan Lingkungan Setempat (SLS/RT) di Desa Keposang Tahun 2026.</p>
+        <p style="margin: 0 0 10px 0;">Secara keseluruhan desa, sebanyak <strong>90,71% rumah tangga (1.250 dari 1.378 RT) telah menggunakan listrik PLN dengan meteran resmi</strong>. Dari total 26 RT di Desa Keposang, sebarannya terbagi seimbang yaitu <strong>13 RT telah mencapai 100% PLN meteran</strong> (warna biru) dan <strong>13 RT masih dalam kategori Belum 100%</strong> (warna merah/cokelat).</p>
+        <p style="margin: 0;">Capaian penetrasi tertinggi berada di <strong>Dusun Air Bulang (97,69%)</strong> dan <strong>Dusun Harapan Makmur (97,05%)</strong>. Sementara itu, wilayah yang membutuhkan perhatian pengembangan legalitas sambungan resmi adalah <strong>Dusun Keposang (80,60%)</strong> dan <strong>Dusun Harapan Mulia (87,38%)</strong>, khususnya pada RT 009 Harapan Mulia (2,04%) dan RT 003 Keposang (46,25%) di mana warga dominan memanfaatkan listrik PLN tanpa meteran.</p>
       `,
-      linkPeta: "./peta-migrasi-seumur-hidup/index.html#14/-3.0079/106.5436",
+      linkPeta: "./peta-keposang-listrik-meteran/index.html#14/-3.0079/106.5436",
       stats: [
-        { dusun: "Dusun Harapan Mulia", persen: "42,29%", tag: "Migran Tertinggi", status: "tinggi" },
-        { dusun: "Dusun Keposang", persen: "35,21%", tag: "Migran Sedang", status: "sedang" },
-        { dusun: "Dusun Harapan Makmur", persen: "23,64%", tag: "Migran Sedang", status: "sedang" },
-        { dusun: "Dusun Air Bulang", persen: "13,83%", tag: "Dominan Warga Lokal", status: "tinggi" }
+        { dusun: "Dusun Air Bulang", persen: "97,69%", tag: "2 RT 100% Meteran", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "97,05%", tag: "5 RT 100% Meteran", status: "tinggi" },
+        { dusun: "Dusun Harapan Mulia", persen: "87,38%", tag: "5 RT 100% Meteran", status: "sedang" },
+        { dusun: "Dusun Keposang", persen: "80,60%", tag: "1 RT 100% Meteran", status: "perhatian" }
       ]
     },
+
+    // ---------------------------------------------------------
+    // PETA 3: AKSES AIR MINUM AMAN (0-80%, 80-90%, 90-100%)
+    // ---------------------------------------------------------
     peta3: {
-      judul: "Peta Rasio Jenis Kelamin Tingkat Dusun di Desa Keposang",
-      analisis: `<p style="margin: 0;">Memetakan rasio jenis kelamin (sex ratio) penduduk antar dusun di Desa Keposang. Nilai rasio di atas 100 menunjukkan bahwa jumlah penduduk laki-laki lebih banyak daripada perempuan. <strong>Dusun Keposang</strong> mencatatkan rasio tertinggi sebesar <strong>116,91</strong>, disusul Dusun Air Bulang (112,45) dan Dusun Harapan Makmur (110,57).</p>`,
-      linkPeta: "./peta-rasio-jenis-kelamin/index.html#14/-3.0079/106.5436",
+      judul: "Peta Sebaran Persentase Akses Air Minum Aman Menurut SLS di Desa Keposang Tahun 2026",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">Peta koroplet ini menggambarkan sebaran pemenuhan akses air minum aman (air layak yang memenuhi kriteria terjangkau, bebas pencemaran, dan tersedia secara berkelanjutan) pada tingkat Satuan Lingkungan Setempat (SLS/RT) di Desa Keposang Tahun 2026.</p>
+        <p style="margin: 0 0 10px 0;">Rata-rata tingkat pemenuhan air minum aman di Desa Keposang telah mencapai <strong>80,33%</strong> (1.107 dari 1.378 rumah tangga). Berdasarkan klasifikasi peta, sebanyak <strong>13 RT telah masuk kategori Sangat Tinggi (90–100%, warna biru)</strong> dan <strong>5 RT berada di kategori Sedang (80–90%, warna kuning)</strong>.</p>
+        <p style="margin: 0;">Adapun <strong>8 RT masih tergolong Kurang (0–80%, warna merah)</strong> yang memerlukan perhatian intervensi kualitas sumber air minum, meliputi 3 RT di Dusun Air Bulang (RT 002, RT 003, RT 005), 3 RT di Dusun Harapan Mulia (RT 006, RT 007, RT 009), serta 2 RT di Dusun Harapan Makmur (RT 001 dan RT 004). Capaian tertinggi dicatatkan oleh <strong>Dusun Keposang (95,26%)</strong> di mana seluruh RT-nya berada pada kategori di atas 80%.</p>
+      `,
+      linkPeta: "./peta-keposang-air-minum-aman/index.html#14/-3.0085/106.5631",
       stats: [
-        { dusun: "Dusun Keposang", persen: "116,91", tag: "Sex Ratio Tertinggi", status: "tinggi" },
-        { dusun: "Dusun Air Bulang", persen: "112,45", tag: "Sex Ratio Tinggi", status: "tinggi" },
-        { dusun: "Dusun Harapan Makmur", persen: "110,57", tag: "Sex Ratio Sedang", status: "sedang" },
-        { dusun: "Dusun Harapan Mulia", persen: "108,00", tag: "Paling Seimbang", status: "sedang" }
+        { dusun: "Dusun Keposang", persen: "95,26%", tag: "3 RT Kategori Biru (90-100%)", status: "tinggi" },
+        { dusun: "Dusun Harapan Mulia", persen: "83,56%", tag: "5 RT Kategori Biru (90-100%)", status: "sedang" },
+        { dusun: "Dusun Harapan Makmur", persen: "79,61%", tag: "4 RT Kategori Biru (90-100%)", status: "sedang" },
+        { dusun: "Dusun Air Bulang", persen: "57,87%", tag: "Prioritas Kualitas Air", status: "perhatian" }
       ]
     },
+
+    // ---------------------------------------------------------
+    // PETA 4: AIR MINUM BUKAN AIR PERMUKAAN (100% BEBAS)
+    // ---------------------------------------------------------
     peta4: {
-      judul: "Peta Rumah Tangga dengan Akses Sanitasi Layak Desa Keposang",
-      analisis: `<p style="margin: 0;"><strong>Dusun Air Bulang</strong> mencatatkan capaian tertinggi sebesar <strong>94,93%</strong> (206 rumah tangga layak), disusul Dusun Harapan Makmur 91,38% dan Dusun Harapan Mulia 88,86%. Sementara Dusun Keposang mencatatkan 82,33%.</p>`,
-      linkPeta: "./peta-sanitasi-layak/index.html#14/-3.0079/106.5436",
+      judul: "Peta Sebaran Persentase Air Minum Bukan Air Permukaan Menurut SLS di Desa Keposang Tahun 2026",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">Peta koroplet ini menggambarkan sebaran penggunaan sumber air minum yang terhindar dari air permukaan langsung (seperti sungai, danau, atau kolam terbuka yang rentan pencemaran) pada tingkat Satuan Lingkungan Setempat (SLS/RT) di Desa Keposang Tahun 2026.</p>
+        <p style="margin: 0 0 10px 0;">Kondisi sanitasi dan kualitas lingkungan sumber air minum di Desa Keposang berada pada taraf <strong>sangat optimal dan sempurna (100,00%)</strong>. Seluruh rumah tangga (1.378 dari 1.378 RT) telah memanfaatkan sumber air tanah yang terlindungi, sumur terbor/tergali, atau jaringan perpipaan.</p>
+        <p style="margin: 0;">Secara spasial, <strong>seluruh 26 RT dari 4 dusun berada pada kategori tertinggi (90–100%, ditandai warna biru penuh)</strong> tanpa ada satu pun wilayah yang tergolong memanfaatkan air permukaan langsung (kategori merah/kuning).</p>
+      `,
+      linkPeta: "./peta-keposang-air-bukan-permukaan/index.html#14/-3.0084/106.5649",
       stats: [
-        { dusun: "Dusun Air Bulang", persen: "94,93%", tag: "Sanitasi Terbaik", status: "tinggi" },
-        { dusun: "Dusun Harapan Makmur", persen: "91,38%", tag: "Sangat Baik", status: "tinggi" },
-        { dusun: "Dusun Harapan Mulia", persen: "88,86%", tag: "Capaian Baik", status: "sedang" },
-        { dusun: "Dusun Keposang", persen: "82,33%", tag: "Fokus Peningkatan", status: "perhatian" }
+        { dusun: "Dusun Harapan Mulia", persen: "100,00%", tag: "9 RT Bebas Air Permukaan", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "100,00%", tag: "8 RT Bebas Air Permukaan", status: "tinggi" },
+        { dusun: "Dusun Air Bulang", persen: "100,00%", tag: "5 RT Bebas Air Permukaan", status: "tinggi" },
+        { dusun: "Dusun Keposang", persen: "100,00%", tag: "4 RT Bebas Air Permukaan", status: "tinggi" }
       ]
     },
+
+    // ---------------------------------------------------------
+    // PETA 5: HUNIAN TIDAK LAYAK (KOMPOSIT KELAYAKAN HUNIAN)
+    // ---------------------------------------------------------
     peta5: {
-      judul: "Peta Persentase Rumah Memenuhi Sufficient Living Space Desa Keposang",
-      analisis: `<p style="margin: 0;"><strong>Dusun Air Bulang</strong> mencatatkan capaian kelayakan hunian tertinggi sebesar <strong>96,31%</strong> (209 layak). Sementara Dusun Harapan Makmur (74,88%) dan Dusun Harapan Mulia (72,95%) memiliki tingkat kepadatan hunian yang lebih tinggi.</p>`,
-      linkPeta: "./peta-sufficient-living-space/index.html#14/-3.0079/106.5436",
+      judul: "Peta Sebaran Persentase Hunian Tidak Layak Menurut SLS di Desa Keposang Tahun 2026",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">Peta koroplet ini menggambarkan sebaran tingkat hunian tidak layak berbasis indikator komposit (gabungan kelayakan kecukupan luas lantai, ketahanan bangunan, akses air minum layak, dan akses sanitasi layak) pada tingkat Satuan Lingkungan Setempat (SLS/RT) di Desa Keposang Tahun 2026.</p>
+        <p style="margin: 0 0 10px 0;">Sesuai definisi komposit baku, suatu rumah tangga dikategorikan menghuni hunian layak apabila <strong>memenuhi ke-4 kriteria kelayakan sekaligus secara bersamaan</strong>. Karena aspek ketahanan bangunan fisik di seluruh wilayah desa belum terpenuhi secara menyeluruh, maka secara statistik komposit <strong>100,00% rumah tangga (1.378 dari 1.378 RT) tercatat berada pada kategori Hunian Tidak Layak</strong>.</p>
+        <p style="margin: 0;">Secara spasial, <strong>seluruh 26 RT dari 4 dusun berada pada interval tertinggi (90–100%, ditandai warna merah penuh)</strong>. Hal ini memberikan petunjuk kebijakan bahwa intervensi perbaikan kualitas rumah di Desa Keposang perlu difokuskan pada penguatan struktur dan ketahanan fisik bangunan pemukiman warga.</p>
+      `,
+      linkPeta: "./peta-keposang-hunian-tidak-layak/index.html#14/-3.0099/106.5536",
       stats: [
-        { dusun: "Dusun Air Bulang", persen: "96,31%", tag: "Ruang Paling Lega", status: "tinggi" },
-        { dusun: "Dusun Keposang", persen: "82,33%", tag: "Cukup Layak", status: "sedang" },
-        { dusun: "Dusun Harapan Makmur", persen: "74,88%", tag: "Cukup Padat", status: "sedang" },
-        { dusun: "Dusun Harapan Mulia", persen: "72,95%", tag: "Hunian Padat", status: "perhatian" }
+        { dusun: "Dusun Harapan Mulia", persen: "100,00%", tag: "9 RT Kategori Komposit", status: "perhatian" },
+        { dusun: "Dusun Harapan Makmur", persen: "100,00%", tag: "8 RT Kategori Komposit", status: "perhatian" },
+        { dusun: "Dusun Air Bulang", persen: "100,00%", tag: "5 RT Kategori Komposit", status: "perhatian" },
+        { dusun: "Dusun Keposang", persen: "100,00%", tag: "4 RT Kategori Komposit", status: "perhatian" }
       ]
     },
+
+    // ---------------------------------------------------------
+    // PETA 6: KETAHANAN BANGUNAN TIDAK LAYAK (FISIK)
+    // ---------------------------------------------------------
     peta6: {
-      judul: "Peta Persentase Rumah Tangga dengan Akses Air Minum Aman Desa Keposang",
-      analisis: `<p style="margin: 0;"><strong>Dusun Keposang</strong> mencatatkan pemenuhan tertinggi sebesar <strong>95,26%</strong>. Sementara <strong>Dusun Air Bulang</strong> memerlukan intervensi prioritas dengan pemenuhan <strong>57,60%</strong>.</p>`,
-      linkPeta: "./peta-air-minum-aman/index.html#14/-3.0267/106.5427",
+      judul: "Peta Sebaran Persentase Ketahanan Bangunan Tidak Layak Menurut SLS di Desa Keposang Tahun 2026",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">Peta koroplet ini memetakan sebaran kelayakan struktur fisik bangunan tempat tinggal (kombinasi bahan utama atap, dinding, dan lantai rumah yang memenuhi standar keselamatan dan ketahanan) pada tingkat Satuan Lingkungan Setempat (SLS/RT) di Desa Keposang Tahun 2026.</p>
+        <p style="margin: 0 0 10px 0;">Secara keseluruhan desa, <strong>100,00% rumah tangga (1.378 dari 1.378 RT) tercatat berada pada kategori Ketahanan Bangunan Tidak Layak</strong>. Hal ini disebabkan sebagian besar material fisik bangunan rumah warga belum memenuhi standar kombinasi tiga elemen dasar secara bersamaan (atap, dinding, dan lantai permanen/layak).</p>
+        <p style="margin: 0;">Secara spasial, <strong>seluruh 26 RT dari 4 dusun berada pada interval tertinggi (90–100%, ditandai warna merah penuh)</strong>. Hasil pendataan spasial ini mengindikasikan perlunya program intervensi prioritas pemerintah desa maupun daerah seperti program Bantuan Stimulan Perumahan Swadaya (BSPS) atau Bedah Rumah untuk meningkatkan kualitas fisik bangunan rumah warga.</p>
+      `,
+      linkPeta: "./peta-keposang-ketahanan-bangunan-tidak-layak/index.html#14/-3.0088/106.5611",
       stats: [
-        { dusun: "Dusun Keposang", persen: "95,26%", tag: "Paling Aman", status: "tinggi" },
-        { dusun: "Dusun Harapan Mulia", persen: "80,91%", tag: "Cukup Aman", status: "sedang" },
-        { dusun: "Dusun Harapan Makmur", persen: "79,56%", tag: "Cukup Aman", status: "sedang" },
-        { dusun: "Dusun Air Bulang", persen: "57,60%", tag: "Prioritas Kualitas", status: "perhatian" }
+        { dusun: "Dusun Harapan Mulia", persen: "100,00%", tag: "9 RT Bangunan Tidak Layak", status: "perhatian" },
+        { dusun: "Dusun Harapan Makmur", persen: "100,00%", tag: "8 RT Bangunan Tidak Layak", status: "perhatian" },
+        { dusun: "Dusun Air Bulang", persen: "100,00%", tag: "5 RT Bangunan Tidak Layak", status: "perhatian" },
+        { dusun: "Dusun Keposang", persen: "100,00%", tag: "4 RT Bangunan Tidak Layak", status: "perhatian" }
       ]
     },
+
+    // ---------------------------------------------------------
+    // PETA 7: AKSES SANITASI LAYAK (19 BIRU, 4 KUNING, 3 MERAH)
+    // ---------------------------------------------------------
     peta7: {
-      judul: "Peta Persentase Elektrifikasi Tingkat Dusun di Desa Keposang",
-      analisis: `<p style="margin: 0;">Tingkat elektrifikasi di Desa Keposang sudah mendekati sempurna. Dusun Harapan Mulia dan Dusun Keposang telah mencapai pemenuhan <strong>100,00%</strong>.</p>`,
-      linkPeta: "./peta-elektrifikasi/index.html#14/-3.0267/106.5427",
+      judul: "Peta Sebaran Persentase Akses Sanitasi Layak Menurut SLS di Desa Keposang Tahun 2026",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">Peta koroplet ini memetakan sebaran tingkat pemenuhan akses fasilitas sanitasi layak (kloset sendiri/bersama dengan leher angsa dan tempat pembuangan akhir septic tank) pada tingkat Satuan Lingkungan Setempat (SLS/RT) di Desa Keposang Tahun 2026.</p>
+        <p style="margin: 0 0 10px 0;">Secara keseluruhan desa, mayoritas rumah tangga telah memiliki akses sanitasi yang sangat baik dengan tingkat capaian sebesar <strong>89,99%</strong> (1.240 dari 1.378 rumah tangga). Berdasarkan klasifikasi peta spasial, sebanyak <strong>19 RT telah mencapai Kategori Sangat Baik (90–100%, warna biru)</strong> dan <strong>4 RT berada pada Kategori Baik (80–90%, warna kuning)</strong>.</p>
+        <p style="margin: 0;">Namun demikian, terdapat <strong>3 RT yang tergolong Perhatian/Kurang (0–80%, warna merah)</strong> yang memerlukan dorongan pembangunan jamban sehat, yaitu <strong>RT 004 Dusun Keposang (30,19%)</strong>, <strong>RT 007 Dusun Harapan Mulia (31,11%)</strong>, dan <strong>RT 005 Dusun Air Bulang (78,57%)</strong>. Capaian dusun tertinggi secara agregat diraih oleh <strong>Dusun Air Bulang (94,91%)</strong> dan <strong>Dusun Harapan Makmur (91,40%)</strong>.</p>
+      `,
+      linkPeta: "./peta-keposang-sanitasi-layak/index.html#14/-3.0093/106.5560",
       stats: [
-        { dusun: "Dusun Harapan Mulia", persen: "100,00%", tag: "Teraliri Sempurna", status: "tinggi" },
-        { dusun: "Dusun Keposang", persen: "100,00%", tag: "Teraliri Sempurna", status: "tinggi" },
-        { dusun: "Dusun Harapan Makmur", persen: "99,75%", tag: "Hampir Sempurna", status: "tinggi" },
-        { dusun: "Dusun Air Bulang", persen: "99,54%", tag: "Hampir Sempurna", status: "tinggi" }
+        { dusun: "Dusun Air Bulang", persen: "94,91%", tag: "4 RT Kategori Biru (90-100%)", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "91,40%", tag: "5 RT Kategori Biru (90-100%)", status: "tinggi" },
+        { dusun: "Dusun Harapan Mulia", persen: "90,25%", tag: "7 RT Kategori Biru (90-100%)", status: "tinggi" },
+        { dusun: "Dusun Keposang", persen: "82,33%", tag: "Prioritas Pembangunan Jamban", status: "perhatian" }
       ]
     },
+
+    // ---------------------------------------------------------
+    // PETA 8: AKSES AIR MINUM LAYAK (17 BIRU, 4 KUNING, 5 MERAH)
+    // ---------------------------------------------------------
     peta8: {
-      judul: "Peta Akses Fasilitas Buang Air Besar (FASBAB) Desa Keposang",
-      analisis: `<p style="margin: 0;">Dusun Harapan Mulia mencatatkan capaian tertinggi sebesar <strong>99,09%</strong>, disusul Dusun Keposang 98,71%, Dusun Harapan Makmur 95,57%, dan Dusun Air Bulang 94,93%.</p>`,
-      linkPeta: "./peta-fasbab/index.html#14/-3.0267/106.5427",
+      judul: "Peta Sebaran Persentase Akses Air Minum Layak Menurut SLS di Desa Keposang Tahun 2026",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">Peta koroplet ini menggambarkan sebaran tingkat pemenuhan akses air minum layak (sumber air utama berasal dari leding, sumur bor/pompa, sumur terlindung, atau mata air terlindung) pada tingkat Satuan Lingkungan Setempat (SLS/RT) di Desa Keposang Tahun 2026.</p>
+        <p style="margin: 0 0 10px 0;">Secara keseluruhan desa, tingkat aksesibilitas air minum layak tergolong sangat baik yaitu mencapai <strong>90,42%</strong> (1.246 dari 1.378 rumah tangga). Berdasarkan sebaran peta spasial, sebanyak <strong>17 RT berada pada Kategori Sangat Baik (90–100%, warna biru)</strong> dan <strong>4 RT tergolong Baik (80–90%, warna kuning)</strong>.</p>
+        <p style="margin: 0;">Sementara itu, terdapat <strong>5 RT yang tergolong Perhatian/Prioritas Intervensi (0–80%, warna merah)</strong>, yaitu RT 003 Air Bulang (53,49%), RT 005 Air Bulang (42,86%), RT 004 Harapan Makmur (75,00%), RT 006 Harapan Mulia (53,33%), dan RT 009 Harapan Mulia (63,27%). Capaian tertinggi per dusun diraih oleh <strong>Dusun Keposang (95,69%)</strong> dan <strong>Dusun Harapan Makmur (93,86%)</strong>.</p>
+      `,
+      linkPeta: "./peta-keposang-air-minum-layak/index.html#14/-3.0096/106.5519",
       stats: [
-        { dusun: "Dusun Harapan Mulia", persen: "99,09%", tag: "Access Rate Tertinggi", status: "tinggi" },
-        { dusun: "Dusun Keposang", persen: "98,71%", tag: "Sangat Baik", status: "tinggi" },
-        { dusun: "Dusun Harapan Makmur", persen: "95,57%", tag: "Baik", status: "tinggi" },
-        { dusun: "Dusun Air Bulang", persen: "94,93%", tag: "Baik", status: "tinggi" }
+        { dusun: "Dusun Keposang", persen: "95,69%", tag: "3 RT Kategori Biru (90-100%)", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "93,86%", tag: "6 RT Kategori Biru (90-100%)", status: "tinggi" },
+        { dusun: "Dusun Harapan Mulia", persen: "89,29%", tag: "6 RT Kategori Biru (90-100%)", status: "sedang" },
+        { dusun: "Dusun Air Bulang", persen: "81,02%", tag: "Prioritas Sarana Air Layak", status: "perhatian" }
       ]
     },
+
+    // ---------------------------------------------------------
+    // PETA 9: MIGRASI SEUMUR HIDUP (12 ORANYE, 9 KREM, 5 UNGU)
+    // ---------------------------------------------------------
     peta9: {
-      judul: "Peta Penggunaan Listrik PLN Meteran Tingkat Dusun Desa Keposang",
-      analisis: `<p style="margin: 0;">Penetrasi listrik PLN meteran tertinggi tercatat di Dusun Air Bulang yaitu <strong>97,69%</strong> dan Dusun Harapan Makmur <strong>97,05%</strong>. Sementara Dusun Keposang tercatat 80,60%.</p>`,
-      linkPeta: "./peta-listrik-meteran/index.html#14/-3.0079/106.5436",
+      judul: "Peta Sebaran Persentase Migrasi Seumur Hidup Menurut SLS di Desa Keposang Tahun 2026",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">Peta koroplet ini menggambarkan sebaran proporsi penduduk migran seumur hidup (penduduk yang kabupaten/kota tempat lahirnya di luar Kabupaten Bangka Selatan) pada tingkat Satuan Lingkungan Setempat (SLS/RT) di Desa Keposang Tahun 2026.</p>
+        <p style="margin: 0 0 10px 0;">Secara keseluruhan desa, sebanyak <strong>30,44% penduduk Desa Keposang (1.665 dari 5.470 jiwa) merupakan migran seumur hidup</strong>. Berdasarkan interval peta spasial, sebanyak <strong>5 RT tergolong Sangat Tinggi (50–75%, warna ungu)</strong>, <strong>9 RT berada pada Kategori Sedang (25–50%, warna krem)</strong>, dan <strong>12 RT berada pada Kategori Rendah (0–25%, warna oranye)</strong>.</p>
+        <p style="margin: 0;">Konsentrasi migran terbesar berada di <strong>Dusun Harapan Mulia (42,29%)</strong> dengan 4 RT masuk kategori warna ungu, yaitu RT 001 (71,89%), RT 008 (61,74%), RT 009 (58,30%), dan RT 007 (53,38%), serta RT 003 Dusun Keposang (68,44%). Sebaliknya, <strong>Dusun Air Bulang (13,83%)</strong> memiliki proporsi warganya yang mayoritas merupakan penduduk asli kelahiran lokal.</p>
+      `,
+      linkPeta: "./peta-keposang-migrasi-seumur-hidup/index.html#14/-3.0085/106.5643",
       stats: [
-        { dusun: "Dusun Air Bulang", persen: "97,69%", tag: "PLN Meteran High", status: "tinggi" },
-        { dusun: "Dusun Harapan Makmur", persen: "97,05%", tag: "PLN Meteran High", status: "tinggi" },
-        { dusun: "Dusun Harapan Mulia", persen: "87,38%", tag: "Sedang", status: "sedang" },
-        { dusun: "Dusun Keposang", persen: "80,60%", tag: "Sedang", status: "sedang" }
+        { dusun: "Dusun Harapan Mulia", persen: "42,29%", tag: "4 RT Kategori Ungu (50-75%)", status: "tinggi" },
+        { dusun: "Dusun Keposang", persen: "35,21%", tag: "1 RT Kategori Ungu (50-75%)", status: "sedang" },
+        { dusun: "Dusun Harapan Makmur", persen: "23,64%", tag: "4 RT Kategori Krem (25-50%)", status: "sedang" },
+        { dusun: "Dusun Air Bulang", persen: "13,83%", tag: "Dominan Warga Kelahiran Lokal", status: "tinggi" }
+      ]
+    },
+
+    // ---------------------------------------------------------
+    // PETA 10: RASIO JENIS KELAMIN / SEX RATIO (20 BIRU, 6 MERAH)
+    // ---------------------------------------------------------
+    peta10: {
+      judul: "Peta Sebaran Rasio Jenis Kelamin Menurut SLS di Desa Keposang Tahun 2026",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">Peta koroplet ini menggambarkan sebaran perbandingan jumlah penduduk laki-laki terhadap 100 penduduk perempuan (Sex Ratio) pada tingkat Satuan Lingkungan Setempat (SLS/RT) di Desa Keposang Tahun 2026.</p>
+        <p style="margin: 0 0 10px 0;">Nilai rasio di atas 100 mengindikasikan populasi laki-laki lebih dominan, sedangkan nilai di bawah 100 menunjukkan populasi perempuan lebih banyak. Secara keseluruhan desa, Rasio Jenis Kelamin Desa Keposang tercatat sebesar <strong>109,26</strong> (2.856 jiwa laki-laki berbanding 2.614 jiwa perempuan).</p>
+        <p style="margin: 0;">Secara spasial, <strong>20 RT tergolong Kategori Dominan Laki-laki (Rasio > 100, warna biru)</strong>, dengan rasio tertinggi berada di RT 006 Harapan Makmur (132,89) dan RT 001 Keposang (125,45). Sementara itu, <strong>6 RT tergolong Kategori Dominan Perempuan (Rasio < 100, warna merah)</strong>, yaitu RT 001 Air Bulang (93,40), RT 003 Harapan Makmur (95,33), RT 005 Harapan Makmur (95,88), RT 007 Harapan Makmur (94,74), RT 003 Harapan Mulia (97,72), dan RT 009 Harapan Mulia (89,52).</p>
+      `,
+      linkPeta: "./peta-keposang-rasio-jenis-kelamin/index.html#14/-3.0089/106.5607",
+      stats: [
+        { dusun: "Dusun Keposang", persen: "116,88", tag: "Seluruh 4 RT Warna Biru (>100)", status: "tinggi" },
+        { dusun: "Dusun Air Bulang", persen: "111,63", tag: "4 RT Biru (>100) & 1 RT Merah (<100)", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "109,69", tag: "5 RT Biru (>100) & 3 RT Merah (<100)", status: "sedang" },
+        { dusun: "Dusun Harapan Mulia", persen: "104,80", tag: "7 RT Biru (>100) & 2 RT Merah (<100)", status: "sedang" }
       ]
     }
   };
 
-  // Inisialisasi TomSelect / Event Listener Change
+  // ---------------------------------------------------------
+  // LOGIKA PANGGIL PETA DENGAN TOMSELECT / EVENT LISTENER
+  // ---------------------------------------------------------
   document.addEventListener("DOMContentLoaded", function() {
     if (window.TomSelect) {
       new TomSelect("#pilihJenisPeta", {
@@ -5336,7 +5426,7 @@
       });
     }
 
-    // MEMANGGIL PETA PERTAMA SECARA OTOMATIS SAAT WEB DIBUKA
+    // Memanggil Peta Pertama (peta1) Secara Otomatis Saat Web Dibuka
     tampilkanPeta("peta1");
   });
 
@@ -5350,19 +5440,19 @@
     document.getElementById("deskripsi-peta").innerHTML = data.analisis || '';
     document.getElementById("frame-peta").src = data.linkPeta || '';
 
-    // Render Kartu Stats
+    // Render Kartu Stats Ringkas
     const statsContainer = document.getElementById("stats-peta-wrapper");
     if (statsContainer) {
       if (data.stats && data.stats.length > 0) {
         statsContainer.innerHTML = data.stats.map(item => {
-          let borderColor = "#10b981"; 
+          let borderColor = "#10b981"; // Hijau (Tinggi)
           let textColor = "#047857";
 
           if (item.status === "sedang") {
-            borderColor = "#f59e0b"; 
+            borderColor = "#f59e0b"; // Kuning (Sedang)
             textColor = "#b45309";
           } else if (item.status === "perhatian") {
-            borderColor = "#ef4444"; 
+            borderColor = "#ef4444"; // Merah (Perhatian/Kurang)
             textColor = "#b91c1c";
           }
 
@@ -5380,6 +5470,7 @@
     }
   }
 </script>
+      
 
       
     <!-- LIBRARY UNTUK FITUR PENCARIAN DROPDOWN (TOM SELECT) -->
