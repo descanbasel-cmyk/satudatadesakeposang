@@ -5297,139 +5297,234 @@
       }, 100);
     </script>
 
-    <!-- Script JavaScript untuk Peta Dinamis -->
-    <script>
-      // DATABASE PETA
-      const databasePeta = {
-        peta1: {
-    judul:
-      "Peta Persentase Akses Air Minum Layak Tingkat Dusun di Desa Keposang Tahun 2026",
-     // Teks Analisis Rapi & Mengalir
-    analisis: `
-      <p style="margin: 0 0 10px 0;">
-        Secara umum, masyarakat Desa Keposang telah menikmati pemenuhan kebutuhan dasar air minum yang sangat baik. Sebagian besar wilayah desa telah terjangkau oleh sumber air minum yang layak dan aman untuk konsumsi harian keluarga.
-      </p>
-      <p style="margin: 0 0 10px 0;">
-        Capaian tertinggi diraih oleh <strong>Dusun Keposang</strong> dengan tingkat akses mencapai <strong>95,69%</strong> (222 dari 232 rumah tangga), disusul erat oleh <strong>Dusun Harapan Makmur</strong> sebesar <strong>93,84%</strong> (381 dari 406 rumah tangga) dan <strong>Dusun Harapan Mulia</strong> sebesar <strong>88,64%</strong> (390 dari 440 rumah tangga). Kebiasaan warga di ketiga wilayah ini dalam memanfaatkan instalasi air teruji menjadi fondasi utamanya.
-      </p>
-      <p style="margin: 0;">
-        Meskipun demikian, pemenuhan air bersih ini masih memiliki tantangan di <strong>Dusun Air Bulang</strong>. Dengan capaian <strong>80,65%</strong> (175 layak dari 217 rumah tangga), wilayah ini masih memiliki 42 keluarga yang belum menjangkau akses air minum layak. Hal ini menjadikan Dusun Air Bulang sebagai prioritas utama bagi pemerintah desa dalam penganggaran sarana air bersih mendatang.
-      </p>
-    `,
-          linkPeta: "./peta-air-minum-layak/index.html#14/-3.0079/106.5436",
-          // Data Ringkas Tambahan di Bawah Teks
-    stats: [
-      { dusun: "Dusun Keposang", persen: "95,69%", tag: "Capaian Tertinggi", status: "tinggi" },
-      { dusun: "Dusun Harapan Makmur", persen: "93,84%", tag: "Kategori Sangat Baik", status: "tinggi" },
-      { dusun: "Dusun Harapan Mulia", persen: "88,64%", tag: "Kategori Baik", status: "sedang" },
-      { dusun: "Dusun Air Bulang", persen: "80,65%", tag: "Prioritas Intervensi", status: "perhatian" }
-    ]
-  },
-  peta2: {
-    judul: "Peta Migrasi Seumur Hidup Tingkat Dusun di Desa Keposang",
-    deskripsi:
-      "Migrasi Seumur Hidup adalah kondisi perpindahan penduduk di mana tempat tinggal seseorang pada saat pendataan/pencatatan berbeda dengan tempat lahirnya. Berdasarkan hasil pendataan Paksian Keposang Tahun 2026, Dusun Harapan Mulia menjadi wilayah dengan konsentrasi penduduk migran seumur hidup paling tinggi, yaitu mencapai 867 jiwa (42,29% dari total 2.050 jiwa), berbanding 1.183 jiwa bukan migran. Dusun Keposang mencatatkan proporsi migran sebesar 35,21% (294 jiwa migran dari total 835 jiwa), sedangkan di Dusun Harapan Makmur terdapat 353 jiwa migran dari total 1.493 jiwa penduduk. Sebaliknya, Dusun Air Bulang mencatatkan keterikatan penduduk lokal tertinggi dengan 941 jiwa (86,17% dari total 1.092 jiwa) merupakan penduduk bukan migran dan hanya 151 jiwa migran.",
-    linkPeta: "./peta-migrasi-seumur-hidup/index.html#14/-3.0079/106.5436",
-  },
-  peta3: {
-    judul: "Peta Rasio Jenis Kelamin Tingkat Dusun di Desa Keposang",
-    deskripsi:
-      "Memetakan rasio jenis kelamin (sex ratio) penduduk antar dusun di Desa Keposang untuk melihat perbandingan jumlah laki-laki dan perempuan pada tahun 2026. Nilai rasio di atas 100 menunjukkan bahwa jumlah penduduk laki-laki lebih banyak daripada perempuan di seluruh dusun. Dusun Keposang mencatatkan rasio tertinggi sebesar 116,91 (484 laki-laki dan 414 perempuan), disusul Dusun Air Bulang sebesar 112,45 (587 laki-laki dan 522 perempuan) serta Dusun Harapan Makmur sebesar 110,57 (795 laki-laki dan 719 perempuan). Sementara itu, Dusun Harapan Mulia memiliki rasio relatif paling seimbang meskipun tetap didominasi laki-laki, yaitu sebesar 108,00 (810 laki-laki dan 750 perempuan).",linkPeta: "./peta-rasio-jenis-kelamin/index.html#14/-3.0079/106.5436",
-  },
-  peta4: {
-    judul: "Peta Rumah Tangga dengan Akses Sanitasi Layak",
-    deskripsi:
-      "Visualisasi spasial yang memetakan persentase rumah tangga yang telah memiliki dan menggunakan fasilitas sanitasi (jamban) yang memenuhi standar kesehatan di tiap dusun Desa Keposang pada tahun 2026. Secara keseluruhan, tingkat kepemilikan sanitasi layak tergolong tinggi. Dusun Air Bulang mencatatkan capaian tertinggi sebesar 94,93% (206 rumah tangga layak, 11 tidak layak), disusul Dusun Harapan Makmur sebesar 91,38% (371 rumah tangga layak, 35 tidak layak) dan Dusun Harapan Mulia sebesar 88,86% (391 rumah tangga layak, 49 tidak layak). Sementara itu, Dusun Keposang mencatatkan persentase terendah sebesar 82,33% (191 rumah tangga layak, 41 tidak layak) sehingga menjadi area fokus peningkatan sanitasi.",
+
+      <!-- Script JavaScript untuk Peta Dinamis -->
+<script>
+  // DATABASE PETA DESA KEPOSANG LENGKAP
+  const databasePeta = {
+    peta1: {
+      judul: "Peta Persentase Akses Air Minum Layak Tingkat Dusun di Desa Keposang Tahun 2026",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">
+          Secara umum, masyarakat Desa Keposang telah menikmati pemenuhan kebutuhan dasar air minum yang sangat baik. Sebagian besar wilayah desa telah terjangkau oleh sumber air minum yang layak dan aman untuk konsumsi harian keluarga.
+        </p>
+        <p style="margin: 0 0 10px 0;">
+          Capaian tertinggi diraih oleh <strong>Dusun Keposang</strong> dengan tingkat akses mencapai <strong>95,69%</strong> (222 dari 232 rumah tangga), disusul erat oleh <strong>Dusun Harapan Makmur</strong> sebesar <strong>93,84%</strong> (381 dari 406 rumah tangga) dan <strong>Dusun Harapan Mulia</strong> sebesar <strong>88,64%</strong> (390 dari 440 rumah tangga).
+        </p>
+        <p style="margin: 0;">
+          Meskipun demikian, pemenuhan air bersih ini masih memiliki tantangan di <strong>Dusun Air Bulang</strong>. Dengan capaian <strong>80,65%</strong> (175 layak dari 217 rumah tangga), wilayah ini masih memiliki 42 keluarga yang belum menjangkau akses air minum layak sehingga menjadi prioritas utama.
+        </p>
+      `,
+      linkPeta: "./peta-air-minum-layak/index.html#14/-3.0079/106.5436",
+      stats: [
+        { dusun: "Dusun Keposang", persen: "95,69%", tag: "Capaian Tertinggi", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "93,84%", tag: "Kategori Sangat Baik", status: "tinggi" },
+        { dusun: "Dusun Harapan Mulia", persen: "88,64%", tag: "Kategori Baik", status: "sedang" },
+        { dusun: "Dusun Air Bulang", persen: "80,65%", tag: "Prioritas Intervensi", status: "perhatian" }
+      ]
+    },
+
+    peta2: {
+      judul: "Peta Migrasi Seumur Hidup Tingkat Dusun di Desa Keposang",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">
+          Migrasi Seumur Hidup menggambarkan kondisi perpindahan penduduk di mana tempat tinggal saat pendataan berbeda dengan tempat lahirnya. Berdasarkan hasil pendataan PAKSIAN Keposang Tahun 2026, <strong>Dusun Harapan Mulia</strong> menjadi wilayah dengan konsentrasi penduduk migran tertinggi, yaitu <strong>42,29%</strong> (867 dari 2.050 jiwa).
+        </p>
+        <p style="margin: 0;">
+          Sementara itu, <strong>Dusun Air Bulang</strong> mencatatkan keterikatan penduduk lokal paling kuat dengan <strong>86,17%</strong> (941 jiwa) merupakan penduduk asli bukan migran.
+        </p>
+      `,
+      linkPeta: "./peta-migrasi-seumur-hidup/index.html#14/-3.0079/106.5436",
+      stats: [
+        { dusun: "Dusun Harapan Mulia", persen: "42,29%", tag: "Migran Tertinggi (867 Jiwa)", status: "tinggi" },
+        { dusun: "Dusun Keposang", persen: "35,21%", tag: "Penduduk Migran (294 Jiwa)", status: "sedang" },
+        { dusun: "Dusun Harapan Makmur", persen: "23,64%", tag: "Penduduk Migran (353 Jiwa)", status: "sedang" },
+        { dusun: "Dusun Air Bulang", persen: "13,83%", tag: "Dominan Warga Lokal (941 Jiwa)", status: "tinggi" }
+      ]
+    },
+
+    peta3: {
+      judul: "Peta Rasio Jenis Kelamin (Sex Ratio) Tingkat Dusun di Desa Keposang",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">
+          Rasio jenis kelamin di seluruh dusun Desa Keposang mencatatkan angka di atas 100, yang menandakan jumlah penduduk laki-laki secara keseluruhan lebih banyak dibandingkan perempuan pada tahun 2026.
+        </p>
+        <p style="margin: 0;">
+          <strong>Dusun Keposang</strong> mencatatkan rasio tertinggi sebesar <strong>116,91</strong> (484 laki-laki vs 414 perempuan), disusul Dusun Air Bulang (112,45) dan Dusun Harapan Makmur (110,57). Sedangkan <strong>Dusun Harapan Mulia</strong> memiliki rasio paling seimbang yaitu <strong>108,00</strong>.
+        </p>
+      `,
+      linkPeta: "./peta-rasio-jenis-kelamin/index.html#14/-3.0079/106.5436",
+      stats: [
+        { dusun: "Dusun Keposang", persen: "116,91", tag: "Sex Ratio Tertinggi", status: "tinggi" },
+        { dusun: "Dusun Air Bulang", persen: "112,45", tag: "Sex Ratio Tinggi", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "110,57", tag: "Sex Ratio Sedang", status: "sedang" },
+        { dusun: "Dusun Harapan Mulia", persen: "108,00", tag: "Paling Seimbang", status: "sedang" }
+      ]
+    },
+
+    peta4: {
+      judul: "Peta Rumah Tangga dengan Akses Sanitasi Layak di Desa Keposang",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">
+          Tingkat kepemilikan sanitasi (jamban sehat) di Desa Keposang tergolong baik secara luas. <strong>Dusun Air Bulang</strong> memimpin capaian tertinggi sebesar <strong>94,93%</strong> (206 layak, 11 tidak layak).
+        </p>
+        <p style="margin: 0;">
+          Sebaliknya, <strong>Dusun Keposang</strong> mencatatkan persentase terendah sebesar <strong>82,33%</strong> (191 layak, 41 tidak layak) sehingga menjadi area fokus peningkatan fasilitas sanitasi warga.
+        </p>
+      `,
       linkPeta: "./peta-sanitasi-layak/index.html#14/-3.0079/106.5436",
-  },
-  peta5: {
-    judul:
-      "Peta Persentase Rumah yang Memenuhi Sufficient Living Space Tingkat Dusun di Desa Keposang",
-    deskripsi:
-      "Visualisasi spasial yang menampilkan proporsi rumah tangga di tiap dusun Desa Keposang yang memiliki kecukupan luas tempat tinggal (sufficient living space >= 7,2 m² per anggota keluarga) sesuai kriteria hunian layak pada tahun 2026. Dusun Air Bulang mencatatkan capaian kelayakan hunian tertinggi sebesar 96,31% (209 rumah tangga layak, 8 tidak layak), disusul Dusun Keposang sebesar 82,33% (191 rumah tangga layak, 41 tidak layak). Sementara itu, Dusun Harapan Makmur dan Dusun Harapan Mulia memiliki proporsi hunian padat/kurang luas yang lumayan tinggi, masing-masing dengan capaian layak sebesar 74,88% (304 layak, 102 tidak layak) dan 72,95% (321 layak, 119 tidak layak).",
+      stats: [
+        { dusun: "Dusun Air Bulang", persen: "94,93%", tag: "Sanitasi Terbaik", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "91,38%", tag: "Sangat Baik", status: "tinggi" },
+        { dusun: "Dusun Harapan Mulia", persen: "88,86%", tag: "Capaian Baik", status: "sedang" },
+        { dusun: "Dusun Keposang", persen: "82,33%", tag: "Fokus Peningkatan", status: "perhatian" }
+      ]
+    },
+
+    peta5: {
+      judul: "Peta Persentase Rumah Memenuhi Sufficient Living Space di Desa Keposang",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">
+          Pengukuran kecukupan luas tempat tinggal (&ge; 7,2 m&sup2; per anggota keluarga) menunjukkan <strong>Dusun Air Bulang</strong> memiliki rasio hunian paling lega/layak yaitu <strong>96,31%</strong> (209 rumah tangga layak).
+        </p>
+        <p style="margin: 0;">
+          Sementara Dusun Harapan Makmur (74,88%) dan Dusun Harapan Mulia (72,95%) mencatatkan tingkat kepadatan hunian yang lebih tinggi, di mana terdapat lebih dari 100 rumah tangga per dusun yang belum memenuhi standar kecukupan luas lantai.
+        </p>
+      `,
       linkPeta: "./peta-sufficient-living-space/index.html#14/-3.0079/106.5436",
-  },
-  peta6: {
-    judul:
-      "Peta Persentase Rumah Tangga dengan Akses Air Minum Aman Tingkat Dusun di Desa Keposang Tahun 2026",
-    deskripsi:
-      "Peta tematik yang menggambarkan tingkat pemenuhan akses air minum aman (memenuhi standar kualitas fisik, mikrobiologi, dan kimia) di setiap dusun Desa Keposang pada tahun 2026. Dusun Keposang mencatatkan pemenuhan tertinggi sebesar 95,26% (221 rumah tangga aman, 11 tidak aman). Disusul Dusun Harapan Mulia sebesar 80,91% (356 aman, 84 tidak aman) dan Dusun Harapan Makmur sebesar 79,56% (323 aman, 83 tidak aman). Sementara itu, Dusun Air Bulang mencatatkan capaian terendah sebesar 57,60% (125 aman, 92 tidak aman) sehingga memerlukan intervensi prioritas untuk peningkatan kualitas sumber air minum.",
-    linkPeta: "./peta-air-minum-aman/index.html#14/-3.0267/106.5427",
-  },
-  peta7: {
-    judul:
-      "Peta Persentase Rumah Tangga Terkoneksi Elektrifikasi Tingkat Dusun di Desa Keposang",
-    deskripsi:
-      "Visualisasi tingkat jangkauan dan pemanfaatan sumber energi listrik untuk penerangan rumah tangga di tiap-tiap dusun wilayah Desa Keposang pada tahun 2026. Secara umum, tingkat elektrifikasi di Desa Keposang sudah sangat tinggi mendekati sempurna. Dusun Harapan Mulia dan Dusun Keposang telah mencapai pemenuhan 100,00%, disusul Dusun Harapan Makmur sebesar 99,75% dan Dusun Air Bulang sebesar 99,54%. Keterjangkauan listrik yang hampir merata ini mendukung produktivitas serta aktivitas kehidupan sehari-hari seluruh warga desa.",
-    linkPeta: "./peta-elektrifikasi/index.html#14/-3.0267/106.5427",
-  },
-  peta8: {
-    judul:
-      "Peta Akses Fasilitas Buang Air Besar (FASBAB) Tingkat Dusun di Desa Keposang",
-    deskripsi:
-      "Memetakan kepemilikan dan penggunaan fasilitas buang air besar (FASBAB) oleh rumah tangga di setiap dusun Desa Keposang pada tahun 2026. Secara umum, kepemilikan jamban/FASBAB di Desa Keposang sangat tinggi. Dusun Harapan Mulia mencatatkan capaian tertinggi sebesar 99,09% (436 rumah tangga memiliki FASBAB), disusul Dusun Keposang sebesar 98,71% (229 rumah tangga) dan Dusun Harapan Makmur sebesar 95,57% (388 rumah tangga). Sementara itu, Dusun Air Bulang mencatatkan persentase sebesar 94,93% (206 rumah tangga).",
-    linkPeta: "./peta-fasbab/index.html#14/-3.0267/106.5427",
-  },
-  peta9: {
-    judul:
-      "Peta Penggunaan Listrik PLN Meteran Tingkat Dusun di Desa Keposang",
-    deskripsi:
-      "	Tingkat penetrasi penerangan PLN bermeteran tertinggi tercatat di Dusun Air Bulang yaitu mencapai 97,69% (211 rumah tangga) dan Dusun Harapan Makmur sebesar 97,05% (395 rumah tangga), disusul oleh Dusun Harapan Mulia sebesar 87,38% (457 rumah tangga) dan Dusun Keposang sebesar 80,60% (187 rumah tangga).",
-    linkPeta: "./peta-listrik-meteran/index.html#14/-3.0079/106.5436",
-  },
-      };
+      stats: [
+        { dusun: "Dusun Air Bulang", persen: "96,31%", tag: "Kecukupan Ruang Terbaik", status: "tinggi" },
+        { dusun: "Dusun Keposang", persen: "82,33%", tag: "Kategori Baik", status: "sedang" },
+        { dusun: "Dusun Harapan Makmur", persen: "74,88%", tag: "Tingkat Kepadatan Sedang", status: "sedang" },
+        { dusun: "Dusun Harapan Mulia", persen: "72,95%", tag: "Hunian Cukup Padat", status: "perhatian" }
+      ]
+    },
 
-      // Inisialisasi Tom Select (Dropdown Pencarian)
-      new TomSelect("#pilihJenisPeta", {
-        create: false,
-        sortField: { field: "text", direction: "asc" },
-        onChange: function (value) {
-          tampilkanPeta(value);
-        },
-      });
+    peta6: {
+      judul: "Peta Persentase Akses Air Minum Aman Tingkat Dusun di Desa Keposang",
+      analisis: `
+        <p style="margin: 0 0 10px 0;">
+          Akses air minum aman (bebas kontaminasi fisik, kimia, & mikrobiologi) paling tinggi dicapai oleh <strong>Dusun Keposang</strong> yaitu sebesar <strong>95,26%</strong> (221 rumah tangga aman).
+        </p>
+        <p style="margin: 0;">
+          Perhatian mendesak diperlukan untuk <strong>Dusun Air Bulang</strong> yang hanya mencatatkan <strong>57,60%</strong> (92 rumah tangga tidak aman), sehingga membutuhkan program penyaringan dan peningkatan sanitasi air minum secara langsung.
+        </p>
+      `,
+      linkPeta: "./peta-air-minum-aman/index.html#14/-3.0267/106.5427",
+      stats: [
+        { dusun: "Dusun Keposang", persen: "95,26%", tag: "Paling Aman", status: "tinggi" },
+        { dusun: "Dusun Harapan Mulia", persen: "80,91%", tag: "Cukup Aman", status: "sedang" },
+        { dusun: "Dusun Harapan Makmur", persen: "79,56%", tag: "Cukup Aman", status: "sedang" },
+        { dusun: "Dusun Air Bulang", persen: "57,60%", tag: "Prioritas Kualitas Air", status: "perhatian" }
+      ]
+    },
 
-      // Fungsi untuk mengubah isi kotak peta dan penjelasan
-      function tampilkanPeta(idPeta) {
-        const data = databasePeta[idPeta];
-        if (!data) return;
+    peta7: {
+      judul: "Peta Persentase Elektrifikasi Tingkat Dusun di Desa Keposang",
+      analisis: `
+        <p style="margin: 0;">
+          Tingkat elektrifikasi penerangan rumah tangga di Desa Keposang sudah sangat memuaskan dan mendekati sempurna. Dusun Harapan Mulia dan Dusun Keposang telah berhasil mencapai keterjangkauan <strong>100,00%</strong>, diikuti oleh Dusun Harapan Makmur (99,75%) dan Dusun Air Bulang (99,54%).
+        </p>
+      `,
+      linkPeta: "./peta-elektrifikasi/index.html#14/-3.0267/106.5427",
+      stats: [
+        { dusun: "Dusun Harapan Mulia", persen: "100,00%", tag: "Teraliri Sempurna", status: "tinggi" },
+        { dusun: "Dusun Keposang", persen: "100,00%", tag: "Teraliri Sempurna", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "99,75%", tag: "Hampir Sempurna", status: "tinggi" },
+        { dusun: "Dusun Air Bulang", persen: "99,54%", tag: "Hampir Sempurna", status: "tinggi" }
+      ]
+    },
 
-        // Tampilkan kotak pembungkus peta
-        document.getElementById("peta-wrapper").style.display = "block";
-        document.getElementById("judul-peta").innerText = data.judul;
+    peta8: {
+      judul: "Peta Akses Fasilitas Buang Air Besar (FASBAB) di Desa Keposang",
+      analisis: `
+        <p style="margin: 0;">
+          Jangkauan kepemilikan sarana FASBAB perorangan/keluarga di Desa Keposang tercatat sangat tinggi secara keseluruhan. Dusun Harapan Mulia memimpin dengan <strong>99,09%</strong>, disusul Dusun Keposang (98,71%), Dusun Harapan Makmur (95,57%), dan Dusun Air Bulang (94,93%).
+        </p>
+      `,
+      linkPeta: "./peta-fasbab/index.html#14/-3.0267/106.5427",
+      stats: [
+        { dusun: "Dusun Harapan Mulia", persen: "99,09%", tag: "Access Rate Tertinggi", status: "tinggi" },
+        { dusun: "Dusun Keposang", persen: "98,71%", tag: "Akses Sangat Baik", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "95,57%", tag: "Akses Baik", status: "tinggi" },
+        { dusun: "Dusun Air Bulang", persen: "94,93%", tag: "Akses Baik", status: "tinggi" }
+      ]
+    },
 
-        // Ganti Teks Judul dan Deskripsi
-        document.getElementById("deskripsi-peta").innerHTML = data.analisis;
-        document.getElementById("frame-peta").src = data.linkPeta;
-        // Render Kartu Sorotan Dusun di Bawah Teks
-  const statsContainer = document.getElementById("stats-peta-wrapper");
-  if (statsContainer && data.stats) {
-    statsContainer.innerHTML = data.stats.map(item => {
-      let borderColor = "#10b981"; // hijau
-      let bgColor = "#ffffff";
-      let textColor = "#047857";
+    peta9: {
+      judul: "Peta Penggunaan Listrik PLN Meteran Tingkat Dusun di Desa Keposang",
+      analisis: `
+        <p style="margin: 0;">
+          Penetrasi sambungan penerangan PLN resmi bermeteran paling tinggi ditemui pada <strong>Dusun Air Bulang</strong> yaitu mencapai <strong>97,69%</strong> (211 rumah tangga) dan <strong>Dusun Harapan Makmur</strong> sebesar <strong>97,05%</strong>. Sementara Dusun Keposang tercatat berada pada tingkat 80,60%.
+        </p>
+      `,
+      linkPeta: "./peta-listrik-meteran/index.html#14/-3.0079/106.5436",
+      stats: [
+        { dusun: "Dusun Air Bulang", persen: "97,69%", tag: "Listrik PLN Meteran", status: "tinggi" },
+        { dusun: "Dusun Harapan Makmur", persen: "97,05%", tag: "Listrik PLN Meteran", status: "tinggi" },
+        { dusun: "Dusun Harapan Mulia", persen: "87,38%", tag: "Penetrasi Sedang", status: "sedang" },
+        { dusun: "Dusun Keposang", persen: "80,60%", tag: "Penetrasi Rendah", status: "sedang" }
+      ]
+    }
+  };
 
-      if (item.status === "sedang") {
-        borderColor = "#f59e0b"; // kuning
-        textColor = "#b45309";
-      } else if (item.status === "perhatian") {
-        borderColor = "#ef4444"; // merah
-        textColor = "#b91c1c";
+  // Inisialisasi Dropdown TomSelect
+  new TomSelect("#pilihJenisPeta", {
+    create: false,
+    sortField: { field: "text", direction: "asc" },
+    onChange: function (value) {
+      tampilkanPeta(value);
+    },
+  });
+
+  // Fungsi sakti pembuka peta & penyaji data
+  function tampilkanPeta(idPeta) {
+    const data = databasePeta[idPeta];
+    if (!data) return;
+
+    // 1. Tampilkan bungkusan peta
+    document.getElementById("peta-wrapper").style.display = "block";
+    document.getElementById("judul-peta").innerText = data.judul;
+
+    // 2. Suntikkan teks analisis & link iframe peta (Aman & Tidak Error)
+    document.getElementById("deskripsi-peta").innerHTML = data.analisis || '';
+    document.getElementById("frame-peta").src = data.linkPeta || '';
+
+    // 3. Render kartu sorotan data dusun di bawah teks
+    const statsContainer = document.getElementById("stats-peta-wrapper");
+    if (statsContainer) {
+      if (data.stats && data.stats.length > 0) {
+        statsContainer.innerHTML = data.stats.map(item => {
+          let borderColor = "#10b981"; // hijau
+          let bgColor = "#ffffff";
+          let textColor = "#047857";
+
+          if (item.status === "sedang") {
+            borderColor = "#f59e0b"; // kuning
+            textColor = "#b45309";
+          } else if (item.status === "perhatian") {
+            borderColor = "#ef4444"; // merah
+            textColor = "#b91c1c";
+          }
+
+          return `
+            <div style="background: ${bgColor}; border: 1px solid #cbd5e1; border-top: 3.5px solid ${borderColor}; padding: 10px 14px; border-radius: 8px;">
+              <div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">${item.dusun}</div>
+              <div style="font-size: 18px; font-weight: 800; color: ${textColor}; margin: 2px 0;">${item.persen}</div>
+              <div style="font-size: 11px; font-weight: 600; color: #475569;">${item.tag}</div>
+            </div>
+          `;
+        }).join('');
+      } else {
+        // Kosongkan jika peta tidak memiliki data stats
+        statsContainer.innerHTML = '';
       }
-
-      return `
-        <div style="background: ${bgColor}; border: 1px solid #cbd5e1; border-top: 3.5px solid ${borderColor}; padding: 10px 14px; border-radius: 8px;">
-          <div style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase;">${item.dusun}</div>
-          <div style="font-size: 18px; font-weight: 800; color: ${textColor}; margin: 2px 0;">${item.persen}</div>
-          <div style="font-size: 11px; font-weight: 600; color: #475569;">${item.tag}</div>
-        </div>
-      `;
-    }).join('');
+    }
   }
-}
-        
+</script>
 
-        
-    </script>
+
+      
     <!-- LIBRARY UNTUK FITUR PENCARIAN DROPDOWN (TOM SELECT) -->
     <link
       href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css"
