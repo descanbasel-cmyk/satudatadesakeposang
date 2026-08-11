@@ -1740,6 +1740,126 @@
     </div>
     <!-- Akhir Halaman Beranda -->
 
+    <!-- POP-UP MODAL DUKUNGAN SENSUS EKONOMI (DENGAN GAMBAR BANNER & LABEL HIMBAUAN) -->
+<div id="modalSensusEkonomi" style="
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 99999;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+">
+  <!-- Kotak Isi Pop-Up -->
+  <div style="
+    background: #ffffff;
+    border-radius: 20px;
+    max-width: 520px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(234, 88, 12, 0.35);
+    position: relative;
+    animation: popupAnim 0.3s ease-out forwards;
+  ">
+    
+    <!-- Tombol Silang (✕) Melayang Kanan Atas -->
+    <button onclick="tutupModalSE()" style="
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 2px solid #ffffff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.2s;
+    " onmouseover="this.style.background='rgba(0,0,0,0.8)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'">
+      ✕
+    </button>
+
+    <!-- BAGIAN GAMBAR BANNER (PNG) -->
+    <div style="width: 100%; max-height: 260px; overflow: hidden; position: relative;">
+      <img src="Kanan.png" alt="Sensus Ekonomi 2026" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+    </div>
+
+    <!-- BADAN ISI PESAN POP-UP -->
+    <div style="padding: 20px 25px 25px 25px; text-align: left; color: #334155; font-size: 14px; line-height: 1.6;">
+      
+      <!-- Label Himbauan Resmi Pemdes -->
+      <div style="margin-bottom: 12px;">
+        <span style="
+          background: #fff7ed;
+          color: #ea580c;
+          border: 1px solid #fdba74;
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          display: inline-block;
+        ">
+          📣 HIMBAUAN RESMI PEMDES
+        </span>
+      </div>
+
+      <p style="margin: 0 0 10px 0;">
+        Seperadik, Yuk... terima kedatangan petugas sensus dengan ramah dan jawab setiap pertanyaan sesuai kondisi yang sebenarnya. Data yang diberikan dijaga kerahasiaannya.
+      </p>
+      
+      <p style="margin: 0 0 15px 0;">
+        Dengan ikut berpartisipasi, kita turut mendukung tersedianya data yang akurat untuk membantu perencanaan dan pembangunan ekonomi Indonesia.
+      </p>
+
+      <!-- Hashtag SE2026 -->
+      <div style="
+        background: #f8fafc;
+        border: 1px dashed #cbd5e1;
+        padding: 8px 12px;
+        border-radius: 8px;
+        color: #c2410c;
+        font-weight: 700;
+        font-size: 12.5px;
+        margin-bottom: 18px;
+        text-align: center;
+      ">
+        #MencatatEkonomiIndonesia &nbsp; #SensusEkonomi2026 &nbsp; #SE2026
+      </div>
+
+      <!-- Tombol Aksi Tutup -->
+      <button onclick="tutupModalSE()" style="
+        width: 100%;
+        background: #f97316;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.35);
+        transition: background 0.2s;
+      " onmouseover="this.style.background='#ea580c'" onmouseout="this.style.background='#f97316'">
+        Siap Sukseskan SE 2026!
+      </button>
+    </div>
+  </div>
+</div>
+
     <!-- SECTION: SEPUTAR DESA CANTIK -->
     <div id="seputar" class="page">
       <!-- 1. APA ITU SDDI (Dengan Ikon Kaca Pembesar Modern) -->
@@ -5960,6 +6080,57 @@ function kirimKeWA(event) {
   toggleInputInstansi();
   closeModal();
 }
+
+    // 1. Fungsi Menutup Pop-Up Modal
+function tutupModalSE() {
+  const modal = document.getElementById("modalSensusEkonomi");
+  if (modal) {
+    modal.style.display = "none";
+  }
+}
+
+// 2. Fungsi Pengecekan Presisi Khusus Menu Beranda
+function cekDanTampilkanModalSE() {
+  const modal = document.getElementById("modalSensusEkonomi");
+  if (!modal) return;
+
+  // Cek apakah halaman Beranda sedang aktif (style display tidak none / punya kelas active)
+  const berandaPage = document.getElementById("beranda");
+  
+  // Ambil hash URL (misal: #beranda, #galeri, dll)
+  const currentHash = window.location.hash;
+
+  // Pop-up HANYA muncul jika URL tanpa hash, URL adalah #beranda, atau elemen beranda dipasang style/class active
+  const isBeranda = (
+    currentHash === "" || 
+    currentHash === "#" || 
+    currentHash === "#beranda" || 
+    (berandaPage && window.getComputedStyle(berandaPage).display !== "none" && !berandaPage.classList.contains("hidden"))
+  );
+
+  // Jika benar di Beranda DAN bukan di menu lain (seperti #galeri)
+  if (isBeranda && currentHash !== "#galeri" && currentHash !== "#peta") {
+    modal.style.display = "flex";
+  } else {
+    modal.style.display = "none";
+  }
+}
+
+// 3. Jalankan pengecekan saat halaman selesai dimuat
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(() => {
+    cekDanTampilkanModalSE();
+  }, 400);
+});
+
+// 4. Jalankan pengecekan saat pengguna mengklik menu/pindah halaman (hashchange)
+window.addEventListener("hashchange", function () {
+  if (window.location.hash === "" || window.location.hash === "#beranda") {
+    cekDanTampilkanModalSE();
+  } else {
+    tutupModalSE(); // Otomatis tutup jika pindah ke menu lain (Galeri, Peta, dll)
+  }
+});
   </script>
       
   </body>
