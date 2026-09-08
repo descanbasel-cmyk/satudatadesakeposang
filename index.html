@@ -1615,6 +1615,7 @@
       href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
   <body>
     <nav>
@@ -1634,6 +1635,9 @@
       <a id="btn-perjalanan" onclick="bukaHalaman('perjalanan')">Perjalanan</a>
       <a id="btn-PPID" onclick="bukaHalaman('PPID')">PPID</a>
       <a id="btn-galeri" onclick="bukaHalaman('galeri')">Galeri</a>
+      <!-- TOMBOL ADMIN DESA -->
+      <a id="btn-admin" onclick="bukaHalaman('admin')" style="background: rgba(255, 255, 255, 0.15); color: #ffffff;">⚙️ Kelola Publikasi</a>
+    </nav>
     </nav>
 
     <!-- BERANDA -->
@@ -2843,7 +2847,7 @@
         </p>
       </div>
 
-      <div class="publikasi-grid">
+      <div class="publikasi-grid" id="wadah-publikasi-dinamis">
         <!-- Item 1: Publikasi A -->
         <div class="publikasi-item">
           <div class="cover-wrapper">
@@ -5012,6 +5016,108 @@
   </script>
 
 </div>
+      <!-- ============================================== -->
+    <!-- SECTION: DASHBOARD ADMIN SUPABASE DESA KEPOSANG-->
+    <!-- ============================================== -->
+    <div id="admin" class="page">
+      <!-- 1. FORM LOGIN ADMIN -->
+      <div id="admin-login-card" class="card" style="max-width: 420px; margin: 40px auto; border-left: 6px solid var(--biru-utama);">
+        <h2 style="text-align: center; margin-bottom: 8px;">🔐 Login Admin Desa</h2>
+        <p style="text-align: center; font-size: 13.5px; color: #64748b; margin-bottom: 25px;">
+          Masuk dengan akun operator desa untuk mengelola katalog publikasi.
+        </p>
+
+        <form onsubmit="handleLoginAdmin(event)">
+          <div class="form-group">
+            <label>Email Admin</label>
+            <input type="email" id="login-email" placeholder="admin@keposang.desa.id" required />
+          </div>
+          <div class="form-group">
+            <label>Kata Sandi</label>
+            <input type="password" id="login-password" placeholder="••••••••" required />
+          </div>
+          <button type="submit" id="btn-login-submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;">
+            Masuk Dashboard
+          </button>
+          <p id="login-error-msg" style="color: #ef4444; font-size: 13px; text-align: center; display: none; margin-top: 12px;"></p>
+        </form>
+      </div>
+
+      <!-- 2. DASHBOARD OPERATOR SETELAH LOGIN -->
+      <div id="admin-panel-card" style="display: none;">
+        <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; border-left: 6px solid #10b981;">
+          <div>
+            <h2 style="margin: 0; font-size: 22px;">Panel Operator Publikasi</h2>
+            <span id="label-user-aktif" style="font-size: 13px; color: #10b981; font-weight: 600;"></span>
+          </div>
+          <button onclick="handleLogoutAdmin()" style="background: #fee2e2; color: #dc2626; border: none; padding: 8px 18px; border-radius: 6px; font-weight: 600; cursor: pointer;">
+            <i class="fas fa-sign-out-alt"></i> Keluar
+          </button>
+        </div>
+
+        <!-- FORM TAMBAH PUBLIKASI -->
+        <div class="card">
+          <h3 style="margin-bottom: 20px; color: var(--biru-gelap);">➕ Tambah Publikasi Baru</h3>
+          <form id="formUploadPublikasi" onsubmit="handleTambahPublikasi(event)">
+            <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label>Judul Publikasi *</label>
+                <input type="text" id="input-judul" placeholder="Contoh: Publikasi PAKSIAN Keposang 2026" required />
+              </div>
+              <div class="form-group">
+                <label>Tahun Terbit *</label>
+                <input type="text" id="input-tahun" placeholder="2026" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Deskripsi / Ringkasan Dokumen *</label>
+              <textarea id="input-deskripsi" placeholder="Tuliskan ringkasan isi buku/publikasi..." required></textarea>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px;">
+              <div class="form-group">
+                <label>Pilih File Cover (Gambar JPG/PNG) *</label>
+                <input type="file" id="file-cover" accept="image/*" required />
+              </div>
+              <div class="form-group">
+                <label>Pilih File Dokumen (PDF) *</label>
+                <input type="file" id="file-pdf" accept="application/pdf" required />
+              </div>
+              <div class="form-group">
+                <label>Link Flipbook FlipHTML5 (Opsional)</label>
+                <input type="url" id="input-preview" placeholder="https://online.fliphtml5.com/..." />
+              </div>
+            </div>
+
+            <div style="margin-top: 15px; display: flex; align-items: center; gap: 15px;">
+              <button type="submit" id="btn-upload-submit" class="btn-primary">
+                🚀 Unggah & Terbitkan ke Web
+              </button>
+              <span id="upload-status" style="font-size: 13.5px; color: #0284c7; font-weight: 600; display: none;"></span>
+            </div>
+          </form>
+        </div>
+
+        <!-- TABEL MANAJEMEN PUBLIKASI -->
+        <div class="card">
+          <h3 style="margin-bottom: 15px; color: var(--biru-gelap);">📋 Daftar Publikasi Aktif</h3>
+          <div style="overflow-x: auto;">
+            <table class="pure-table" style="width: 100%;">
+              <thead>
+                <tr>
+                  <th style="width: 80px;">Cover</th>
+                  <th>Judul Publikasi</th>
+                  <th>Tahun</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tabel-admin-publikasi"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -6134,192 +6240,229 @@ window.addEventListener("hashchange", function () {
   </script>
 
 
-    <script>
-      // ==============================================
-      // KONFIGURASI SPREADSHEET BARU: PAKSIAN_KEPOSANG
-      // ==============================================
-      const SPREADSHEET_ID_PUB = "AKfycbwZx404MPFvtBGeNHvRCDvk-NooMsA14CXVcTQk920SDk_MKPLVTMoj3FU0mlVMHU8rHA"; // ID Spreadsheet baru kamu
-      const SHEET_TAB_PUB = "Publikasi";
+    
+      <script>
+     // ==============================================
+    // KONFIGURASI SUPABASE DESA KEPOSANG
+    // ==============================================
+    const SUPABASE_URL = "https://orihptcrcanqecguvcjt.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_oq3y1aQtY91Sx3_0Nzjqyw_PnG2AGEK";
 
-      // Ganti teks di bawah dengan link URL Web App hasil Deploy Apps Script dari spreadsheet baru:
-      const SCRIPT_URL_PUB = "https://script.google.com/macros/s/AKfycb.../exec";
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-      // Sandi akses admin untuk operator desa
-      const SANDI_ADMIN_DESA = "keposang2026";
-      // --- FUNGSI PARSER CSV (Aman dari tanda koma di dalam teks/deskripsi) ---
-function parseCsvLine(text) {
-  const result = [];
-  let cur = '';
-  let inQuotes = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (c === '"') {
-      if (inQuotes && text[i + 1] === '"') {
-        cur += '"';
-        i++;
-      } else {
-        inQuotes = !inQuotes;
-      }
-    } else if (c === ',' && !inQuotes) {
-      result.push(cur.trim());
-      cur = '';
-    } else {
-      cur += c;
-    }
-  }
-  result.push(cur.trim());
-  return result;
-}
-
-
-// --- 1. AMBIL DATA DARI GOOGLE SHEETS & TAMPILKAN DI WEBSITE ---
-function muatKatalogPublikasi() {
-  const urlCSV = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID_PUB}/gviz/tq?tqx=out:csv&sheet=${SHEET_TAB_PUB}`;
-
-  fetch(urlCSV)
-    .then((res) => {
-      if (!res.ok) throw new Error("Gagal mengambil data sheet");
-      return res.text();
-    })
-    .then((csvText) => {
-      const lines = csvText.trim().split(/\r?\n/).filter(line => line.trim() !== "");
+    // 1. Ambil Publikasi & Tampilkan di Halaman Depan
+    async function fetchPublikasi() {
       const container = document.getElementById("wadah-publikasi-dinamis");
       if (!container) return;
 
-      // Baris 0 adalah Header: judul, tahun, deskripsi, url_cover, url_preview, url_pdf
-      if (lines.length <= 1) {
-        container.innerHTML = `<p style="text-align: center; grid-column: 1/-1; color: #64748b; padding: 30px;">Belum ada publikasi yang ditambahkan di spreadsheet.</p>`;
+      const { data, error } = await sb
+        .from("publikasi")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Error:", error);
+        container.innerHTML = `<p style="text-align: center; grid-column: 1/-1; color: red;">Gagal memuat katalog publikasi.</p>`;
         return;
       }
 
-      let htmlCards = "";
-      // Loop dari baris ke-1 (melewati baris header)
-      for (let i = 1; i < lines.length; i++) {
-        const cols = parseCsvLine(lines[i]);
-        const judul = cols[0] || "";
-        const tahun = cols[1] || "";
-        const deskripsi = cols[2] || "";
-        const cover = cols[3] || "CoverPaksianKeposang.png";
-        const previewUrl = cols[4] || "";
-        const pdfUrl = cols[5] || "#";
+      if (!data || data.length === 0) {
+        container.innerHTML = `<p style="text-align: center; grid-column: 1/-1; color: #64748b;">Belum ada publikasi yang diterbitkan.</p>`;
+        return;
+      }
 
-        if (!judul) continue;
-
-        htmlCards += `
-          <div class="publikasi-item">
-            <div class="cover-wrapper">
-              <img src="${cover}" alt="Cover ${judul}" onerror="this.src='CoverPaksianKeposang.png'" />
-              <div class="overlay-baca">
-                <span style="color: white; font-weight: bold">E-Book</span>
-              </div>
-            </div>
-            <div class="info-publikasi">
-              <h4>${judul}</h4>
-              <p class="deskripsi-teks" style="font-size: 13.5px; color: #57606f; line-height: 1.6; margin-bottom: 15px;">
-                ${deskripsi}
-              </p>
-              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center;">
-                ${previewUrl ? `
-                  <button onclick="toggleFullPreview(this, '${previewUrl}')" class="toggle-deskripsi" style="background: #e0f2fe; color: #0284c7; padding: 8px 14px; border-radius: 6px; border: none; font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; text-decoration: none;">
-                    <i class="fas fa-book-open"></i> Lihat Preview
-                  </button>
-                ` : ''}
-                <a href="${pdfUrl}" download target="_blank" class="btn-unduh" style="padding: 8px 14px; font-size: 13px;">
-                  📥 Unduh PDF
-                </a>
-              </div>
+      container.innerHTML = data.map((item) => `
+        <div class="publikasi-item">
+          <div class="cover-wrapper">
+            <img src="${item.url_cover}" alt="Cover ${item.judul}" />
+            <div class="overlay-baca">
+              <span style="color: white; font-weight: bold">E-Book</span>
             </div>
           </div>
-        `;
+          <div class="info-publikasi">
+            <h4>${item.judul} (${item.tahun})</h4>
+            <p class="deskripsi-teks" style="font-size: 13.5px; color: #57606f; line-height: 1.6; margin-bottom: 15px;">
+              ${item.deskripsi}
+            </p>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center;">
+              ${item.url_preview ? `
+                <button onclick="toggleFullPreview(this, '${item.url_preview}')" class="toggle-deskripsi" style="background: #e0f2fe; color: #0284c7; padding: 8px 14px; border-radius: 6px; border: none; font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; text-decoration: none;">
+                  <i class="fas fa-book-open"></i> Lihat Preview
+                </button>
+              ` : ''}
+              <a href="${item.url_pdf}" target="_blank" download class="btn-unduh" style="padding: 8px 14px; font-size: 13px">
+                📥 Unduh PDF
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // 2. Cek Sesi Login Admin
+    async function checkAuthAdmin() {
+      const { data: { session } } = await sb.auth.getSession();
+      const loginCard = document.getElementById("admin-login-card");
+      const panelCard = document.getElementById("admin-panel-card");
+      const labelUser = document.getElementById("label-user-aktif");
+
+      if (session) {
+        if (loginCard) loginCard.style.display = "none";
+        if (panelCard) panelCard.style.display = "block";
+        if (labelUser) labelUser.innerText = `● Operator: ${session.user.email}`;
+        renderTabelAdmin();
+      } else {
+        if (loginCard) loginCard.style.display = "block";
+        if (panelCard) panelCard.style.display = "none";
+      }
+    }
+
+    // 3. Fungsi Login Admin
+    async function handleLoginAdmin(e) {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+      const btn = document.getElementById("btn-login-submit");
+      const err = document.getElementById("login-error-msg");
+
+      btn.disabled = true;
+      btn.innerText = "Memverifikasi...";
+      err.style.display = "none";
+
+      const { error } = await sb.auth.signInWithPassword({ email, password });
+
+      if (error) {
+        err.innerText = "Email atau sandi tidak sesuai.";
+        err.style.display = "block";
+        btn.disabled = false;
+        btn.innerText = "Masuk Dashboard";
+      } else {
+        btn.disabled = false;
+        btn.innerText = "Masuk Dashboard";
+        checkAuthAdmin();
+      }
+    }
+
+    // 4. Fungsi Logout Admin
+    async function handleLogoutAdmin() {
+      await sb.auth.signOut();
+      checkAuthAdmin();
+      bukaHalaman("beranda");
+    }
+
+    // 5. Upload File Cover & PDF ke Storage lalu Simpan ke Database
+    async function handleTambahPublikasi(e) {
+      e.preventDefault();
+
+      const fileCover = document.getElementById("file-cover").files[0];
+      const filePdf = document.getElementById("file-pdf").files[0];
+      const statusLabel = document.getElementById("upload-status");
+      const btnSubmit = document.getElementById("btn-upload-submit");
+
+      btnSubmit.disabled = true;
+      statusLabel.style.display = "inline";
+      statusLabel.innerText = "Mengunggah cover & PDF...";
+
+      try {
+        const timestamp = Date.now();
+        const cleanCoverName = fileCover.name.replace(/[^a-zA-Z0-9.]/g, "_");
+        const cleanPdfName = filePdf.name.replace(/[^a-zA-Z0-9.]/g, "_");
+
+        const coverPath = `covers/${timestamp}_${cleanCoverName}`;
+        const pdfPath = `pdfs/${timestamp}_${cleanPdfName}`;
+
+        // Upload Cover ke Bucket
+        const { error: errCover } = await sb.storage
+          .from("publikasi-files")
+          .upload(coverPath, fileCover);
+        if (errCover) throw errCover;
+
+        // Upload PDF ke Bucket
+        const { error: errPdf } = await sb.storage
+          .from("publikasi-files")
+          .upload(pdfPath, filePdf);
+        if (errPdf) throw errPdf;
+
+        // Dapatkan URL Publik File
+        const { data: coverUrl } = sb.storage.from("publikasi-files").getPublicUrl(coverPath);
+        const { data: pdfUrl } = sb.storage.from("publikasi-files").getPublicUrl(pdfPath);
+
+        statusLabel.innerText = "Menyimpan ke katalog publikasi...";
+
+        // Masukkan record ke tabel database
+        const { error: errInsert } = await sb.from("publikasi").insert([
+          {
+            judul: document.getElementById("input-judul").value,
+            tahun: document.getElementById("input-tahun").value,
+            deskripsi: document.getElementById("input-deskripsi").value,
+            url_cover: coverUrl.publicUrl,
+            url_pdf: pdfUrl.publicUrl,
+            url_preview: document.getElementById("input-preview").value || null,
+          },
+        ]);
+
+        if (errInsert) throw errInsert;
+
+        alert("Berhasil! Publikasi baru telah terbit di website.");
+        document.getElementById("formUploadPublikasi").reset();
+        fetchPublikasi();
+        renderTabelAdmin();
+      } catch (err) {
+        console.error(err);
+        alert("Gagal mengunggah: " + err.message);
+      } finally {
+        btnSubmit.disabled = false;
+        statusLabel.style.display = "none";
+      }
+    }
+
+    // 6. Render Tabel Admin (Daftar & Hapus)
+    async function renderTabelAdmin() {
+      const tbody = document.getElementById("tabel-admin-publikasi");
+      if (!tbody) return;
+
+      const { data } = await sb
+        .from("publikasi")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (!data || data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #64748b;">Belum ada publikasi terbit.</td></tr>`;
+        return;
       }
 
-      container.innerHTML = htmlCards;
-    })
-    .catch((err) => {
-      console.error("Gagal load publikasi:", err);
-      const container = document.getElementById("wadah-publikasi-dinamis");
-      if (container) {
-        container.innerHTML = `
-          <div style="text-align: center; grid-column: 1/-1; color: #ef4444; padding: 20px;">
-            <p><strong>Gagal memuat publikasi dari Spreadsheet.</strong></p>
-            <p style="font-size: 13px; color: #64748b;">Pastikan akses sheet sudah diatur ke <em>"Anyone with the link (Viewer)"</em> dan nama tab persis <strong>Publikasi</strong>.</p>
-          </div>`;
+      tbody.innerHTML = data.map((p) => `
+        <tr>
+          <td><img src="${p.url_cover}" style="width: 40px; height: 50px; object-fit: cover; border-radius: 4px;" /></td>
+          <td style="text-align: left; font-weight: 600;">${p.judul}</td>
+          <td>${p.tahun}</td>
+          <td>
+            <button onclick="hapusPublikasi('${p.id}')" style="background: #fee2e2; color: #dc2626; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer;">
+              Hapus
+            </button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    // 7. Hapus Publikasi
+    async function hapusPublikasi(id) {
+      if (!confirm("Apakah Anda yakin ingin menghapus publikasi ini?")) return;
+
+      const { error } = await sb.from("publikasi").delete().eq("id", id);
+      if (error) {
+        alert("Gagal menghapus: " + error.message);
+      } else {
+        fetchPublikasi();
+        renderTabelAdmin();
       }
+    }
+
+    // Jalankan otomatis saat web dibuka
+    document.addEventListener("DOMContentLoaded", () => {
+      fetchPublikasi();
+      checkAuthAdmin();
     });
-}
-
-
-// --- 2. SISTEM LOGIN / LOGOUT ADMIN DESA ---
-function verifikasiLoginAdmin() {
-  const pinInput = document.getElementById("admin-pin-input").value;
-  const errorMsg = document.getElementById("pesan-error-login");
-
-  if (pinInput === SANDI_ADMIN_DESA) {
-    document.getElementById("admin-login-card").style.display = "none";
-    document.getElementById("admin-panel-card").style.display = "block";
-    errorMsg.style.display = "none";
-  } else {
-    errorMsg.style.display = "block";
-  }
-}
-
-function logoutAdmin() {
-  document.getElementById("admin-pin-input").value = "";
-  document.getElementById("admin-login-card").style.display = "block";
-  document.getElementById("admin-panel-card").style.display = "none";
-  bukaHalaman("beranda");
-}
-
-
-// --- 3. PROSES SIMPAN PUBLIKASI DARI FORM KE GOOGLE SHEETS ---
-function simpanPublikasiBaru(e) {
-  e.preventDefault();
-
-  const payload = {
-    judul: document.getElementById("pub-judul").value,
-    tahun: document.getElementById("pub-tahun").value,
-    deskripsi: document.getElementById("pub-deskripsi").value,
-    url_cover: document.getElementById("pub-cover").value,
-    url_preview: document.getElementById("pub-preview").value,
-    url_pdf: document.getElementById("pub-pdf").value
-  };
-
-  const btnSubmit = document.getElementById("btn-submit-pub");
-  const spinner = document.getElementById("loading-spinner");
-
-  btnSubmit.disabled = true;
-  spinner.style.display = "inline";
-
-  fetch(SCRIPT_URL_PUB, {
-    method: "POST",
-    mode: "no-cors", // Memotong restriksi CORS dari browser
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  })
-  .then(() => {
-    alert("Berhasil! Publikasi baru telah ditambahkan ke data Google Sheets Desa.");
-    document.getElementById("formTambahPublikasi").reset();
-    btnSubmit.disabled = false;
-    spinner.style.display = "none";
-
-    // Beri jeda tipis 1 detik agar Google Sheets selesai menulis, lalu refresh katalog publikasi
-    setTimeout(() => {
-      muatKatalogPublikasi();
-      bukaHalaman("publikasi");
-    }, 1000);
-  })
-  .catch((err) => {
-    console.error(err);
-    alert("Terjadi kendala saat menyimpan. Silakan coba kembali.");
-    btnSubmit.disabled = false;
-    spinner.style.display = "none";
-  });
-}
-
-// Panggil muatKatalogPublikasi saat pertama kali web dibuka
-document.addEventListener("DOMContentLoaded", function() {
-  muatKatalogPublikasi();
-});
     </script>
   </body>
 </html>
