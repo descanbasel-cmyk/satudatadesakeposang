@@ -6305,7 +6305,7 @@ function closeModalPanduanSheet() {
   }
 }
 
-// Tutup modal secara otomatis jika pengguna mengklik area luar kotak pop-up
+// Tutup otomatis jika area luar pop-up diklik
 window.addEventListener('click', function(event) {
   const modal = document.getElementById('modalPanduanSheet');
   if (event.target === modal) {
@@ -6340,10 +6340,11 @@ function togglePanelAdmin(panelId) {
 }
   </script>
 
+
       <!-- ============================================== -->
-    <!-- TARUH KODE MODAL INI DI PALING BAWAH (SEBELUM </body>) -->
+    <!-- MODAL POPUP PANDUAN DAFTAR SHEET (TARUH DI LUAR, SEBELUM </body>) -->
     <!-- ============================================== -->
-    <div class="modal-overlay" id="modalPanduanSheet" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(6px); justify-content: center; align-items: center; z-index: 3000; padding: 15px;">
+    <div class="modal-overlay" id="modalPanduanSheet" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(6px); justify-content: center; align-items: center; z-index: 9999; padding: 15px;">
       <div class="modal-content" style="background: white; padding: 30px; border-radius: 16px; width: 100%; max-width: 600px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25); position: relative; max-height: 85vh; overflow-y: auto;">
         
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #f1f5f9;">
@@ -6388,6 +6389,6 @@ function togglePanelAdmin(panelId) {
         </div>
       </div>
     </div>
-    <!-- END MODAL POPUP -->
+  
   </body>
 </html>
