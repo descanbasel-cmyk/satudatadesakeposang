@@ -5042,7 +5042,10 @@
             </div>
             <ol style="margin: 0; padding-left: 18px; color: #334155; font-size: 12.5px; line-height: 1.6;">
               <li>Inputkan data sesuai dengan letak sheetnya.</li>
-              <li>Pastikan data yang diinputkan berbentuk Teks bukan angka agar terbaca oleh sistem.</li>
+              <li>
+                <i class="fas fa-exclamation-triangle" style="color: #f59e0b; margin-right: 3px;"></i> 
+                Pastikan data yang diinputkan berbentuk <strong>Teks</strong> bukan angka agar terbaca oleh sistem.
+              </li>
               <li>Perbarui Judul Data.</li>
               <li>Perbarui Sumber dan Catatan Data bila perlu.</li>
             </ol>
@@ -6289,30 +6292,7 @@ function logoutAdmin() {
   bukaHalaman('beranda'); // Kembali ke beranda saat keluar
 }
 
-// Fungsi Membuka Modal Panduan Daftar Sheet
-function openModalPanduanSheet() {
-  const modal = document.getElementById('modalPanduanSheet');
-  if (modal) {
-    modal.style.display = 'flex';
-  }
-}
-
-// Fungsi Menutup Modal Panduan Daftar Sheet
-function closeModalPanduanSheet() {
-  const modal = document.getElementById('modalPanduanSheet');
-  if (modal) {
-    modal.style.display = 'none';
-  }
-}
-
-// Tutup otomatis jika area luar pop-up diklik
-window.addEventListener('click', function(event) {
-  const modal = document.getElementById('modalPanduanSheet');
-  if (event.target === modal) {
-    closeModalPanduanSheet();
-  }
-});
-    /* ==============================================
+/* ==============================================
    LOGIKA TOMBOL INTERAKTIF PANEL ADMIN
    ============================================== */
 function togglePanelAdmin(panelId) {
@@ -6338,57 +6318,36 @@ function togglePanelAdmin(panelId) {
     }
   }
 }
+
+/* ==============================================
+   LOGIKA MODAL PANDUAN DAFTAR SHEET
+   ============================================== */
+
+// Fungsi Membuka Modal Panduan Daftar Sheet
+function openModalPanduanSheet() {
+  const modal = document.getElementById('modalPanduanSheet');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+}
+
+// Fungsi Menutup Modal Panduan Daftar Sheet
+function closeModalPanduanSheet() {
+  const modal = document.getElementById('modalPanduanSheet');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+// Tutup otomatis jika area luar pop-up diklik
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('modalPanduanSheet');
+  if (event.target === modal) {
+    closeModalPanduanSheet();
+  }
+});
   </script>
 
-
-      <!-- ============================================== -->
-    <!-- MODAL POPUP PANDUAN DAFTAR SHEET (TARUH DI LUAR, SEBELUM </body>) -->
-    <!-- ============================================== -->
-    <div class="modal-overlay" id="modalPanduanSheet" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(6px); justify-content: center; align-items: center; z-index: 9999; padding: 15px;">
-      <div class="modal-content" style="background: white; padding: 30px; border-radius: 16px; width: 100%; max-width: 600px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25); position: relative; max-height: 85vh; overflow-y: auto;">
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #f1f5f9;">
-          <h3 style="margin: 0; color: var(--biru-gelap); font-weight: 800; font-size: 19px;">
-            <i class="fas fa-list-ol" style="color: var(--biru-utama); margin-right: 8px;"></i> Panduan Letak Sheet Administrasi Desa
-          </h3>
-          <button onclick="closeModalPanduanSheet()" style="background: #f1f5f9; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; color: #64748b; display: flex; align-items: center; justify-content: center;">&times;</button>
-        </div>
-
-        <div style="text-align: left; font-size: 13.5px; color: #334155; line-height: 1.6;">
-          <p style="margin-bottom: 15px; color: #64748b;">
-            Berikut adalah rincian letak sheet di Google Sheets administrasi agar sinkron dengan sistem portal:
-          </p>
-
-          <ul style="padding-left: 0; list-style: none; margin: 0;">
-            <li style="margin-bottom: 10px; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border-left: 4px solid var(--biru-utama);">
-              <strong style="color: var(--biru-gelap);">Sheet1:</strong> Perkembangan Jumlah Keluarga di Desa Keposang
-            </li>
-            <li style="margin-bottom: 10px; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border-left: 4px solid var(--biru-utama);">
-              <strong style="color: var(--biru-gelap);">Sheet2:</strong> Perkembangan Jumlah Penduduk di Desa Keposang
-            </li>
-            <li style="margin-bottom: 10px; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border-left: 4px solid var(--biru-utama);">
-              <strong style="color: var(--biru-gelap);">Sheet3:</strong> Perkembangan Jumlah Penduduk Laki-Laki di Desa Keposang
-            </li>
-            <li style="margin-bottom: 10px; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border-left: 4px solid var(--biru-utama);">
-              <strong style="color: var(--biru-gelap);">Sheet4:</strong> Perkembangan Jumlah Penduduk Perempuan di Desa Keposang
-            </li>
-            <li style="margin-bottom: 10px; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border-left: 4px solid var(--biru-utama);">
-              <strong style="color: var(--biru-gelap);">Sheet5:</strong> Perkembangan Jumlah Bumbung Rumah di Desa Keposang
-            </li>
-            <li style="margin-bottom: 10px; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border-left: 4px solid var(--biru-utama);">
-              <strong style="color: var(--biru-gelap);">Sheet6:</strong> Perkembangan Jumlah Penduduk Pindah dari Desa Keposang
-            </li>
-            <li style="margin-bottom: 10px; background: #f8fafc; padding: 10px 14px; border-radius: 8px; border-left: 4px solid var(--biru-utama);">
-              <strong style="color: var(--biru-gelap);">Sheet7:</strong> Perkembangan Jumlah Penduduk Datang ke Desa Keposang
-            </li>
-          </ul>
-        </div>
-
-        <div style="margin-top: 25px; text-align: right;">
-          <button onclick="closeModalPanduanSheet()" class="btn-primary" style="padding: 10px 20px; font-size: 13px; border-radius: 8px;">Tutup Panduan</button>
-        </div>
-      </div>
-    </div>
   
   </body>
 </html>
