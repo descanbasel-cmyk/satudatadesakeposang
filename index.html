@@ -6132,6 +6132,194 @@ window.addEventListener("hashchange", function () {
   }
 });
   </script>
-      
+
+
+    <script>
+      // ==============================================
+      // KONFIGURASI SPREADSHEET BARU: PAKSIAN_KEPOSANG
+      // ==============================================
+      const SPREADSHEET_ID_PUB = "AKfycbwZx404MPFvtBGeNHvRCDvk-NooMsA14CXVcTQk920SDk_MKPLVTMoj3FU0mlVMHU8rHA"; // ID Spreadsheet baru kamu
+      const SHEET_TAB_PUB = "Publikasi";
+
+      // Ganti teks di bawah dengan link URL Web App hasil Deploy Apps Script dari spreadsheet baru:
+      const SCRIPT_URL_PUB = "https://script.google.com/macros/s/AKfycb.../exec";
+
+      // Sandi akses admin untuk operator desa
+      const SANDI_ADMIN_DESA = "keposang2026";
+      // --- FUNGSI PARSER CSV (Aman dari tanda koma di dalam teks/deskripsi) ---
+function parseCsvLine(text) {
+  const result = [];
+  let cur = '';
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (c === '"') {
+      if (inQuotes && text[i + 1] === '"') {
+        cur += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (c === ',' && !inQuotes) {
+      result.push(cur.trim());
+      cur = '';
+    } else {
+      cur += c;
+    }
+  }
+  result.push(cur.trim());
+  return result;
+}
+
+
+// --- 1. AMBIL DATA DARI GOOGLE SHEETS & TAMPILKAN DI WEBSITE ---
+function muatKatalogPublikasi() {
+  const urlCSV = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID_PUB}/gviz/tq?tqx=out:csv&sheet=${SHEET_TAB_PUB}`;
+
+  fetch(urlCSV)
+    .then((res) => {
+      if (!res.ok) throw new Error("Gagal mengambil data sheet");
+      return res.text();
+    })
+    .then((csvText) => {
+      const lines = csvText.trim().split(/\r?\n/).filter(line => line.trim() !== "");
+      const container = document.getElementById("wadah-publikasi-dinamis");
+      if (!container) return;
+
+      // Baris 0 adalah Header: judul, tahun, deskripsi, url_cover, url_preview, url_pdf
+      if (lines.length <= 1) {
+        container.innerHTML = `<p style="text-align: center; grid-column: 1/-1; color: #64748b; padding: 30px;">Belum ada publikasi yang ditambahkan di spreadsheet.</p>`;
+        return;
+      }
+
+      let htmlCards = "";
+      // Loop dari baris ke-1 (melewati baris header)
+      for (let i = 1; i < lines.length; i++) {
+        const cols = parseCsvLine(lines[i]);
+        const judul = cols[0] || "";
+        const tahun = cols[1] || "";
+        const deskripsi = cols[2] || "";
+        const cover = cols[3] || "CoverPaksianKeposang.png";
+        const previewUrl = cols[4] || "";
+        const pdfUrl = cols[5] || "#";
+
+        if (!judul) continue;
+
+        htmlCards += `
+          <div class="publikasi-item">
+            <div class="cover-wrapper">
+              <img src="${cover}" alt="Cover ${judul}" onerror="this.src='CoverPaksianKeposang.png'" />
+              <div class="overlay-baca">
+                <span style="color: white; font-weight: bold">E-Book</span>
+              </div>
+            </div>
+            <div class="info-publikasi">
+              <h4>${judul}</h4>
+              <p class="deskripsi-teks" style="font-size: 13.5px; color: #57606f; line-height: 1.6; margin-bottom: 15px;">
+                ${deskripsi}
+              </p>
+              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center;">
+                ${previewUrl ? `
+                  <button onclick="toggleFullPreview(this, '${previewUrl}')" class="toggle-deskripsi" style="background: #e0f2fe; color: #0284c7; padding: 8px 14px; border-radius: 6px; border: none; font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; text-decoration: none;">
+                    <i class="fas fa-book-open"></i> Lihat Preview
+                  </button>
+                ` : ''}
+                <a href="${pdfUrl}" download target="_blank" class="btn-unduh" style="padding: 8px 14px; font-size: 13px;">
+                  📥 Unduh PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      container.innerHTML = htmlCards;
+    })
+    .catch((err) => {
+      console.error("Gagal load publikasi:", err);
+      const container = document.getElementById("wadah-publikasi-dinamis");
+      if (container) {
+        container.innerHTML = `
+          <div style="text-align: center; grid-column: 1/-1; color: #ef4444; padding: 20px;">
+            <p><strong>Gagal memuat publikasi dari Spreadsheet.</strong></p>
+            <p style="font-size: 13px; color: #64748b;">Pastikan akses sheet sudah diatur ke <em>"Anyone with the link (Viewer)"</em> dan nama tab persis <strong>Publikasi</strong>.</p>
+          </div>`;
+      }
+    });
+}
+
+
+// --- 2. SISTEM LOGIN / LOGOUT ADMIN DESA ---
+function verifikasiLoginAdmin() {
+  const pinInput = document.getElementById("admin-pin-input").value;
+  const errorMsg = document.getElementById("pesan-error-login");
+
+  if (pinInput === SANDI_ADMIN_DESA) {
+    document.getElementById("admin-login-card").style.display = "none";
+    document.getElementById("admin-panel-card").style.display = "block";
+    errorMsg.style.display = "none";
+  } else {
+    errorMsg.style.display = "block";
+  }
+}
+
+function logoutAdmin() {
+  document.getElementById("admin-pin-input").value = "";
+  document.getElementById("admin-login-card").style.display = "block";
+  document.getElementById("admin-panel-card").style.display = "none";
+  bukaHalaman("beranda");
+}
+
+
+// --- 3. PROSES SIMPAN PUBLIKASI DARI FORM KE GOOGLE SHEETS ---
+function simpanPublikasiBaru(e) {
+  e.preventDefault();
+
+  const payload = {
+    judul: document.getElementById("pub-judul").value,
+    tahun: document.getElementById("pub-tahun").value,
+    deskripsi: document.getElementById("pub-deskripsi").value,
+    url_cover: document.getElementById("pub-cover").value,
+    url_preview: document.getElementById("pub-preview").value,
+    url_pdf: document.getElementById("pub-pdf").value
+  };
+
+  const btnSubmit = document.getElementById("btn-submit-pub");
+  const spinner = document.getElementById("loading-spinner");
+
+  btnSubmit.disabled = true;
+  spinner.style.display = "inline";
+
+  fetch(SCRIPT_URL_PUB, {
+    method: "POST",
+    mode: "no-cors", // Memotong restriksi CORS dari browser
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+  .then(() => {
+    alert("Berhasil! Publikasi baru telah ditambahkan ke data Google Sheets Desa.");
+    document.getElementById("formTambahPublikasi").reset();
+    btnSubmit.disabled = false;
+    spinner.style.display = "none";
+
+    // Beri jeda tipis 1 detik agar Google Sheets selesai menulis, lalu refresh katalog publikasi
+    setTimeout(() => {
+      muatKatalogPublikasi();
+      bukaHalaman("publikasi");
+    }, 1000);
+  })
+  .catch((err) => {
+    console.error(err);
+    alert("Terjadi kendala saat menyimpan. Silakan coba kembali.");
+    btnSubmit.disabled = false;
+    spinner.style.display = "none";
+  });
+}
+
+// Panggil muatKatalogPublikasi saat pertama kali web dibuka
+document.addEventListener("DOMContentLoaded", function() {
+  muatKatalogPublikasi();
+});
+    </script>
   </body>
 </html>
