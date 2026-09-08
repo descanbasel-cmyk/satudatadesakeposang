@@ -6342,29 +6342,17 @@ function togglePanelAdmin(panelId) {
    LOGIKA MODAL PANDUAN DAFTAR SHEET
    ============================================== */
 
-// Fungsi Membuka Modal Panduan Daftar Sheet
-function openModalPanduanSheet() {
-  const modal = document.getElementById('modalPanduanSheet');
-  if (modal) {
-    modal.style.display = 'flex';
+// Fungsi untuk memunculkan atau menyembunyikan daftar sheet secara langsung
+function toggleDaftarSheet() {
+  const box = document.getElementById('boxDaftarSheet');
+  if (box) {
+    if (box.style.display === 'none' || box.style.display === '') {
+      box.style.display = 'block';
+    } else {
+      box.style.display = 'none';
+    }
   }
 }
-
-// Fungsi Menutup Modal Panduan Daftar Sheet
-function closeModalPanduanSheet() {
-  const modal = document.getElementById('modalPanduanSheet');
-  if (modal) {
-    modal.style.display = 'none';
-  }
-}
-
-// Tutup otomatis jika area luar pop-up diklik
-window.addEventListener('click', function(event) {
-  const modal = document.getElementById('modalPanduanSheet');
-  if (event.target === modal) {
-    closeModalPanduanSheet();
-  }
-});
   </script>
 
   
